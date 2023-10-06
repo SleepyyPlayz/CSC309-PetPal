@@ -14,13 +14,13 @@
 </head>
 <body>
 
-<div class="row row-cols-1 row-cols-md-2 g-4 my-1 mx-1">
-  <div class="col">
-    <img src="puppy1.jpg" class="img-fluid card" alt="...">
+<div class="row row-cols-1 row-cols-md-4 g-4 my-1 mx-1">
+  <div class="col-md-9">
+    <img src="puppy1.jpg" class="img-fluid card h-100" alt="...">
   </div>
 
   <div class="col">
-    <div class="card" >
+    <div class="card h-100" >
       <div class="card-body">
           <h5 class="card-title">Fido</h5>
           <p class="card-text">Labrador Retriever</p>
