@@ -14,16 +14,13 @@
 </head>
 <body>
 
-<div class="d-flex justify-content-evenly">
- 
-
-  <div class="mx-3 my-3" style="width: 800px;">
+<div class="row row-cols-1 row-cols-md-2 g-4 my-1 mx-1">
+  <div class="col">
     <img src="puppy1.jpg" class="img-fluid card" alt="...">
   </div>
 
-    
-  <div class="my-2 mx-3"  style="width: 18rem">
-  <div class="card" >
+  <div class="col">
+    <div class="card" >
       <div class="card-body">
           <h5 class="card-title">Fido</h5>
           <p class="card-text">Labrador Retriever</p>
@@ -41,9 +38,8 @@
       </div>
     </div>
   </div>
-
-</div>
-
+  </div>
+ 
 <p class="ms-3 my-0" style="font-style: italic" >Other pets you may like:</p>
 
   <div class="row row-cols-1 row-cols-md-3 g-4 my-1 mx-2 d-flex">
