@@ -16,24 +16,28 @@
             </div>                
         </div>
 
-        <form class="signup-form">
+        <form class="signup-form needs-validation" novalidate>
             <h2 id="create-your-account">Create your account</h2>
             <div class="form-group">
                 <div class="row">
 
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="fName" placeholder="First Name">
+                        <input type="text" id="validationCustom02" class="form-control" name="fName" placeholder="First Name" required>
+                        <div class="invalid-feedback">
+                            Please provide your first name.
+                        </div>
                     </div>
 
+
                     <div class="col-md-6">
-                        <input type="text" class="form-control"  name="lName" placeholder="Last Name">
+                        <input type="text" class="form-control"  name="lName" placeholder="Last Name" required>
                     </div>
 
                 </div>
             </div>
 
             <div class="form-group">
-                <input type="email" class="form-control" name="email" placeholder="Email Address">
+                <input type="email" class="form-control" name="email" placeholder="Email Address" required>
             </div>
 
             <div class="form-group">
