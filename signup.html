@@ -16,12 +16,13 @@
             </div>                
         </div>
 
-        <form class="signup-form needs-validation" action="/" method="post" novalidate>
+        <form class="signup-form needs-validation" action="signup-success.html" method="post" novalidate>
             <h2 id="create-your-account">Create your account</h2>
             <div class="form-group">
                 <div class="row">
 
                     <div class="col-md-6">
+                        <label 
                         <input type="text" id="validationCustom02" class="form-control" name="fName" placeholder="First Name"  required />
                         <div class="invalid-feedback">
                             Please provide your first name.
@@ -68,7 +69,16 @@
             </div>
 
             <div class="form-group">
-                <input id="submit-button" type="submit" class="btn btn-success btn-block" name="submit-button" value="submit">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <input id="submit-button" type="submit" class="btn btn-success btn-block" name="submit-button" value="submit">
+                    </div>
+
+                    <div class="col-md-6">
+                        <a href="/">Home</a>
+                    </div>
+                </div>
             </div>
         </form>
     </div>

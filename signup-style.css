@@ -15,6 +15,10 @@
     padding: 30px 10px 30px 10px;
 }
 
+#no-border {
+    border-width: 0px;
+}
+
 #petpal-logo {
     max-width: 100%;
     max-height:100;
