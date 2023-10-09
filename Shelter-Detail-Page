@@ -21,7 +21,7 @@
     <div class="col">
         <div class="card h-100">
             <div class="card-body">
-                <h5 class="card-title">Shelter Name</h5>
+                <h1 class="card-title">Shelter Name</h1>
                 <p class="card-text">Toronto, Ontario</p>
                 <p class="card-text">123 Fake Street</p>
                 <p class="card-text">Hours: 8:00 - 6:00</p>      
@@ -31,7 +31,7 @@
 
     <div class="col">
         <div>
-            <p>Reviews:</p>
+            <p class="fst-italic fs-5">Reviews:</p>
             <div class="card mb-3 h-100">
                 <div class="row g-0">
                 <div class="col-4">
@@ -39,7 +39,8 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
+                    <h5 class="card-title">Joe Brown</h5>
+                    <img src="5-Star-Review.jpg" class="img-fluid mb-2" style="max-height: 40px;">
                     <p class="card-text">My new puppy is AMAZING!!! Would 100% recommend to all pet owners! </p>
                     </div>
                 </div>
@@ -52,7 +53,8 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
+                    <h5 class="card-title">Bob Smith</h5>
+                    <img src="3-Star-Review.jpg" class="img-fluid mb-2" style="max-height: 40px;">
                     <p class="card-text">New kitten is alright I guess... Decent service but the website was really well organized!</p>
                     </div>
                 </div>
@@ -63,7 +65,7 @@
     </div>
     <div class="col">
         <div>
-            <p>Featured Pets:</p>
+            <p class="fst-italic fs-5">Featured Pets:</p>
             <div class="card mb-3 h-100">
                 <div class="row g-0">
                 <div class="col-4">
@@ -71,11 +73,14 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Description of this pet would go here.</p>
+                    <h5 class="card-title">Cooper</h5>
+                    <p class="card-text">Cooper is such a go-getter!
+                        He always wants to play fetch and is so energetic!
+                    </p>
                     </div>
                 </div>
                 </div>
+                <a href="Pet-Detail-Page" class="stretched-link"></a>
             </div>
             <div class="card mb-3 h-100">
                 <div class="row g-0">
@@ -84,11 +89,14 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Description of this pet would go here.</p>
+                    <h5 class="card-title">Buddy</h5>
+                    <p class="card-text">Buddy is one of the cutest
+                        dogs you'll ever meet. Once you see him you can't let go!
+                    </p>
                     </div>
                 </div>
                 </div>
+                <a href="Pet-Detail-Page" class="stretched-link"></a>
             </div>
         </div>
         
