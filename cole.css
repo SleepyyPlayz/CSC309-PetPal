@@ -5,6 +5,13 @@
     font-weight: bold;
 }
 
+.btn.btn-primary.btn-lg.adopt-button.disabled{
+    background-color: #97DDDF;
+    color: black;
+    border-color: black;
+    font-weight: bold;
+}
+
 .review-stars {
     max-height: 40px;
 }
