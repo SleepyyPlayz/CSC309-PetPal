@@ -39,3 +39,13 @@ body {
     padding: 10px 20px;
 }
 
+.form-check {
+    margin: 1rem 1rem 1rem 0;
+}
+
+#buttons-nav {
+    display:flex;
+    align-items: center;
+    justify-content:space-between;
+
+}
