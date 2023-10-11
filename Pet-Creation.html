@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Pet Creation</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link href="b-style.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="container-sm background12">
+
+            <div class="text-center my-auto">
+                <img class="portrait" src="blank-profile-pic.png">
+                <div class="center input-group mb-3 my-auto">
+                    <div class="form-group text-center">
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    </div>
+                </div>
+            </div>
+
+            <form class="pet-creation needs-validation" action="Pet-Edit-Page.html" method="post" novalidate>
+                <h2 id="net-pet">Create your pet's profile</h2>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                <label for="pet-name">Pet Name:</label>
+                                <input type="text" id="validationCustom01" class="form-control" name="pet-name" placeholder=" " required>
+                                <div class="invalid-feedback">Please provide your first name.</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                <label for="pet-age">Age:</label>
+                                <input type="text" id="validationCustom02" class="form-control" name="pet-age" placeholder=" " required>
+                                <div class="invalid-feedback">Please provide the age of the pet.</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                <label for="pet-species">Species:</label>
+                                <input type="text" id="validationCustom01" class="form-control" name="pet-species" placeholder=" " required>
+                                <div class="invalid-feedback">Please provide the species of the pet.</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                <label for="pet-breed">Breed:</label>
+                                <input type="text" id="validationCustom01" class="form-control" name="pet-breed" placeholder=" " required>
+                                <div class="invalid-feedback">Please provide the breed of the pet.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                <label for="pet-gender">Gender:</label>
+                                <input type="text" id="validationCustom01" class="form-control" name="pet-gender" placeholder=" " required>
+                                <div class="invalid-feedback">Please provide the gender of the pet.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                <label for="pet-behavior">Behavior:</label>
+                                <input type="text" id="validationCustom01" class="form-control" name="pet-behavior" placeholder=" " required>
+                                <div class="invalid-feedback">Please provide the behavior-type of the pet.</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="pet-description">Description:</label>
+                            <textarea class="form-control" id="pet-description" rows="3"></textarea>
+                          </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+    
+                        <div class="col-md-6">
+                            <input id="submit-button" type="submit" class="btn btn-success btn-block" name="submit-button" value="submit">
+                        </div>
+    
+                        <div class="col-md-8">
+                            <a href="Shelter-Management-Page">Back to Shelter Management Page</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+        <script>
+            let forms = document.querySelectorAll (".needs-validation");
+            Array.prototype.slice.call (forms).forEach (function(form)
+            {
+                form.addEventListener ("submit", function(event)
+                {
+                if (!form.checkValidity())
+                    {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    }
+                    form.classList.add("was-validated");
+                });
+            });
+        </script>
+    </body>
+</html>

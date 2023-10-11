@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<!--
+  CSC309 Pet Pal Project
+  
+  University of Toronto
+  Fall 2023
+-->
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pet Adoption Form</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link href="b-style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container-sm">
+            <form class="application-form needs-validation" action="Pet-Adoption-Update-Page.html" method="post" novalidate>
+                <div class="row">
+                    <div class="text-left">
+                        <h3>Pet Adoption Application Form</h3>
+                        <h6>
+                        Thank you for your interest in adopting a pet!
+                        Please fill out the application form below and we update your status on the application page. 
+                        </h6>
+                    </div>
+                    <div class="col">
+
+                        <div class="form-group">
+                            <label for="full-name">Your full name:</label>
+                            <input type="full-name" class="form-control" id="full-name" placeholder="John Doe" disabled>
+                            <div class="invalid-feedback">
+                                Please enter your full name.
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Your address:</label>
+                            <input type="address" class="form-control"  id="address" placeholder="123 Avenue st." disabled>
+                            <div class="invalid-feedback">
+                                Please enter your address.
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Your e-mail:</label>
+                            <input type="email" class="form-control"  id="address" placeholder="johndoe@gmail.com" disabled>
+                            <div class="invalid-feedback">
+                                Please enter your e-mail address.
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="age">Your age:</label>
+                            <input type="age" class="form-control"  id="age" placeholder="25" disabled>
+                            <div class="invalid-feedback">
+                                Please enter your age.
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Do you live in a house, apartment, or condo?</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="radiohouse" value="option1" checked disabled>
+                                <label class="form-check-label" for="radiohouse">House</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="radioapartment" value="option2" disabled>
+                                <label class="form-check-label" for="radioapartment">Apartment</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="radiocondo" value="option2" disabled>
+                                <label class="form-check-label" for="radiocondo">Condo</label>
+                            </div>  
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rent-own">Do you rent or own your home?</label>
+                            <input type="rent-own" class="form-control"  id="rent-own" placeholder="Rent" disabled>
+                            <div class="invalid-feedback">
+                                Please enter whether you rent or own where you are currently living.
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="experiences">Have you owned any pets? If yes, what are your past experiences with taking care of pets.</label>
+                            <input type="experiences" class="form-control"  id="experiences" placeholder="No" disabled>
+                            <div class="invalid-feedback">
+                                Please enter whether you have previously owned or taken care of pets.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <h2>Application Status:</h2>
+                        <h4>Currently being processing</h4>
+                    </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <a href="Pet-Detail-Page.html">Back to Pet-Detail-Page</a>
+                        </div>
+                    </div>
+                </div>
+                </div>  
+            </form>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+        <script>
+            let forms = document.querySelectorAll (".needs-validation");
+
+            Array.prototype.slice.call (forms).forEach (function(form)
+            {
+                form.addEventListener ("submit", function(event)
+                {
+                if (!form.checkValidity())
+                    {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    }
+                    form.classList.add("was-validated");
+                });
+            });
+        </script>
+    </body>
+</html>
