@@ -27,53 +27,84 @@
                              
                             </div>
                             
-                            
+                            <form class="needs-validation" action="edituser.html" method="post" novalidate>
+
                                 <div class="form-group">
                                     <label class="form-label">First Name</label>
-                                    <input type="text" class="form-control" value="John">
+                                    <input type="text" class="form-control" name="fName" value="John" required>
+                                    <div class="invalid-feedback">
+                                        Please provide your first name.
+                                    </div>
                                 </div>
+
                                 <div class="form-group">
                                     <label class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" value="Doe">
+                                    <input type="text" class="form-control" name = "lName" value="Doe" required>
                                 </div>
+
                                 <div class="form-group">
                                     <label class="form-label">E-mail</label>
-                                    <input type="text" class="form-control" value="petpaluser@gmail.com">
+                                    <input type="text" class="form-control" name="email" value="petpaluser@gmail.com" required>
                                 </div>
+
                                 <div class="form-group">
                                     <label class="form-label">Location</label>
-                                    <input type="text" class="form-control" value="UofT">
+                                    <input type="text" class="form-control" name="location" value="UofT" required>
                                 </div>
+
                                 <div class="form-group">
-                                    <label class="form-label">Current password</label>
-                                    <input type="password" class="form-control">
+                                    <label class="form-label">Password</label>
+                                    <input type="password" class="form-control" name="oldpass" value="password" required>
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label">New password</label>
-                                    <input type="password" class="form-control">
-                                </div>
+
+
                                 <div class="form-group">
                                     <label class="form-label" for="species">Preferred Species</label>
                                     <select name="species" id="species">
                                         <option value="dogs">Dogs</option>
                                         <option value="cats">Cats</option>
-                                        <option value="birds">Birds</option>
                                     </select>
                                 </div>
+
                                 <div class="form-group" id="savechanges-cancel">
-                                    <button type="button" class="btn btn-primary">Apply Changes</button>
-                                    <button type="button" class="btn btn-default">Cancel</button>
+                                    
+                                    
+                                        
+                                            <input id="submit-button" type="submit" class="btn btn-success btn-block" name="submit-button" value="Apply Changes">
+                                       
+
+                                                                            
+                                       
+                                            <a id="cancel-button" href="edituser.html">Cancel</a>
+                                 
+        
+                                            
+
+                            
                                 </div>
+                            </form>
 
                            
                             
             </div>
         </div>
        
-
-       
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
+    <script>
+        let forms = document.querySelectorAll (".needs-validation");
+        Array.prototype.slice.call (forms).forEach (function(form)
+        {
+            form.addEventListener ("submit", function(event)
+            {
+            if (!form.checkValidity())
+                {
+                event.preventDefault();
+                event.stopPropagation();
+                }
+                form.classList.add("was-validated");
+            });
+        });
+    </script>
   </body>
 </html>

@@ -9,8 +9,6 @@ body {
     border-radius: 50%;
 }
 
-
-
 .btn {
     cursor: pointer;
 }
@@ -21,7 +19,15 @@ body {
 
 #savechanges-cancel {
     margin: 1rem 0px 1rem 0px;
+    display:flex;
+    align-items: center;
+    justify-content:flex-start;
 }
+
+#cancel-button {
+    margin-left: 2rem;
+}
+
 .row-bordered {
     overflow: hidden;
 }
