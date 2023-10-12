@@ -13,6 +13,7 @@ nav {
 }
 
 .user-bar {
+    width: 60px;
     border: solid 1px #CCCCCC;
     border-radius: 30px;
 }

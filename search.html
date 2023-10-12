@@ -13,7 +13,7 @@
 
 <body class="d-flex flex-column min-vh-100">
 
-  <nav class="navbar navbar-expand-md mb-4">
+  <nav class="navbar navbar-expand-lg mb-4 align-items-center">
     <div class="container-lg">
       <a class="navbar-brand" href="index.html">
         <img src="logo-with-text-big.png" alt="Bootstrap" height="50">
@@ -24,6 +24,25 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarNav">
+
+        <!-- <div class="search-bar mx-auto">
+          <ul class="navbar-nav">
+            <li class="nav-item ms-3">
+              <a class="nav-link" href="#">Species</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">&#x2022;</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Age</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">&#x2022;</a></li>
+            <li class="nav-item me-1">
+              <a class="nav-link" href="#">Location</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"><i class="fa fa-search me-2"></i></a>
+            </li>
+          </ul>
+        </div> -->
 
         <form class="mx-auto d-flex flex-row" action="search.html">
           <select class="form-select me-2" name="species" id="species">
@@ -45,22 +64,27 @@
           <input class="btn btn-secondary" type="submit" value="Search Pet">
         </form>
 
+        <div>
+          <a class="btn btn-secondary" href="signup.html">Sign Up</a>
+          <a class="btn btn-outline-secondary" href="login.html">Log In</a>
+        </div>
+
       </div>
 
-      <div class="user-bar">
+      <!-- <div class="user-bar">
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
             <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa fa-bars ms-1 me-1"></i>
+              <i class="fa fa-bars me-1"></i>
               <i class="fa fa-user me-1"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="#">Register</a></li>
-              <li><a class="dropdown-item" href="#">Log In</a></li>
+              <li><a class="dropdown-item" href="signup.html">Register</a></li>
+              <li><a class="dropdown-item" href="login.html">Log In</a></li>
             </ul>
           </li>
         </ul>
-      </div>
+      </div> -->
 
     </div>
   </nav>
@@ -82,10 +106,10 @@
             <div class="card shadow-sm">
               <img class="card-img-top" width="100%" src="assets/puppy3.jpg" role="img">
               <div class="card-body">
-                <h5 class="card-title">"Tiny"</h5>
+                <h5 class="card-title">"Buddy"</h5>
                 <p class="card-text">Chihuahua Mix (F) - 4 weeks old</p>
                 <div class="d-flex justify-content-between align-items-center">
-                  <a class="btn btn-sm btn-outline-info me-3" href="#">Details</a>
+                  <a class="btn btn-sm btn-outline-info me-3" href="pet-detail-page.html">Details</a>
                   <small class="text-muted">North York Humane Society</small>
                 </div>
               </div>
@@ -96,10 +120,10 @@
             <div class="card shadow-sm">
               <img class="card-img-top" width="100%" src="assets/puppy4.jpg" role="img">
               <div class="card-body">
-                <h5 class="card-title">"Snowball"</h5>
+                <h5 class="card-title">"Daisy"</h5>
                 <p class="card-text">Pomeranian (F) - 3 months old</p>
                 <div class="d-flex justify-content-between align-items-center">
-                  <a class="btn btn-sm btn-outline-info me-3" href="#">Details</a>
+                  <a class="btn btn-sm btn-outline-info me-3" href="pet-detail-page.html">Details</a>
                   <small class="text-muted">Richmond Hill Shelter</small>
                 </div>
               </div>
@@ -110,10 +134,10 @@
             <div class="card shadow-sm">
               <img class="card-img-top" width="100%" src="assets/puppy1.jpg" role="img">
               <div class="card-body">
-                <h5 class="card-title">"Cookie"</h5>
+                <h5 class="card-title">"Fido"</h5>
                 <p class="card-text">Golden Retriever (M) - 4 months old</p>
                 <div class="d-flex justify-content-between align-items-center">
-                  <a class="btn btn-sm btn-outline-info me-3" href="#">Details</a>
+                  <a class="btn btn-sm btn-outline-info me-3" href="pet-detail-page.html">Details</a>
                   <small class="text-muted">Toronto Humane Society</small>
                 </div>
               </div>

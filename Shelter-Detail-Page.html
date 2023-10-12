@@ -12,104 +12,191 @@
   <title>Pet Pal Project</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link href="cole.css" rel="stylesheet">  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="universal.css">
 </head>
-<body>
-<div class="container mx-auto align-items-center row row-cols-1 row-cols-md-2 g-4 mx-2 my-2">
-    <div class="col">
-        <img src="assets/pet-shelter.png" class="img-fluid card">
-    </div>
 
-    <div class="col">
-        <div class="card">
-            <div class="card-body">
-                <h1 class="card-title">Toronto Pet Shelter</h1>
-                <p class="card-text">Toronto, Ontario</p>
-                <p class="card-text">123 Fake Street</p>
-                <p class="card-text">Hours: 8:00 - 6:00</p>      
-                <p class="card-text">Mission Statement: To make sure that every pet, no matter its breed,
-                    size, or species, is cared for until it can find its true home. </p>      
+<body class="d-flex flex-column min-vh-100">
+
+    <nav class="navbar navbar-expand-lg mb-4 align-items-center">
+        <div class="container-lg">
+          <a class="navbar-brand" href="index.html">
+            <img src="logo-with-text-big.png" alt="Bootstrap" height="50">
+          </a>
+    
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+    
+          <div class="collapse navbar-collapse" id="navbarNav">
+    
+            <!-- <div class="search-bar mx-auto">
+              <ul class="navbar-nav">
+                <li class="nav-item ms-3">
+                  <a class="nav-link" href="#">Species</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="#">&#x2022;</a></li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Age</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="#">&#x2022;</a></li>
+                <li class="nav-item me-1">
+                  <a class="nav-link" href="#">Location</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link"><i class="fa fa-search me-2"></i></a>
+                </li>
+              </ul>
+            </div> -->
+    
+            <form class="mx-auto d-flex flex-row" action="search.html">
+              <select class="form-select me-2" name="species" id="species">
+                <option selected value="0">Species</option>
+                <option value="1">Dog</option>
+                <option value="2">Cat</option>
+                <option value="3">Other</option>
+              </select>
+              <select class="form-select me-2" name="age" id="species">
+                <option selected value="0">Age</option>
+                <option value="1">&lt; 1 year</option>
+                <option value="2">&gt;= 1 year</option>
+              </select>
+              <select class="form-select me-2" name="sort-order" id="sort-order">
+                <option selected value="0">Sort By</option>
+                <option value="1">Age</option>
+                <option value="2">Recent</option>
+              </select>
+              <input class="btn btn-secondary" type="submit" value="Search Pet">
+            </form>
+    
+            <div>
+              <a class="btn btn-secondary" href="signup.html">Sign Up</a>
+              <a class="btn btn-outline-secondary" href="login.html">Log In</a>
+            </div>
+    
+          </div>
+    
+          <!-- <div class="user-bar">
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fa fa-bars me-1"></i>
+                  <i class="fa fa-user me-1"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" href="signup.html">Register</a></li>
+                  <li><a class="dropdown-item" href="login.html">Log In</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div> -->
+    
+        </div>
+      </nav>
+
+<main>
+    <div class="container mx-auto align-items-center row row-cols-1 row-cols-md-2 g-4 mx-2 my-2">
+        <div class="col">
+            <img src="assets/pet-shelter.png" class="img-fluid card">
+        </div>
+
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title">Toronto Pet Shelter</h1>
+                    <p class="card-text">Toronto, Ontario</p>
+                    <p class="card-text">123 Fake Street</p>
+                    <p class="card-text">Hours: 8:00 - 6:00</p>      
+                    <p class="card-text">Mission Statement: To make sure that every pet, no matter its breed,
+                        size, or species, is cared for until it can find its true home. </p>      
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="col">
-        <div>
-            <p class="fst-italic fs-5">Reviews:</p>
-            <div class="card mb-3 h-100">
-                <div class="row g-0">
-                <div class="col-4">
-                    <img src="assets/profile-pic1.jpg" class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                    <h5 class="card-title">Joe Brown</h5>
-                    <img src="assets/5-Star-Review.jpg" class="img-fluid mb-2 review-stars">
-                    <p class="card-text">My new puppy is AMAZING!!! Would 100% recommend to all pet owners! </p>
+        <div class="col">
+            <div>
+                <p class="fst-italic fs-5">Reviews:</p>
+                <div class="card mb-3 h-100">
+                    <div class="row g-0">
+                    <div class="col-4">
+                        <img src="assets/profile-pic1.jpg" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                        <h5 class="card-title">Joe Brown</h5>
+                        <img src="assets/5-Star-Review.jpg" class="img-fluid mb-2 review-stars">
+                        <p class="card-text">My new puppy is AMAZING!!! Would 100% recommend to all pet owners! </p>
+                        </div>
+                    </div>
                     </div>
                 </div>
-                </div>
-            </div>
-            <div class="card mb-3 h-100">
-                <div class="row g-0">
-                <div class="col-4">
-                    <img src="assets/profile-pic2.jpg" class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                    <h5 class="card-title">Bob Smith</h5>
-                    <img src="assets/3-Star-Review.jpg" class="img-fluid mb-2 review-stars">
-                    <p class="card-text">New kitten is alright I guess... Decent service but the website was really well organized!</p>
+                <div class="card mb-3 h-100">
+                    <div class="row g-0">
+                    <div class="col-4">
+                        <img src="assets/profile-pic2.jpg" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                        <h5 class="card-title">Bob Smith</h5>
+                        <img src="assets/3-Star-Review.jpg" class="img-fluid mb-2 review-stars">
+                        <p class="card-text">New kitten is alright I guess... Decent service but the website was really well organized!</p>
+                        </div>
+                    </div>
                     </div>
                 </div>
-                </div>
             </div>
+            
         </div>
-        
-    </div>
-    <div class="col">
-        <div>
-            <p class="fst-italic fs-5">Featured Pets:</p>
-            <div class="card mb-3 h-100">
-                <div class="row g-0">
-                <div class="col-4">
-                    <img src="assets/puppy2.jpg" class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                    <h5 class="card-title">Cooper</h5>
-                    <p class="card-text">Cooper is such a go-getter!
-                        He always wants to play fetch and is so energetic!
-                    </p>
+        <div class="col">
+            <div>
+                <p class="fst-italic fs-5">Featured Pets:</p>
+                <div class="card mb-3 h-100">
+                    <div class="row g-0">
+                    <div class="col-4">
+                        <img src="assets/puppy2.jpg" class="img-fluid rounded-start" alt="...">
                     </div>
-                </div>
-                </div>
-                <a href="pet-detail-page.html" class="stretched-link"></a>
-            </div>
-            <div class="card mb-3 h-100">
-                <div class="row g-0">
-                <div class="col-4">
-                    <img src="assets/puppy3.jpg" class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                    <h5 class="card-title">Buddy</h5>
-                    <p class="card-text">Buddy is one of the cutest
-                        dogs you'll ever meet. Once you see him you can't let go!
-                    </p>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                        <h5 class="card-title">Cooper</h5>
+                        <p class="card-text">Cooper is such a go-getter!
+                            He always wants to play fetch and is so energetic!
+                        </p>
+                        </div>
                     </div>
+                    </div>
+                    <a href="pet-detail-page.html" class="stretched-link"></a>
                 </div>
+                <div class="card mb-3 h-100">
+                    <div class="row g-0">
+                    <div class="col-4">
+                        <img src="assets/puppy3.jpg" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                        <h5 class="card-title">Buddy</h5>
+                        <p class="card-text">Buddy is one of the cutest
+                            dogs you'll ever meet. Once you see him you can't let go!
+                        </p>
+                        </div>
+                    </div>
+                    </div>
+                    <a href="pet-detail-page.html" class="stretched-link"></a>
                 </div>
-                <a href="pet-detail-page.html" class="stretched-link"></a>
             </div>
+            
         </div>
-        
+
     </div>
-
-</div>
-
+</main>
 
 
+    <footer class="mt-auto py-4 bg-body-tertiary">
+        <div class="container">
+            <p class="mb-1">&copy; PetPal 2023</p>
+        </div>
+    </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
