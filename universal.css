@@ -21,3 +21,7 @@ nav {
     box-shadow: 0px 1px 1px 1px #CCCCCC;
     transition: 100ms ease-out;
 }
+
+a.categories {
+    text-decoration: none;
+}
