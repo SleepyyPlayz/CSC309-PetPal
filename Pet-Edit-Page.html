@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Pet Creation</title>
+        <title>Edit Pet</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link href="b-style.css" rel="stylesheet">
     </head>
@@ -12,7 +12,7 @@
         <div class="container-sm pet-form-bg">
 
             <div class="text-center my-auto">
-                <img class="portrait" src="assets/puppy2-og.jpg">
+                <img class="portrait" src="assets/puppy1.jpg">
                 <div class="center input-group mb-3 my-auto">
                     <div class="form-group text-center">
                         <input type="file" class="form-control-file" id="exampleFormControlFile1">
@@ -21,13 +21,13 @@
             </div>
 
             <form class="pet-creation needs-validation" action="Pet-Edit-Page.html" method="post" novalidate>
-                <h2 id="net-pet">Create your pet's profile</h2>
+                <h2 id="net-pet">Edit your pet's profile</h2>
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
                             <div class="col-md-8">
                                 <label for="pet-name">Pet Name:</label>
-                                <input type="text" id="validationCustom01" class="form-control" name="pet-name" placeholder="Luna" required>
+                                <input type="text" id="validationCustom01" class="form-control" name="pet-name" value="Fido" required>
                                 <div class="invalid-feedback">Please provide your first name.</div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                         <div class="form-group">
                             <div class="col-md-8">
                                 <label for="pet-age">Age:</label>
-                                <input type="text" id="validationCustom02" class="form-control" name="pet-age" placeholder="3" required>
+                                <input type="text" id="validationCustom02" class="form-control" name="pet-age" value="7" required>
                                 <div class="invalid-feedback">Please provide the age of the pet.</div>
                             </div>
                         </div>
@@ -43,37 +43,40 @@
                         <div class="form-group">
                             <div class="col-md-8">
                                 <label for="pet-species">Species:</label>
-                                <input type="text" id="validationCustom01" class="form-control" name="pet-species" placeholder="Dog" required>
+                                <input type="text" id="validationCustom01" class="form-control" name="pet-species" value="Dog" required>
                                 <div class="invalid-feedback">Please provide the species of the pet.</div>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-8">
-                                <label for="pet-breed">Breed:</label>
-                                <input type="text" id="validationCustom01" class="form-control" name="pet-breed" placeholder="Shiba Inu" required>
-                                <div class="invalid-feedback">Please provide the breed of the pet.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <div class="col-md-8">
                                 <label for="pet-gender">Gender:</label>
-                                <input type="text" id="validationCustom01" class="form-control" name="pet-gender" placeholder="Female" required>
+                                <input type="text" id="validationCustom01" class="form-control" name="pet-gender" value="Male" required>
                                 <div class="invalid-feedback">Please provide the gender of the pet.</div>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="col">
                         <div class="form-group">
                             <div class="col-md-8">
                                 <label for="pet-behavior">Behavior:</label>
-                                <input type="text" id="validationCustom01" class="form-control" name="pet-behavior" placeholder="Rowdy" required>
+                                <input type="text" id="validationCustom01" class="form-control" name="pet-behavior" value="Energetic, Happy" required>
                                 <div class="invalid-feedback">Please provide the behavior-type of the pet.</div>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                <label for="pet-health">Health:</label>
+                                <input type="text" id="validationCustom01" class="form-control" name="pet-health" value="Fully vaccinated and spayed" required>
+                                <div class="invalid-feedback">Please provide the behavior-type of the pet.</div>
+                            </div>
+                        </div>
+
                         <div class="form-group col-md-8">
                             <label for="pet-description">Description:</label>
-                            <textarea class="form-control" id="pet-description" rows="3"></textarea>
+                            <textarea class="form-control" id="pet-description" rows="3" value="Fido is very cute and oh so adorable! You would be crazy not to adopt him!"></textarea>
                           </div>
                     </div>
                 </div>
@@ -82,11 +85,11 @@
                     <div class="row">
     
                         <div class="col-md-6">
-                            <input id="submit-button" type="submit" class="btn btn-success btn-block" name="submit-button" value="submit">
+                            <input id="submit-button" type="submit" class="btn btn-success btn-block" name="submit-button" value="Edit">
                         </div>
     
                         <div class="col-md-8">
-                            <a href="Shelter-Management-Page">Back to Shelter Management Page</a>
+                            <a href="Shelter-Management-Page.html">Back to Shelter Management Page</a>
                         </div>
                     </div>
                 </div>

@@ -28,7 +28,7 @@
                             <div class="col-md-8">
                                 <label for="pet-name">Pet Name:</label>
                                 <input type="text" id="validationCustom01" class="form-control" name="pet-name" placeholder=" " required>
-                                <div class="invalid-feedback">Please provide your first name.</div>
+                                <div class="invalid-feedback">Please provide the name of the pet.</div>
                             </div>
                         </div>
 
@@ -50,20 +50,13 @@
 
                         <div class="form-group">
                             <div class="col-md-8">
-                                <label for="pet-breed">Breed:</label>
-                                <input type="text" id="validationCustom01" class="form-control" name="pet-breed" placeholder=" " required>
-                                <div class="invalid-feedback">Please provide the breed of the pet.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <div class="col-md-8">
                                 <label for="pet-gender">Gender:</label>
                                 <input type="text" id="validationCustom01" class="form-control" name="pet-gender" placeholder=" " required>
                                 <div class="invalid-feedback">Please provide the gender of the pet.</div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col">
                         <div class="form-group">
                             <div class="col-md-8">
                                 <label for="pet-behavior">Behavior:</label>
@@ -71,18 +64,27 @@
                                 <div class="invalid-feedback">Please provide the behavior-type of the pet.</div>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                <label for="pet-health">Health:</label>
+                                <input type="text" id="validationCustom01" class="form-control" name="pet-health" placeholder=" " required>
+                                <div class="invalid-feedback">Please provide the health of the pet.</div>
+                            </div>
+                        </div>
+
                         <div class="form-group col-md-8">
                             <label for="pet-description">Description:</label>
-                            <textarea class="form-control" id="pet-description" rows="3"></textarea>
+                            <textarea class="form-control" id="pet-description validationCustom01" rows="3" required></textarea>
+                            <div class="invalid-feedback">Please provide a description for the pet.</div>
                           </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="row">
-    
                         <div class="col-md-6">
-                            <input id="submit-button" type="submit" class="btn btn-success btn-block" name="submit-button" value="submit">
+                            <input id="submit-button" type="submit" class="btn btn-success btn-block" name="submit-button" value="Create">
                         </div>
     
                         <div class="col-md-8">

@@ -20,23 +20,44 @@
                     <div class="text-left">
                         <h3>Pet Adoption Application Form</h3>
                         <h6>
-                        Thank you for your interest in adopting a pet!
-                        Please fill out the application form below and we update your status on the application page. 
+                        Thank you for submitting the application form for adoption! You can check on this page for the status of your application. 
                         </h6>
                     </div>
                     <div class="col">
 
                         <div class="form-group">
-                            <label for="full-name">Your full name:</label>
-                            <input type="full-name" class="form-control" id="full-name" placeholder="John Doe" disabled>
+                            <label for="pet-name">Name of the pet you want to adopt:</label>
+                            <input type="pet-name" class="form-control" id="pet-name" value="Fido" disabled>
                             <div class="invalid-feedback">
                                 Please enter your full name.
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class ="col">
+                                <div class="form-group">
+                                    <label for="first-name">Your first name:</label>
+                                    <input type="first-name" class="form-control" id="first-name" value="John" disabled>
+                                    <div class="invalid-feedback">
+                                        Please enter your first name.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class ="col">
+                                <div class="form-group">
+                                    <label for="last-name">Your last name:</label>
+                                    <input type="last-name" class="form-control" id="last-name" value="Doe" disabled>
+                                    <div class="invalid-feedback">
+                                        Please enter your last name.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label for="address">Your address:</label>
-                            <input type="address" class="form-control"  id="address" placeholder="123 Avenue st." disabled>
+                            <input type="address" class="form-control"  id="address" value="123 Avenue st." disabled>
                             <div class="invalid-feedback">
                                 Please enter your address.
                             </div>
@@ -44,7 +65,7 @@
 
                         <div class="form-group">
                             <label for="email">Your e-mail:</label>
-                            <input type="email" class="form-control"  id="address" placeholder="johndoe@gmail.com" disabled>
+                            <input type="email" class="form-control"  id="address" value="johndoe@gmail.com" disabled>
                             <div class="invalid-feedback">
                                 Please enter your e-mail address.
                             </div>
@@ -52,7 +73,7 @@
 
                         <div class="form-group">
                             <label for="age">Your age:</label>
-                            <input type="age" class="form-control"  id="age" placeholder="25" disabled>
+                            <input type="age" class="form-control"  id="age" value="25" disabled>
                             <div class="invalid-feedback">
                                 Please enter your age.
                             </div>
@@ -61,12 +82,12 @@
                         <div class="form-group">
                             <label for="address">Do you live in a house, apartment, or condo?</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="radiohouse" value="option1" checked disabled>
+                                <input class="form-check-input" type="radio" name="gridRadios" id="radiohouse" value="option1" disabled>
                                 <label class="form-check-label" for="radiohouse">House</label>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="radioapartment" value="option2" disabled>
+                                <input class="form-check-input" type="radio" name="gridRadios" id="radioapartment" value="option2" checked disabled>
                                 <label class="form-check-label" for="radioapartment">Apartment</label>
                             </div>
 
@@ -78,7 +99,7 @@
 
                         <div class="form-group">
                             <label for="rent-own">Do you rent or own your home?</label>
-                            <input type="rent-own" class="form-control"  id="rent-own" placeholder="Rent" disabled>
+                            <input type="rent-own" class="form-control"  id="rent-own" value="Rent" disabled>
                             <div class="invalid-feedback">
                                 Please enter whether you rent or own where you are currently living.
                             </div>
@@ -86,7 +107,7 @@
 
                         <div class="form-group">
                             <label for="experiences">Have you owned any pets? If yes, what are your past experiences with taking care of pets.</label>
-                            <input type="experiences" class="form-control"  id="experiences" placeholder="No" disabled>
+                            <input type="experiences" class="form-control"  id="experiences" value="No" disabled>
                             <div class="invalid-feedback">
                                 Please enter whether you have previously owned or taken care of pets.
                             </div>
@@ -95,7 +116,7 @@
 
                     <div class="col">
                         <h2>Application Status:</h2>
-                        <h4>Currently being processing</h4>
+                        <div class="btn btn-primary disabled">Currently being processing</div>
                     </div>
 
                 <div class="form-group">
