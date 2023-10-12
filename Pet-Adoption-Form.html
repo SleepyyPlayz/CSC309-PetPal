@@ -66,7 +66,7 @@
 
                         <div class="form-group">
                             <label for="email">Your e-mail:</label>
-                            <input type="email" class="form-control"  id="address" placeholder=" " required>
+                            <input type="email" class="form-control"  id="email" placeholder=" " required>
                             <div class="invalid-feedback">
                                 Please enter your e-mail address.
                             </div>
@@ -83,7 +83,7 @@
                         <div class="form-group">
                             <label for="address">Do you live in a house, apartment, or condo?</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="radiohouse" value="option1">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="radiohouse" value="option1" required>
                                 <label class="form-check-label" for="radiohouse">House</label>
                             </div>
 
@@ -95,7 +95,10 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="gridRadios" id="radiocondo" value="option2">
                                 <label class="form-check-label" for="radiocondo">Condo</label>
-                            </div>  
+                                <div class="invalid-feedback">
+                                    Please select one of the options.
+                                </div>  
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -122,13 +125,11 @@
                                 </div>
             
                                 <div class="col-md-8">
-                                    <a href="Pet-Detail-Page.html">Back to Pet-Detail-Page</a>
+                                    <a href="Pet-Detail-Page.html">Back to Pet Details</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col"></div>
                 </div>  
             </form>
         </div>
