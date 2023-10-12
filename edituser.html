@@ -14,78 +14,60 @@
             <h2>
                 Account settings
             </h2>
-                <div class="col-md-8">
-                            <div class="align-items-center">
-                                <img src="assets/profile-pic1.jpg"
-                                    id="profile-pic-edituser">
-                                
-                                    <label class="btn btn-dark">
-                                        Upload new photo
-                                        <input type="file" class="account-settings-fileinput">
-                                    </label>
-          
-                             
-                            </div>
-                            
-                            <form class="needs-validation" action="edituser.html" method="post" novalidate>
+            <div class="col-md-8">
+                <div class="align-items-center">
+                    <img src="assets/profile-pic1.jpg" id="profile-pic-edituser">
+                    
+                    <label class="btn btn-dark">
+                        Upload new photo
+                        <input type="file" class="account-settings-fileinput">
+                    </label>
+                </div>
+                
+                <form class="needs-validation" action="edituser.html" method="post" novalidate>
 
-                                <div class="form-group">
-                                    <label class="form-label">First Name</label>
-                                    <input type="text" class="form-control" name="fName" value="John" required>
-                                    <div class="invalid-feedback">
-                                        Please provide your first name.
-                                    </div>
-                                </div>
+                    <div class="form-group">
+                        <label class="form-label">First Name</label>
+                        <input type="text" class="form-control" name="fName" value="John" required>
+                        <div class="invalid-feedback">
+                            Please provide your first name.
+                        </div>
+                    </div>
 
-                                <div class="form-group">
-                                    <label class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" name = "lName" value="Doe" required>
-                                </div>
+                    <div class="form-group">
+                        <label class="form-label">Last Name</label>
+                        <input type="text" class="form-control" name = "lName" value="Doe" required>
+                    </div>
 
-                                <div class="form-group">
-                                    <label class="form-label">E-mail</label>
-                                    <input type="text" class="form-control" name="email" value="petpaluser@gmail.com" required>
-                                </div>
+                    <div class="form-group">
+                        <label class="form-label">E-mail</label>
+                        <input type="text" class="form-control" name="email" value="petpaluser@gmail.com" required>
+                    </div>
 
-                                <div class="form-group">
-                                    <label class="form-label">Location</label>
-                                    <input type="text" class="form-control" name="location" value="UofT" required>
-                                </div>
+                    <div class="form-group">
+                        <label class="form-label">Location</label>
+                        <input type="text" class="form-control" name="location" value="UofT" required>
+                    </div>
 
-                                <div class="form-group">
-                                    <label class="form-label">Password</label>
-                                    <input type="password" class="form-control" name="oldpass" value="password" required>
-                                </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" name="oldpass" value="password" required>
+                    </div>
 
+                    <div class="form-group">
+                        <label class="form-label" for="species">Preferred Species</label>
+                        <select name="species" id="species">
+                            <option value="dogs">Dogs</option>
+                            <option value="cats">Cats</option>
+                        </select>
+                    </div>
 
-                                <div class="form-group">
-                                    <label class="form-label" for="species">Preferred Species</label>
-                                    <select name="species" id="species">
-                                        <option value="dogs">Dogs</option>
-                                        <option value="cats">Cats</option>
-                                    </select>
-                                </div>
+                    <div class="form-group" id="savechanges-cancel">
+                        <input id="submit-button" type="submit" class="btn btn-success btn-block" name="submit-button" value="Apply Changes">
+                        <a id="cancel-button" href="edituser.html">Cancel</a>
+                    </div>
+                </form>
 
-                                <div class="form-group" id="savechanges-cancel">
-                                    
-                                    
-                                        
-                                            <input id="submit-button" type="submit" class="btn btn-success btn-block" name="submit-button" value="Apply Changes">
-                                       
-
-                                                                            
-                                       
-                                            <a id="cancel-button" href="edituser.html">Cancel</a>
-                                 
-        
-                                            
-
-                            
-                                </div>
-                            </form>
-
-                           
-                            
             </div>
         </div>
        
