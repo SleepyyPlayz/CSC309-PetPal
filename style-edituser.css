@@ -36,3 +36,10 @@ body {
 .form-group {
     margin: 1rem 0.5rem 1rem 0px;
 }
+
+.container-md {
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 2rem 2rem 2rem 2rem;
+    max-width: 562px;
+}
