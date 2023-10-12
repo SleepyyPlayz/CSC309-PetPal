@@ -6,9 +6,89 @@
         <title>Edit Pet</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link href="b-style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="universal.css">
     </head>
 
-    <body>
+    <body class="d-flex flex-column min-vh-100">
+
+        <nav class="navbar navbar-expand-lg mb-4 align-items-center">
+            <div class="container-lg">
+              <a class="navbar-brand" href="index.html">
+                <img src="logo-with-text-big.png" alt="Bootstrap" height="50">
+              </a>
+        
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+        
+              <div class="collapse navbar-collapse" id="navbarNav">
+        
+                <!-- <div class="search-bar mx-auto">
+                  <ul class="navbar-nav">
+                    <li class="nav-item ms-3">
+                      <a class="nav-link" href="#">Species</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">&#x2022;</a></li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Age</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">&#x2022;</a></li>
+                    <li class="nav-item me-1">
+                      <a class="nav-link" href="#">Location</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link"><i class="fa fa-search me-2"></i></a>
+                    </li>
+                  </ul>
+                </div> -->
+        
+                <form class="mx-auto d-flex flex-row" action="search.html">
+                  <select class="form-select me-2" name="species" id="species">
+                    <option selected value="0">Species</option>
+                    <option value="1">Dog</option>
+                    <option value="2">Cat</option>
+                    <option value="3">Other</option>
+                  </select>
+                  <select class="form-select me-2" name="age" id="species">
+                    <option selected value="0">Age</option>
+                    <option value="1">&lt; 1 year</option>
+                    <option value="2">&gt;= 1 year</option>
+                  </select>
+                  <select class="form-select me-2" name="sort-order" id="sort-order">
+                    <option selected value="0">Sort By</option>
+                    <option value="1">Age</option>
+                    <option value="2">Recent</option>
+                  </select>
+                  <input class="btn btn-secondary" type="submit" value="Search Pet">
+                </form>
+        
+                <div>
+                  <a class="btn btn-secondary" href="edituser.html">Manage Profile</a>
+                  <a class="btn btn-outline-secondary" href="notifications-page.html">Your Messages: 3</a>
+                </div>
+        
+              </div>
+        
+              <!-- <div class="user-bar">
+                <ul class="navbar-nav">
+                  <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa fa-bars me-1"></i>
+                      <i class="fa fa-user me-1"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                      <li><a class="dropdown-item" href="signup.html">Register</a></li>
+                      <li><a class="dropdown-item" href="login.html">Log In</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div> -->
+        
+            </div>
+          </nav>
+
+    <main>
         <div class="container-sm pet-form-bg">
 
             <div class="text-center my-auto">
@@ -88,13 +168,21 @@
                             <input id="submit-button" type="submit" class="btn btn-success btn-block" name="submit-button" value="Edit">
                         </div>
     
-                        <div class="col-md-8">
+                        <div class="col-md-8 mt-4">
                             <a href="shelter-management-page.html">Back to Shelter Management Page</a>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
+    </main>
+
+    <footer class="mt-auto py-4 bg-body-tertiary">
+        <div class="container">
+            <p class="mb-1">&copy; PetPal 2023</p>
+            <a href="login-shelter.html">Shelter Log In</a>
+        </div>
+    </footer>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
