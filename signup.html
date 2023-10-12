@@ -12,13 +12,35 @@
 
         <div id="logo-top" class="row my-auto">
             <div class="col-lg text-center">
-                <img id="petpal-logo" src="logo-with-text.png" class="img-fluid">
+                <img id="petpal-logo" src="assets/logo-with-text.png" class="img-fluid">
             </div>                
         </div>
 
         <form class="signup-form needs-validation" action="signup-success.html" method="post" novalidate>
             <h2 id="create-your-account">Create your account</h2>
-            <div class="form-group">
+            
+                <div class="form-group" id="choose-acc-type">
+                    <label for="optionA">Choose your account type:</label>
+                    <div class="form-check">
+                    <input class="form-check-input" type="radio" name="accType" id="UserOption" value="user" required>
+                    <label class="form-check-label" for="optionA">
+                                            User
+                                        </label>
+                    </div>
+                    <div class="form-check">
+                    <input class="form-check-input" type="radio" name="accType" id="ShelterOption" value="shelter" required>
+                    <label class="form-check-label" for="optionB">
+                                            Shelter
+                                        </label>
+                    <div class="invalid-feedback">
+                        Please select an account type option.
+                    </div>
+                    </div>
+               
+                        
+        
+            
+             
                 <div class="row">
 
                     <div class="col-md-6">
@@ -70,13 +92,11 @@
             <div class="form-group">
                 <div class="row">
 
-                    <div class="col-md-6">
+                    <div class="col-md-6" id="buttons-nav">
                         <input id="submit-button" type="submit" class="btn btn-success btn-block" name="submit-button" value="submit">
-                    </div>
-
-                    <div class="col-md-6">
                         <a href="/">Home</a>
                     </div>
+
                 </div>
             </div>
         </form>
@@ -85,7 +105,6 @@
 
     <script>
         let forms = document.querySelectorAll (".needs-validation");
-
         Array.prototype.slice.call (forms).forEach (function(form)
         {
             form.addEventListener ("submit", function(event)

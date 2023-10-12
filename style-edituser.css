@@ -1,0 +1,38 @@
+body {
+    margin-top: 100px;
+}
+
+#profile-pic-edituser{
+    margin: 1rem 16px 1rem 0px;
+    width : 80px !important;
+    height: auto;
+    border-radius: 50%;
+}
+
+
+
+.btn {
+    cursor: pointer;
+}
+
+.text-light {
+    color: #babbbc !important;
+}
+
+#savechanges-cancel {
+    margin: 1rem 0px 1rem 0px;
+}
+.row-bordered {
+    overflow: hidden;
+}
+
+.account-settings-fileinput {
+    visibility: hidden;
+    width     : 1px;
+    height    : 1px;
+    opacity   : 0;
+}
+
+.form-group {
+    margin: 1rem 0.5rem 1rem 0px;
+}
