@@ -45,7 +45,7 @@ class ApplicationCommentList(generics.ListCreateAPIView):
         else:
             receiver_id = applicant.id
             n_type = "alert"
-            message = f"{owner.first_name} has commented on the {owner.pet.pet_name} application."
+            message = f"{owner.first_name} has commented on the {application.pet.pet_name} application."
             link = reverse('app_comment_list', kwargs={'application_id': application_id})
 
         create_notification(receiver_id=receiver_id, n_type=n_type, message=message, link=link)
