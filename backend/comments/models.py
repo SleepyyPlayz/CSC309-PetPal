@@ -15,7 +15,7 @@ class ApplicationComment(models.Model):
         return f'{self.user.email} - {self.text} - {self.created}'
 
     class Meta:
-        ordering = ['created']
+        ordering = ['-created']
 
 
 class ReviewComment(models.Model):
@@ -38,5 +38,18 @@ class ReviewComment(models.Model):
         return f'{self.user.email} - {self.text} - {self.rating} {self.created}'
 
     class Meta:
-        ordering = ['created']
+        ordering = ['-created']
+
+class BlogComment(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    text = models.CharField(max_length=200)
+    user =  models.ForeignKey('accounts.PetPalUser', on_delete=models.CASCADE)
+    blog = models.ForeignKey('shelter_blogs.ShelterBlog', on_delete=models.CASCADE)
+    parent_comment = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='replies')
+    
+    def __str__(self) -> str:
+        return f'{self.user.email} - {self.text} - {self.created}'
+
+    class Meta:
+        ordering = ['-created']
 

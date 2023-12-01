@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
-from comments.models import ApplicationComment, ReviewComment
-from comments.serializers import ApplicationCommentSerializer, ReviewCommentSerializer
+from comments.models import ApplicationComment, ReviewComment, BlogComment
+from comments.serializers import ApplicationCommentSerializer, ReviewCommentSerializer, BlogCommentSerializer
 from applications.models import PetApplication
 from rest_framework import permissions
 from comments.permissions import IsApplicantOrShelter
@@ -10,6 +10,7 @@ from accounts.models import Shelter
 from django.shortcuts import get_object_or_404
 from notifications.callbacks import create_notification
 from django.urls import reverse
+from shelter_blogs.models import ShelterBlog
 
 
 class ApplicationCommentList(generics.ListCreateAPIView):
@@ -86,9 +87,38 @@ class ReviewCommentList(generics.ListCreateAPIView):
         create_notification(receiver_id=receiver_id, n_type=n_type, message=message, link=link)
         
         return super().perform_create(serializer)
+    
+
+
+class BlogCommentList(generics.ListCreateAPIView):
+    serializer_class = BlogCommentSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        blog_id = self.kwargs['blog_id']
+        return BlogComment.objects.filter(blog_id=blog_id)
+    
+    def perform_create(self, serializer):
+        blog_id = self.kwargs['blog_id']
+        parent_comment_id = self.request.data.get('parent_comment')
+        blog = get_object_or_404(ShelterBlog, pk=blog_id)
+    
+        if parent_comment_id:
+            parent_comment = get_object_or_404(BlogComment, pk=parent_comment_id)
+            serializer.save(user=self.request.user, blog=blog, blog_id=blog_id, parent_comment=parent_comment)
+        else:
+            serializer.save(user=self.request.user, blog=blog, blog_id=blog_id)
+
+        receiver_id = blog.shelter.underlying_user.id
+        reviewer = self.request.user
+        n_type = "alert"
+        message = f"{reviewer.first_name} has commented on the {blog.title} blog."
+        link = reverse('blog_comment_list', kwargs={'blog_id': blog_id})
+
+        create_notification(receiver_id=receiver_id, n_type=n_type, message=message, link=link)
+
+        return super().perform_create(serializer)
+
 
 
     
-
-    
-

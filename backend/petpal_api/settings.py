@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'applications',
     'notifications',
     'comments',
+    'shelter_blogs',
     'drf_yasg',
     'rest_framework',
     'rest_framework_simplejwt',

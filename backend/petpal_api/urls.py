@@ -42,6 +42,7 @@ urlpatterns = [
     path('notifications/', include('notifications.urls', namespace='notifications')),
     path('applications/', include('applications.urls')),
     path('comments/', include('comments.urls')),
+    path('shelter_blogs/', include('shelter_blogs.urls')),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     
