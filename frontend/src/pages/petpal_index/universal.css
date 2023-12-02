@@ -1,0 +1,28 @@
+nav {
+    border-bottom: solid 1px #CCCCCC;
+}
+
+.search-bar {
+    border: solid 1px #CCCCCC;
+    border-radius: 30px;
+}
+
+.search-bar:hover {
+    box-shadow: 0px 1px 1px 1px #CCCCCC;
+    transition: 100ms ease-out;
+}
+
+.user-bar {
+    width: 60px;
+    border: solid 1px #CCCCCC;
+    border-radius: 30px;
+}
+
+.user-bar:hover {
+    box-shadow: 0px 1px 1px 1px #CCCCCC;
+    transition: 100ms ease-out;
+}
+
+a.categories {
+    text-decoration: none;
+}
