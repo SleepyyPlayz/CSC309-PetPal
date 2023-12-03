@@ -15,7 +15,7 @@ class BaseUserSerializer(ModelSerializer):
 
 
 class ShelterSerializer(ModelSerializer):
-    underlying_user = serializers.ReadOnlyField(source='underlying_user.username')
+    underlying_user = serializers.ReadOnlyField(source='underlying_user.id')
     class Meta:
         model = Shelter
         fields = ['underlying_user', 'name', 'address_line_1', 'address_line_2', 'postal_code']
