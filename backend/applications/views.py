@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from .models import PetApplication
-from .permissions import IsApplicationForUser, CanUpdateApplicationStatus
+from .permissions import IsApplicationForUser, CanUpdateApplicationStatus, IsNotAShelter
 from .permissions import CanViewOwnApplications, IsApplicationForShelter
 from .serializers import PetApplicationSerializer
 from .filters import ApplicationFilter
@@ -12,6 +12,7 @@ import django_filters
 
 class NewPetApplication(generics.CreateAPIView):
     queryset = PetApplication.objects.all()
+    permission_classes = [IsNotAShelter]
     serializer_class = PetApplicationSerializer
 
     def perform_create(self, serializer):

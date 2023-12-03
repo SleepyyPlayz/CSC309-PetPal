@@ -23,6 +23,7 @@ RENT_OWN_OR = (
 )
 
 class PetApplication(models.Model):
+    id = models.AutoField(primary_key=True)
     applicant = models.ForeignKey(PetPalUser, on_delete=models.CASCADE)
     pet = models.ForeignKey(PetListing, on_delete=models.CASCADE)
     status = models.CharField(max_length=30, choices=APPLICATION_STATUS_CHOICES, default='pending')

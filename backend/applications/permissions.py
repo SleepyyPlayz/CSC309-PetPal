@@ -1,5 +1,15 @@
 from rest_framework import permissions
 
+
+class IsNotAShelter(permissions.BasePermission):
+    """
+    Only allow the shelter the application is directed towards can access.
+    """
+
+    def has_object_permission(self, request, view, obj):
+        # Check if user is not a shelter
+        return request.user.is_shelter == False
+
 class IsApplicationForShelter(permissions.BasePermission):
     """
     Only allow the shelter the application is directed towards can access.
