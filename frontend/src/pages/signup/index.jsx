@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './signup-style.css';
 
 const Signup = () => {
   const registerUrl = 'http://127.0.0.1:8000/accounts/user/'
@@ -13,6 +14,7 @@ const Signup = () => {
   });
 
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
@@ -25,8 +27,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     console.log(JSON.stringify(formData));
     e.preventDefault();
-  
-
+    var skipFlag = false;
     fetch(registerUrl, {
         method: 'POST',
         headers: {
@@ -35,58 +36,44 @@ const Signup = () => {
         body: JSON.stringify(formData),
     })
     .then((response) => {
-      if(response.ok) {
-        setError("Registration Success")
+      if (response.ok) {
+        setError("")
+        setSuccess("Registration Success")
+        skipFlag = true;
         return ""
       }
-      else {
-        setError("registration fail")
-        return ""
-      }
+      return response.json()
     })
-  }
+    .then((json) => {
+      if (!skipFlag) {
+        setError("Registration Failed")
+        setSuccess("")
+        console.log(json)
+        return json
+      }
+      
+      })
+    }
 
 
+
+    const bootstrapCSS = (
+      <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossOrigin="anonymous"
+      />
+    );
 
   return (
-    
-      <form onSubmit={handleSubmit}>
-        <h2>Create a new PetPal account</h2>
-        <input
-          type="text"
-          name="first_name"
-          value={formData.first_name}
-          onChange={handleChange}
-          placeholder="First Name"
-        />
-        <input
-          type="text"
-          name="last_name"
-          value={formData.last_name}
-          onChange={handleChange}
-          placeholder="Last Name"
-        />
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          placeholder="Password"
-        />
-        <input
-          type="tel"
-          name="phone_number"
-          value={formData.phone_number}
-          onChange={handleChange}
-          placeholder="Phone Number"
-        />
+    <>
+      {bootstrapCSS}
+  
+      <div className="container-sm">
+      <form className="signup-form" onSubmit={handleSubmit}>
+        <h2 id="create-your-account">Create a new PetPal account</h2>
+        <div className="form-group" id="choose-acc-type">
         <label>
           Is Shelter:
           <input
@@ -96,19 +83,89 @@ const Signup = () => {
             onChange={handleChange}
           />
         </label>
+        </div>
+        <div className = "row form-group">
+            <div className="col-md-6">
+                <input
+                  type="text"
+                  name="first_name"
+                  className="form-control"
+                  value={formData.first_name}
+                  onChange={handleChange}
+                  placeholder="First Name"
+                />
 
-        <label>
-          Location:
+</div>
+<div className="col-md-6">
+                <input
+                  type="text"
+                  name="last_name"
+                  className="form-control"
+                  value={formData.last_name}
+                  onChange={handleChange}
+                  placeholder="Last Name"
+                />
+          </div>
+        </div>
+
+        <div className="form-group">
+        <input
+          type="email"
+          name="email"
+          className="form-control"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="Email"
+        />
+        </div>
+
+        <div className="form-group">
+        <input
+          type="password"
+          name="password"
+          className="form-control"
+          value={formData.password}
+          onChange={handleChange}
+          placeholder="Password"
+        />
+        </div>
+        <div className="form-group">
+        <input
+          type="tel"
+          className="form-control"
+          name="phone_number"
+          value={formData.phone_number}
+          onChange={handleChange}
+          placeholder="Phone Number"
+        />
+        </div>
+       
+
+        <div className="form-group">
+        
+          
           <input
+            className="form-control"
             type="text"
             name="location"
             checked={formData.location}
             onChange={handleChange}
+            placeholder="Location"
           />
-        </label>
-        <button type="submit">Sign Up</button>
-        <p className="error">{error}</p>
-      </form>);
-     
+        
+        </div>
+        <div class="form-group">
+        <button id="submit-button" className="btn btn-success btn-block" type="submit">Sign Up</button>
+        </div>
+        <div class="form-group">
+          <p className="error">{error}</p>
+          <p className="success">{success}</p>
+        </div>
+        
+      
+      </form>
+      </div>
+     </>
+  );
 }
 export default Signup;
