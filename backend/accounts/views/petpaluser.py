@@ -26,6 +26,12 @@ class PetPalUserRetrieve(RetrieveAPIView):
     def get_queryset(self):
         return PetPalUser.objects.filter(id=self.kwargs['pk'])
     
+class PetPalUserSelfRetrieve(RetrieveAPIView):
+    permission_classes = [HasActiveApplicationWithUser]
+    serializer_class = BaseUserSerializer
+    def get_queryset(self):
+        return PetPalUser.objects.filter(id=self.kwargs['pk'])
+    
 class PetPalUserEdit(RetrieveUpdateDestroyAPIView):
     permission_classes = [IsUserOrReadOnly]
     serializer_class = BaseUserSerializer

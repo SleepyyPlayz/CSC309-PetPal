@@ -37,9 +37,38 @@ const Signup = () => {
     })
     .then((response) => {
       if (response.ok) {
+     
+        skipFlag = true;
+        if (formData.is_shelter === true) {
+            fetch('http://127.0.0.1:8000/api/token/', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                email: formData.email,
+                password: formData.password,
+              }),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+            console.log(data);
+            const accessToken = data.access;
+            fetch('http://127.0.0.1:8000/accounts/shelter/', {
+              method: 'POST',
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                name: formData.email,
+              }),
+            })
+            })
+           
+        }
         setError("")
         setSuccess("Registration Success")
-        skipFlag = true;
         return ""
       }
       return response.json()
