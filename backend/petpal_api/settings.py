@@ -52,7 +52,7 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 5,
+    'PAGE_SIZE': 2,
 
     'DEFAULT_PERMISSION_CLASSES' : [
         'rest_framework.permissions.IsAuthenticated',
@@ -162,5 +162,6 @@ MEDIA_URL = "/media/"
 CORS_ALLOWED_ORIGINS = [
 "http://localhost:3000",
 "http://127.0.0.1:3000",
+"http://192.168.2.251:3000",
 ]
 
