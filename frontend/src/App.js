@@ -4,6 +4,7 @@ import Login from './pages/login';
 import Blogs from './pages/blogs';
 import PetList from './pages/petpal_index';
 import NoPage from './pages/no_page';
+import Signup from './pages/signup';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 
@@ -14,6 +15,7 @@ function App() {
         <Route index element={<PetList />} />
         <Route path="blogs" element={<Blogs />} />
         <Route path="login" element={<Login />} />
+        <Route path="signup" element={<Signup />} />
         <Route path="*" element={<NoPage />} />
       </Route>
     </Routes>
