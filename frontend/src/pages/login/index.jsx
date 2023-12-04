@@ -48,7 +48,8 @@ function Login( {setIsLoggedIn}) {
     return (
     <>
         {bootstrapCSS}
-        <div class="container-sm">
+       
+        <div className="container-sm" id="form-auth">
             <form id="login-form" onSubmit={handle_submit} className="signup-form">
             <h2 id="create-your-account">Login</h2>
             <div className="form-group">
@@ -61,9 +62,10 @@ function Login( {setIsLoggedIn}) {
                 <button className="btn btn-success btn-block" id="submit-button" type="submit">Login</button>
             </div>
             <p className="error">{error}</p>
-            </form>;
+            </form>
 
         </div>
+     
 
     </>
     )

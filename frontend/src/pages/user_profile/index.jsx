@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './signup-style.css';
 
-const Signup = () => {
-  const registerUrl = 'http://127.0.0.1:8000/accounts/user/'
+const EditUser = () => {
+  const editProfileUrl= 'http://127.0.0.1:8000/accounts/user/'
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',

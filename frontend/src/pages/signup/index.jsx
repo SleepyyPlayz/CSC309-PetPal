@@ -70,7 +70,7 @@ const Signup = () => {
     <>
       {bootstrapCSS}
   
-      <div className="container-sm">
+      <div className="container-sm" id="form-auth">
       <form className="signup-form" onSubmit={handleSubmit}>
         <h2 id="create-your-account">Create a new PetPal account</h2>
         <div className="form-group" id="choose-acc-type">

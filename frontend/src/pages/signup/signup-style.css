@@ -9,11 +9,13 @@
 .success {
     color: green;
 }
-.container-sm {
+
+.container-sm #form-auth {
     border: 1px solid black;
     border-radius: 20px;
-    max-width: 574px;
+    max-width: 500px;
     padding: 45px 10px 45px 10px;
+
 }
 
 #logo-top {
