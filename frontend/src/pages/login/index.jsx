@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import '../signup/signup-style.css';
 
-function Login() {
+function Login( {setIsLoggedIn}) {
     const [error, setError] = useState("");
     const navigate = useNavigate();
     const loginUrl = 'http://127.0.0.1:8000/api/token/';
@@ -19,6 +19,7 @@ function Login() {
             if ('access' in json) {
                 localStorage.setItem('access', json.access);
                 localStorage.setItem('email', data.get('email'));
+                setIsLoggedIn(true);
                 navigate('/');
             }
             else if ('detail' in json) {
