@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 
 const PetList = () => {
   console.log('Rendering PetList'); // Add this line
@@ -82,6 +84,7 @@ const PetList = () => {
                         <p className="card-text">{pet.breed} - {pet.gender} - {pet.age} years old</p>
                         <div className="d-flex justify-content-between align-items-center">
                           {/* <a className="btn btn-sm btn-outline-info me-3" href="pet-detail-page.html">Details</a> */}
+                          <Link to={`/pet_listings/${pet.id}`} className="btn btn-sm btn-outline-info me-3">Details</Link>
                           <small className="text-muted">{pet.shelter.name}</small>
                         </div>
                       </div>

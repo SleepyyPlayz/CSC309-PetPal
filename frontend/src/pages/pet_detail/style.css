@@ -1,0 +1,18 @@
+.adopt-button {
+    background-color: #97DDDF;
+    color: black;
+    border-color: grey;
+    font-weight: normal;
+}
+
+.adopt-button:hover {
+    background-color: rgb(0, 102, 255);
+    border-color: grey;
+}
+
+.btn.btn-primary.btn-lg.adopt-button.disabled{
+    background-color: #97DDDF;
+    color: black;
+    border-color: grey;
+    font-weight: normal;
+}

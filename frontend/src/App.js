@@ -5,6 +5,7 @@ import Blogs from './pages/blogs';
 import PetList from './pages/petpal_index';
 import NoPage from './pages/no_page';
 import Signup from './pages/signup';
+import PetDetail from './pages/pet_detail';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { verifyToken } from './auth'
 import React, {useState, useEffect} from 'react';
@@ -33,6 +34,7 @@ function App() {
         <Route path="blogs" element={<Blogs />} />
         <Route path="login" element={<Login setIsLoggedIn={setIsLoggedIn}/>} />
         <Route path="signup" element={<Signup />} />
+        <Route path="/pet_listings/:id/" element={<PetDetail />} />
         <Route path="*" element={<NoPage />} />
       </Route>
     </Routes>
