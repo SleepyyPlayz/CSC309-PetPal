@@ -7,11 +7,11 @@ const PetList = () => {
 
   const [pets, setPets] = useState([]);
   const [nextPage, setNextPage] = useState(null);
-  const [preNextPage, setPreNextPage] = useState(null);
+  const [currentPage, setCurrentPage] = useState(`http://127.0.0.1:8000/pet_listings/`);
+  const [previousPage, setPreviousPage] = useState(null);
+
 
   useEffect(() => {
-    // Define the API endpoint for your pets
-    const apiUrl = nextPage || 'http://127.0.0.1:8000/pet_listings/';
 
     // Uncomment the following lines if you are using Axios
     /*
@@ -26,18 +26,21 @@ const PetList = () => {
     */
 
     // Using the Fetch API
-    fetch(apiUrl)
+    fetch(currentPage)
       .then(response => response.json())
       .then(data => {
-        setPets(prevPets => [...prevPets, ...data.results]);
-        setPreNextPage(data.next);
+        setPets(data.results);
+        setNextPage(data.next);
+        if (data.hasOwnProperty('previous')){
+          setPreviousPage(data.previous);
+        } else {
+          setPreviousPage(null);
+        }
       })
       .catch(error => {
         console.error('Error fetching pets:', error);
       });
-  }, [nextPage]); // Run this effect when nextPage changes
-
-
+  }, [currentPage]); // Run this effect when nextPage changes
 
   return (
     // <>
@@ -96,9 +99,15 @@ const PetList = () => {
             </div>
           </div>
           
-          {preNextPage && (
-              <button onClick={() => setNextPage(preNextPage)}>
-                Load More
+          {nextPage && (
+              <button onClick={() => setCurrentPage(nextPage)}>
+                Next Page
+              </button>
+            )}
+          
+          {previousPage && (
+              <button onClick={() => setCurrentPage(previousPage)}>
+                Previous Page
               </button>
             )}
 
