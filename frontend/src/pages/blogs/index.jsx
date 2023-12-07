@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 const Blogs = () => {
@@ -8,7 +9,7 @@ const Blogs = () => {
   const [currentPage, setCurrentPage] = useState('http://127.0.0.1:8000/shelter_blogs/');
   const [previousPage, setPreviousPage] = useState(null);
   const [likeStatusChanged, setLikeStatusChanged] = useState(false); // New state for tracking like status changes
-
+  
 
   useEffect(() => {
     // Define the API endpoint for your pets
@@ -100,9 +101,11 @@ const Blogs = () => {
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         />
-      </head>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        </head>
+      
 
-      <body className="d-flex flex-column min-vh-100">
+      <div className="d-flex flex-column min-vh-100">
         <main className="mb-5">
           <section className="py-1 text-center container">
             <div className="row">
@@ -118,7 +121,7 @@ const Blogs = () => {
               <div className="row row-cols-1  row-cols-md-2 g-3">
                 {blogs.map(blog => (
                   // <li key={pet.id}>{pet.pet_name}</li>
-                  <div className="col">
+                  <div className="col" key={blog.id}>
                     <div className="card shadow-sm">
                       <img className="card-img-top" width="100%" src={blog.image !== null ? `${blog.image}` : "/no_image.jpg" } alt="Blog Pic"/>
                       <div className="card-body">
@@ -127,7 +130,7 @@ const Blogs = () => {
                         <div className="d-flex justify-content-between align-items-center">
                           {/* <a className="btn btn-sm btn-outline-info me-3" href="pet-detail-page.html">Details</a> */}
                           <button className="btn btn-sm btn-outline-danger me-3" onClick={() => like(blog.id)}>Like </button>
-                          <button className="btn btn-sm btn-outline-primary me-3">Comments </button>
+                          <Link to={`/comments/${blog.id}`} className="btn btn-sm btn-outline-primary me-3" >Comments </Link>
                           {/* <small className="text-muted">{pet.shelter.name}</small> */}
                         </div>
                         <p className="card-text">{blog.likes}</p>
@@ -154,7 +157,7 @@ const Blogs = () => {
             )}
 
         </main>
-      </body>
+      </div>
     
     </>)
   };
