@@ -1,44 +1,71 @@
-import React, { useState } from 'react';
-import './signup-style.css';
-
-const Detail = () => {
-  const editProfileUrl= 'http://127.0.0.1:8000/accounts/user/'
-  const [formData, setFormData] = useState({
-    first_name: '',
-    last_name: '',
-    email: '',
-    password: '',
-    phone_number: '',
-    is_shelter: false,
-    location: '',
-  });
-
+import React, { useState, useEffect } from 'react';
+import '../signup/signup-style.css';
+const UserDetail = ({isLoggedIn}) => {
+  const userId = localStorage.getItem('userId');
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const accessToken = localStorage.getItem('access');
+  const [profileData, setProfileData] = useState({
+    email: '',
+    first_name: '',
+    last_name: '',
+    location: '',
+    phone_number: '',
+    profile_picture: '',
+  });
 
-  const handleChange = (e) => {
-    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-    setFormData({
-      ...formData,
-      [e.target.name]: value,
-    });
-  };
+  useEffect(() => {
+    const getProfile = async () => {
+      try {
+        
+        const response = await fetch(`http://127.0.0.1:8000/accounts/user/${userId}/`, {
+          headers: {
+            "Authorization": `Bearer ${accessToken}`,
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setProfileData(data);
+        } else {
+          console.error('Failed to fetch profile data');
+        }
+      } catch (error) {
+        console.error('Error fetching profile data:', error);
+      }
+    }
+    console.log(isLoggedIn)
+    if (isLoggedIn === true) {
+      getProfile();
+      console.log(profileData);
+    }
+    else {
+      console.log("invalid token");
+    }
   
-  const handleSubmit = async (e) => {
-    console.log(JSON.stringify(formData));
-    e.preventDefault();
+  
+  }, []);
+
+    const handleChange = (event) => {
+      const { name, value } = event.target;
+      // Update the profileData state as the user types
+      setProfileData({ ...profileData, [name]: value });
+    };
+  
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     var skipFlag = false;
-    fetch(registerUrl, {
-        method: 'POST',
+    fetch(`http://127.0.0.1:8000/accounts/user/${userId}/profile/`, {
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(profileData),
     })
     .then((response) => {
       if (response.ok) {
         setError("")
-        setSuccess("Registration Success")
+        setSuccess("Profile updated!")
         skipFlag = true;
         return ""
       }
@@ -46,12 +73,11 @@ const Detail = () => {
     })
     .then((json) => {
       if (!skipFlag) {
-        setError("Registration Failed")
+        setError("Error updating profile")
         setSuccess("")
         console.log(json)
         return json
       }
-      
       })
     }
 
@@ -72,27 +98,17 @@ const Detail = () => {
   
       <div className="container-sm">
       <form className="signup-form" onSubmit={handleSubmit}>
-        <h2 id="create-your-account">Create a new PetPal account</h2>
-        <div className="form-group" id="choose-acc-type">
-        <label>
-          Is Shelter:
-          <input
-            type="checkbox"
-            name="is_shelter"
-            checked={formData.is_shelter}
-            onChange={handleChange}
-          />
-        </label>
-        </div>
+        <h2 id="create-your-account">User Profile</h2>
+
         <div className = "row form-group">
             <div className="col-md-6">
                 <input
                   type="text"
                   name="first_name"
                   className="form-control"
-                  value={formData.first_name}
+                  value={profileData.first_name}
                   onChange={handleChange}
-                  placeholder="First Name"
+                  
                 />
 
 </div>
@@ -101,9 +117,9 @@ const Detail = () => {
                   type="text"
                   name="last_name"
                   className="form-control"
-                  value={formData.last_name}
+                  value={profileData.last_name}
                   onChange={handleChange}
-                  placeholder="Last Name"
+                  placeholder={profileData.last_name}
                 />
           </div>
         </div>
@@ -113,7 +129,7 @@ const Detail = () => {
           type="email"
           name="email"
           className="form-control"
-          value={formData.email}
+          value={profileData.email}
           onChange={handleChange}
           placeholder="Email"
         />
@@ -124,7 +140,7 @@ const Detail = () => {
           type="password"
           name="password"
           className="form-control"
-          value={formData.password}
+          value={profileData.password}
           onChange={handleChange}
           placeholder="Password"
         />
@@ -134,7 +150,7 @@ const Detail = () => {
           type="tel"
           className="form-control"
           name="phone_number"
-          value={formData.phone_number}
+          value={profileData.phone_number}
           onChange={handleChange}
           placeholder="Phone Number"
         />
@@ -148,16 +164,16 @@ const Detail = () => {
             className="form-control"
             type="text"
             name="location"
-            checked={formData.location}
+            value={profileData.location}
             onChange={handleChange}
-            placeholder="Location"
+         
           />
         
         </div>
-        <div class="form-group">
-        <button id="submit-button" className="btn btn-success btn-block" type="submit">Sign Up</button>
+        <div className="form-group">
+        <button id="submit-button" className="btn btn-success btn-block" type="submit">Save</button>
         </div>
-        <div class="form-group">
+        <div className="form-group">
           <p className="error">{error}</p>
           <p className="success">{success}</p>
         </div>
@@ -168,4 +184,5 @@ const Detail = () => {
      </>
   );
 }
-export default Signup;
+
+export default UserDetail;
