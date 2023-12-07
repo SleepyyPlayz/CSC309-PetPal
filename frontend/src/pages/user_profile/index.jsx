@@ -5,7 +5,7 @@ const UserDetail = ({isLoggedIn}) => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const accessToken = localStorage.getItem('access');
-  const new_pass = '';
+  const [new_pass, setnew_pass] = useState('');
   const [profileData, setProfileData] = useState({
     email: '',
     first_name: '',
@@ -51,6 +51,12 @@ const UserDetail = ({isLoggedIn}) => {
       // Update the profileData state as the user types
       setProfileData({ ...profileData, [name]: value });
     };
+    const handlePWChange = (event) => {
+      const value = event.target.value
+      // Update the profileData state as the user types
+      setnew_pass(value);
+    };
+    
   
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -148,8 +154,8 @@ const UserDetail = ({isLoggedIn}) => {
           name="password"
           className="form-control"
           value={new_pass}
-          onChange={handleChange}
-          placeholder="Password"
+          onChange={handlePWChange}
+          placeholder="New Password"
         />
         </div>
         <div className="form-group">
