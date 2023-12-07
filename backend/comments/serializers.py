@@ -1,12 +1,12 @@
 from rest_framework import serializers
 from comments.models import ApplicationComment, ReviewComment, BlogComment
 from applications.serializers import PetApplicationSerializer
-from accounts.serializers import ShelterSerializer
+from accounts.serializers import ShelterSerializer, BaseUserSerializer
 from shelter_blogs.serializers import ShelterBlogSerializer
 
 class ApplicationCommentSerializer(serializers.ModelSerializer):
     replies = serializers.SerializerMethodField()
-    user = serializers.ReadOnlyField(source='user.username')
+    user = BaseUserSerializer(read_only=True)
     application = PetApplicationSerializer(read_only=True)
 
     class Meta:
@@ -19,7 +19,7 @@ class ApplicationCommentSerializer(serializers.ModelSerializer):
     
 class ReviewCommentSerializer(serializers.ModelSerializer):
     replies = serializers.SerializerMethodField()
-    user = serializers.ReadOnlyField(source='user.username')
+    user = BaseUserSerializer(read_only=True)
     shelter = ShelterSerializer(read_only=True)
 
     class Meta:
@@ -32,7 +32,7 @@ class ReviewCommentSerializer(serializers.ModelSerializer):
     
 class BlogCommentSerializer(serializers.ModelSerializer):
     replies = serializers.SerializerMethodField()
-    user = serializers.ReadOnlyField(source='user.username')
+    user = BaseUserSerializer(read_only=True)
     blog = ShelterBlogSerializer(read_only=True)
 
     class Meta:
