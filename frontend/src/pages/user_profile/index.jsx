@@ -12,6 +12,7 @@ const UserDetail = ({isLoggedIn}) => {
     location: '',
     phone_number: '',
     profile_picture: '',
+    password: '',
   });
 
   useEffect(() => {
