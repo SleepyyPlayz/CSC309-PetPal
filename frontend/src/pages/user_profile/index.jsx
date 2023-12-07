@@ -5,6 +5,7 @@ const UserDetail = ({isLoggedIn}) => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const accessToken = localStorage.getItem('access');
+  const new_pass = '';
   const [profileData, setProfileData] = useState({
     email: '',
     first_name: '',
@@ -12,9 +13,8 @@ const UserDetail = ({isLoggedIn}) => {
     location: '',
     phone_number: '',
     profile_picture: '',
-    password: '',
   });
-
+  
   useEffect(() => {
     const getProfile = async () => {
       try {
@@ -55,6 +55,12 @@ const UserDetail = ({isLoggedIn}) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     var skipFlag = false;
+    if (new_pass !== '') {
+      profileData.password = new_pass;
+    }
+    else {
+      delete profileData.password
+    }
     fetch(`http://127.0.0.1:8000/accounts/user/${userId}/profile/`, {
         method: 'PATCH',
         headers: {
@@ -141,7 +147,7 @@ const UserDetail = ({isLoggedIn}) => {
           type="password"
           name="password"
           className="form-control"
-          value={profileData.password}
+          value={new_pass}
           onChange={handleChange}
           placeholder="Password"
         />
