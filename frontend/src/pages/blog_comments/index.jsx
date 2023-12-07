@@ -32,7 +32,19 @@ function BlogComment() {
 
       const renderReplies = (comment) => (
         <div key={comment.id} style={{marginLeft: '20px'}}>
-            <p>{comment.text}</p>
+            <div className="card mb-3 h-100">
+                      <div className="row g-0">
+                        <div className="col-4">
+                          <img src={comment.user.profile_picture ? `${comment.user.profile_picture}` : "/no_image.jpg" } class="img-fluid rounded-start" alt="..."/>
+                        </div>
+                        <div className="col-8">
+                          <div className="card-body">
+                            <h5 className="card-title">{comment.user.first_name} {comment.user.last_name}</h5>
+                            <p className="card-text"> {comment.text} </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
             {comment.replies && comment.replies.length > 0 && (
                 <div style={{ marginLeft: '20px' }}>
                     {comment.replies.map(reply => renderReplies(reply))}
@@ -53,15 +65,28 @@ function BlogComment() {
         </head>
 
         <main>
-        <div>
+        <div className="container mx-auto row justify-content-center g-0 mx-4 mt-2 px-3">
             {comments.map(comment => (   
                            
               <div key={comment.id}>
                 {comment.parent_comment == null && (
                   <div>
-                    <p>{comment.text}</p>
+                    <div className="card mb-3 h-100">
+                      <div className="row g-0">
+                        <div className="col-4">
+                          <img src={comment.user.profile_picture ? `${comment.user.profile_picture}` : "/no_image.jpg" } class="img-fluid rounded-start" alt="..."/>
+                        </div>
+                        <div className="col-8">
+                          <div className="card-body">
+                            <h5 className="card-title">{comment.user.first_name} {comment.user.last_name}</h5>
+                            <p className="card-text"> {comment.text} </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     {comment.replies.map(comment => renderReplies(comment))}
                   </div>
+                  
                   
                 )}
 
