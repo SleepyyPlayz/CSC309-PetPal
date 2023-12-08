@@ -7,6 +7,8 @@ import NoPage from './pages/no_page';
 import Signup from './pages/signup';
 import UserDetail from './pages/user_profile';
 import PetDetail from './pages/pet_detail';
+import MyPosts from './pages/my_posts';
+import MyListings from './pages/my_listings';
 import BlogComment from './pages/blog_comments';
 import { BrowserRouter, Route, Routes, Redirect} from 'react-router-dom';
 import { verifyToken } from './auth'
@@ -60,6 +62,8 @@ function App() {
         <Route index element={<PetList />} />
         <Route path="blogs" element={<Blogs />} />
         <Route path="/shelter_profile" element = {<ShelterDetail isLoggedIn={isLoggedIn}/>} />
+        <Route path="/my_posts" element = {<MyPosts IsLoggedIn={isLoggedIn}/>} />
+        <Route path="/my_listings" element = {<MyListings IsLoggedIn={isLoggedIn}/>} />
         <Route path="login" element={<Login setIsLoggedIn={setIsLoggedIn}/>} />
         <Route path="signup" element={<Signup />} />
         <Route path="/pet_listings/:id/" element={<PetDetail />} />

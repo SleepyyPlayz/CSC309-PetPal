@@ -20,9 +20,19 @@ const Layout = ({ handleSignOut, isLoggedIn}) => {
                 <Link to="/user_profile">User Profile</Link>
               </li>
               {isShelter && (
+                <>
                 <li>
                   <Link to="/shelter_profile">Shelter Profile</Link>
                 </li>
+
+                <li>
+                  <Link to="/my_listings">My Listings</Link>
+                </li>
+
+                <li>
+                  <Link to="/my_posts">My Blogposts</Link>
+                </li>
+                </>
               )}
                 <li>
                 <button onClick={handleSignOut}>Sign Out</button>
