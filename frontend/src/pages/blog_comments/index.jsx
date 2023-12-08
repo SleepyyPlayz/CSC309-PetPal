@@ -134,14 +134,28 @@ function BlogComment() {
             )}
             <button onClick={() => handleReplyClick(comment.id)}>Reply</button>
             {parentCommentId === comment.id && (
+                // <div>
+                //     <input
+                //         type="text"
+                //         value={replyText}
+                //         onChange={(e) => setReplyText(e.target.value)}
+                //         placeholder="Type your reply"
+                //     />
+                //     <button onClick={handleReplySubmit}>Submit Reply</button>
+                // </div>
                 <div>
-                    <input
+                  <div className="mb-3">
+                    <label class="form-label">New Reply</label>
+                    <textarea
                         type="text"
+                        className="form-control"
+                        rows="3"
                         value={replyText}
                         onChange={(e) => setReplyText(e.target.value)}
                         placeholder="Type your reply"
                     />
-                    <button onClick={handleReplySubmit}>Submit Reply</button>
+                  </div>
+                  <button onClick={handleReplySubmit}>Submit Reply</button>
                 </div>
             )}
         </div>
@@ -162,12 +176,17 @@ function BlogComment() {
         <div className="container mx-auto row justify-content-center g-0 mx-4 mt-2 px-3">
 
             <div>
-              <input
-                  type="text"
-                  value={newCommentText}
-                  onChange={(e) => setNewCommentText(e.target.value)}
-                  placeholder="Type your comment"
-              />
+              <div className="mb-3">
+                <label class="form-label">New Comment</label>
+                <textarea
+                    type="text"
+                    className="form-control"
+                    rows="3"
+                    value={newCommentText}
+                    onChange={(e) => setNewCommentText(e.target.value)}
+                    placeholder="Type your comment"
+                />
+              </div>
               <button onClick={handleCommentSubmit}>Submit Comment</button>
             </div>
           
@@ -194,13 +213,18 @@ function BlogComment() {
                     <button onClick={() => handleReplyClick(comment.id)}>Reply</button>
                     {parentCommentId === comment.id && (
                         <div>
-                            <input
+                          <div className="mb-3">
+                            <label class="form-label">New Reply</label>
+                            <textarea
                                 type="text"
+                                className="form-control"
+                                rows="3"
                                 value={replyText}
                                 onChange={(e) => setReplyText(e.target.value)}
                                 placeholder="Type your reply"
                             />
-                            <button onClick={handleReplySubmit}>Submit Reply</button>
+                          </div>
+                          <button onClick={handleReplySubmit}>Submit Reply</button>
                         </div>
                     )}
 
