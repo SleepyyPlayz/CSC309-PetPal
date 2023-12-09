@@ -13,6 +13,7 @@ import BlogComment from './pages/blog_comments';
 import { BrowserRouter, Route, Routes, Redirect} from 'react-router-dom';
 import { verifyToken } from './auth'
 import React, {useState, useEffect} from 'react';
+import ShelterList from './pages/shelters';
 import ShelterDetail from './pages/shelter_profile';
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
       <Route path="/" element={<Layout handleSignOut={handleSignOut} isLoggedIn={isLoggedIn} IsShelter={isShelter}/>}>
         <Route index element={<PetList />} />
         <Route path="blogs" element={<Blogs />} />
+        <Route path="shelters" element={<ShelterList />} />
         <Route path="/shelter_profile" element = {<ShelterDetail isLoggedIn={isLoggedIn}/>} />
         <Route path="/my_posts" element = {<MyPosts IsLoggedIn={isLoggedIn}/>} />
         <Route path="/my_listings" element = {<MyListings IsLoggedIn={isLoggedIn}/>} />

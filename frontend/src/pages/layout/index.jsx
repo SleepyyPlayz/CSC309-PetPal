@@ -7,10 +7,15 @@ const Layout = ({ handleSignOut, isLoggedIn}) => {
     <>
       <nav>
         <ul>
+         
           <li>
             <Link to="/">Home</Link>
           </li>
-          
+
+          <li>
+            <Link to="/shelters">Shelters</Link>
+          </li>
+       
           {isLoggedIn ? (
             <>
               <li>
