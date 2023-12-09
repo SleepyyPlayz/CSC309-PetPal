@@ -1,0 +1,12 @@
+# setup notes
+
+To first set up the back end, you should first cd into our backend folder (cd backend). 
+
+Then, you may optionally set up a virtual environment. Then install the required packages from our packages.txt folder (pip3 install -r packages.txt). 
+
+After migrating, run (python manage.py runserver) to start the server. 
+
+
+To set up the front end, you should first open a new terminal and then cd into the frontend folder (cd frontend). 
+
+Then do (npm install) to install the packages for Node.js. Lastly, do (npm start) and shortly our webpage will start.
