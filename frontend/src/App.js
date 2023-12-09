@@ -54,7 +54,7 @@ function App() {
     localStorage.removeItem('is_shelter');
     setIsShelter(false);
     setIsLoggedIn(false);
-    window.location.href= '/login';
+    window.location.href = '/';
   };
 
   return <BrowserRouter>
