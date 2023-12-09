@@ -29,7 +29,7 @@ const Layout = ({ handleSignOut, isLoggedIn}) => {
 
           <Navbar.Collapse id="navbarNav">
 
-            <Form className="mx-auto d-flex flex-row">
+            {/* <Form className="mx-auto d-flex flex-row">
 
               <Form.Select className="me-2" name="species">
                 <option selected value="0">Species</option>
@@ -51,10 +51,10 @@ const Layout = ({ handleSignOut, isLoggedIn}) => {
               </Form.Select>
 
               <Button variant="secondary" type="submit">Search</Button>
-            </Form>
+            </Form> */}
 
-            <div>
-            <Link to="/shelters" className="me-2"><Button variant="primary">Shelters</Button></Link>
+            <div className="ms-auto">
+              <Link to="/shelters" className="me-2"><Button variant="primary">Shelters</Button></Link>
               { isLoggedIn ? 
                 <>
                   <Link to="/blogs" className="me-2"><Button variant="primary">Blogs</Button></Link>

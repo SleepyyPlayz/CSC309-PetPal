@@ -127,6 +127,7 @@ const Blogs = () => {
                       <div className="card-body">
                         <h5 className="card-title">{blog.title}</h5>
                         <p className="card-text">{blog.text}</p>
+                        <p className="card-text">Author: {blog.shelter.name}</p>
                         <div className="d-flex justify-content-between align-items-center">
                           {/* <a className="btn btn-sm btn-outline-info me-3" href="pet-detail-page.html">Details</a> */}
                           <button className="btn btn-sm btn-outline-danger me-3" onClick={() => like(blog.id)}>Like </button>

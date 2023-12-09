@@ -77,7 +77,7 @@ function App() {
         <Route path="/applications_filled/:id/" element={<ApplicationsFilled />} />
         <Route path="/shelter_view/:id/" element={<ShelterView isLoggedIn={isLoggedIn}/>} />
         <Route path="/comments/:id/" element={<BlogComment />} />
-        <Route path="/user_profile" element = {<UserDetail isLoggedIn={isLoggedIn}/>} />
+        <Route path="/user_profile" element = {<UserDetail handleSignOut={handleSignOut} isLoggedIn={isLoggedIn}/>} />
         <Route path="*" element={<NoPage />} />
       </Route>
     </Routes>
