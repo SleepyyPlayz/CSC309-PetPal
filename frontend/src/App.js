@@ -22,6 +22,7 @@ import ShelterList from './pages/shelters';
 import ShelterDetail from './pages/shelter_profile';
 import ShelterView from './pages/shelter_view';
 import CreateBlog from './pages/create_blog';
+import Notifications from './pages/notifications';
 
 function App() {
   const [isShelter, setIsShelter] = useState(false);
@@ -86,6 +87,8 @@ function App() {
         <Route path="/user_profile" element = {<UserDetail handleSignOut={handleSignOut} isLoggedIn={isLoggedIn}/>} />
         <Route path="/create_pet_listing/" element = {<CreatePetForm/>}/>
         <Route path="/update_pet_listing/:id/" element = {<UpdatePetForm/>}/>
+
+        <Route path="notifications" element = {<Notifications />} />
         <Route path="*" element={<NoPage />} />
       </Route>
     </Routes>

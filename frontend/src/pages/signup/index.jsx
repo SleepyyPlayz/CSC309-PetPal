@@ -106,37 +106,37 @@ const Signup = () => {
       <form className="signup-form" onSubmit={handleSubmit}>
         <h2 id="create-your-account">Create a new PetPal account</h2>
         <div className="form-group" id="choose-acc-type">
-        <label>
-          Is Shelter:
-          <input
-            type="checkbox"
-            name="is_shelter"
-            checked={formData.is_shelter}
-            onChange={handleChange}
-          />
-        </label>
+          <label>
+            Are you a shelter? {'  '}
+            <input
+              type="checkbox"
+              name="is_shelter"
+              checked={formData.is_shelter}
+              onChange={handleChange}
+            />
+          </label>
         </div>
         <div className = "row form-group">
-            <div className="col-md-6">
-                <input
-                  type="text"
-                  name="first_name"
-                  className="form-control"
-                  value={formData.first_name}
-                  onChange={handleChange}
-                  placeholder="First Name"
-                />
+          <div className="col-md-6">
+              <input
+                type="text"
+                name="first_name"
+                className="form-control"
+                value={formData.first_name}
+                onChange={handleChange}
+                placeholder="First Name"
+              />
 
-</div>
-<div className="col-md-6">
-                <input
-                  type="text"
-                  name="last_name"
-                  className="form-control"
-                  value={formData.last_name}
-                  onChange={handleChange}
-                  placeholder="Last Name"
-                />
+          </div>
+          <div className="col-md-6">
+              <input
+                type="text"
+                name="last_name"
+                className="form-control"
+                value={formData.last_name}
+                onChange={handleChange}
+                placeholder="Last Name"
+              />
           </div>
         </div>
 

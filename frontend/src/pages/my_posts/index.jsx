@@ -8,6 +8,7 @@ const MyPosts = ({isLoggedIn}) => {
       const [nextPage, setNextPage] = useState(null);
       const [currentPage, setCurrentPage] = useState(`http://127.0.0.1:8000/shelter_blogs/${shelterId}/blog-posts/`);
       const [previousPage, setPreviousPage] = useState(null);
+      
       const handleDelete = (blogId) => {
         const response = fetch(`http://127.0.0.1:8000/shelter_blogs/${blogId}`, {
             method: 'DELETE',

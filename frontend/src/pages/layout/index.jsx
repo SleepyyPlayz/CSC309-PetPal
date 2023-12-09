@@ -62,7 +62,7 @@ const Layout = ({ handleSignOut, isLoggedIn}) => {
                   {/* <Link to="/applications/filled-applications/shelter/list/" className="me-2"><Button variant="primary">Applications</Button></Link> */}
                   <Link to="/user_profile" className="me-2"><Button variant="secondary">Your Profile</Button></Link>
                     {isShelter && (
-                <>
+                  <>
                 
                     <Link to="/shelter_profile" className="me-2"><Button variant="secondary">Shelter Profile</Button></Link>
                     
@@ -72,6 +72,7 @@ const Layout = ({ handleSignOut, isLoggedIn}) => {
                  
                   </>
                 )}
+                  <Link to="/notifications" className="me-2"><Button variant="outline-info">Notifications</Button></Link>
                   <Button variant="outline-danger" className="me-2" onClick={handleSignOut}>Sign Out</Button>
                 </>
                 :

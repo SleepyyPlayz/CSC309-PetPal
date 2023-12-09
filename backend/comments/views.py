@@ -40,12 +40,12 @@ class ApplicationCommentList(generics.ListCreateAPIView):
         owner = application.pet.shelter.underlying_user
         if self.request.user == applicant:
             receiver_id = owner.id
-            n_type = "alert"
+            n_type = "default"
             message = f"{applicant.first_name} has commented on the {application.pet.pet_name} application."
             link = reverse('app_comment_list', kwargs={'application_id': application_id})
         else:
             receiver_id = applicant.id
-            n_type = "alert"
+            n_type = "default"
             message = f"{owner.first_name} has commented on the {application.pet.pet_name} application."
             link = reverse('app_comment_list', kwargs={'application_id': application_id})
 
@@ -80,11 +80,11 @@ class ReviewCommentList(generics.ListCreateAPIView):
 
         receiver_id = shelter.underlying_user.id
         reviewer = self.request.user
-        n_type = "alert"
-        message = f"{reviewer.first_name} has commented on the {shelter.name} shelter."
+        n_type = "default"
+        message = f"User {reviewer.first_name} has written a comment on the your {shelter.name} shelter."
         link = reverse('review_comment_list', kwargs={'shelter_id': shelter_id})
 
-        create_notification(receiver_id=receiver_id, n_type=n_type, message=message, link=link)
+        create_notification(receiver_id=receiver_id, n_type=n_type, message=message, link=f"/shelter_view/{shelter_id}/")
         
         return super().perform_create(serializer)
     
@@ -111,11 +111,11 @@ class BlogCommentList(generics.ListCreateAPIView):
 
         receiver_id = blog.shelter.underlying_user.id
         reviewer = self.request.user
-        n_type = "alert"
-        message = f"{reviewer.first_name} has commented on the {blog.title} blog."
-        link = reverse('blog_comment_list', kwargs={'blog_id': blog_id})
+        n_type = "default"
+        message = f"User {reviewer.first_name} {reviewer.last_name} has commented on the your blog post: {blog.title}."
+        # link = reverse('blog_comment_list', kwargs={'blog_id': blog_id})
 
-        create_notification(receiver_id=receiver_id, n_type=n_type, message=message, link=link)
+        create_notification(receiver_id=receiver_id, n_type=n_type, message=message, link="/my_posts")
 
         return super().perform_create(serializer)
 
