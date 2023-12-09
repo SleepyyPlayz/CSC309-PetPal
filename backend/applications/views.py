@@ -21,6 +21,7 @@ class NewPetApplication(generics.CreateAPIView):
         #Set current user as the applicant and save application
         if pet_listing.status == 'available':
             serializer.save(applicant=self.request.user)
+        
             return super().perform_create(serializer)
         else:
             raise exceptions.ValidationError("Cannot apply to a pet listing not marked available")

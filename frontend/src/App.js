@@ -76,7 +76,7 @@ function App() {
         <Route path="signup" element={<Signup />} />
         {/* <Route path="applications/applications_list/" element={<Applications />} /> */}
         <Route path="/pet_listings/:id/" element={<PetDetail />} />
-        <Route path="/applications/:id/" element={<Applications />} />
+        <Route path="/applications/:id/" element={<Applications isLoggedIn={isLoggedIn}/>} />
         <Route path="/applications_filled/:id/" element={<ApplicationsFilled />} />
         <Route path="/shelter_view/:id/" element={<ShelterView isLoggedIn={isLoggedIn}/>} />
         <Route path="/comments/:id/" element={<BlogComment />} />
