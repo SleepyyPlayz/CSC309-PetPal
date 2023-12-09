@@ -72,7 +72,6 @@ const UserDetail = ({isLoggedIn}, {handleSignOut}) => {
     };
 
     const handleDeleteProfile = async () => {
-      try {
         const response = await fetch(`http://127.0.0.1:8000/accounts/user/${userId}/profile/`, {
           method: 'DELETE',
           headers: {
@@ -82,22 +81,15 @@ const UserDetail = ({isLoggedIn}, {handleSignOut}) => {
         });
   
         if (response.ok) {
-          // Handle successful deletion
           localStorage.removeItem('access');
           localStorage.removeItem('id');
           localStorage.removeItem('is_shelter');
           window.location.href = '/login';
           console.log('Profile deleted successfully.');
-          // Perform any other necessary actions upon successful deletion
+    
         } else {
-          // Handle unsuccessful deletion
           console.error('Failed to delete profile.');
-          // Display an error message or perform other actions if deletion fails
         }
-      } catch (error) {
-        console.error('Error deleting profile:', error);
-        // Handle errors that occur during the deletion process
-      }
     };
     
   
