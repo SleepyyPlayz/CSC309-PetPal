@@ -64,6 +64,7 @@ const Signup = () => {
               },
               body: JSON.stringify({
                 name: formData.email,
+                profile_picture: formData.id,
               }),
             })
             })
@@ -185,10 +186,10 @@ const Signup = () => {
           />
         
         </div>
-        <div class="form-group">
+        <div className="form-group">
         <button id="submit-button" className="btn btn-success btn-block" type="submit">Sign Up</button>
         </div>
-        <div class="form-group">
+        <div className="form-group">
           <p className="error">{error}</p>
           <p className="success">{success}</p>
         </div>

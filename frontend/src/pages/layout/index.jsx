@@ -54,6 +54,7 @@ const Layout = ({ handleSignOut, isLoggedIn}) => {
             </Form>
 
             <div>
+            <Link to="/shelters" className="me-2"><Button variant="primary">Shelters</Button></Link>
               { isLoggedIn ? 
                 <>
                   <Link to="/blogs" className="me-2"><Button variant="primary">Blogs</Button></Link>
@@ -61,6 +62,17 @@ const Layout = ({ handleSignOut, isLoggedIn}) => {
                   <Link to="/applications" className="me-2"><Button variant="primary">New Application</Button></Link>
                   {/* <Link to="/applications/filled-applications/shelter/list/" className="me-2"><Button variant="primary">Applications</Button></Link> */}
                   <Link to="/user_profile" className="me-2"><Button variant="secondary">Your Profile</Button></Link>
+                    {isShelter && (
+                <>
+                
+                    <Link to="/shelter_profile" className="me-2"><Button variant="secondary">Shelter Profile</Button></Link>
+                    
+                    <Link to="/my_listings"  className="me-2"><Button variant="secondary">My Listings</Button></Link>
+        
+                    <Link to="/my_posts"  className="me-2"><Button variant="secondary">My Blogposts</Button></Link>
+                 
+                  </>
+                )}
                   <Button variant="outline-danger" className="me-2" onClick={handleSignOut}>Sign Out</Button>
                 </>
                 :
@@ -92,10 +104,15 @@ const Layout = ({ handleSignOut, isLoggedIn}) => {
     <>
       <nav>
         <ul>
+         
           <li>
             <Link to="/">Home</Link>
           </li>
-          
+
+          <li>
+            <Link to="/shelters">Shelters</Link>
+          </li>
+       
           {isLoggedIn ? (
             <>
               <li>

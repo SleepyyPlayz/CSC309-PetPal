@@ -16,7 +16,13 @@ class BaseUserSerializer(ModelSerializer):
 
 class ShelterSerializer(ModelSerializer):
     underlying_user = serializers.ReadOnlyField(source='underlying_user.id')
+    profile_picture = serializers.ImageField(
+        source='underlying_user.profile_picture',
+        read_only=True,
+        allow_null=True,
+        required=False,
+    )
     class Meta:
         model = Shelter
-        fields = ['underlying_user', 'name', 'address_line_1', 'address_line_2', 'postal_code']
+        fields = ['profile_picture', 'underlying_user', 'name', 'address_line_1', 'address_line_2', 'postal_code']
 
