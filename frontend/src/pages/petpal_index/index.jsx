@@ -177,7 +177,7 @@ const PetList = () => {
                     <input
                       type="number"
                       className="form-control"
-                      min="0"
+                      min="1"
                       value={filterValues.age}
                       onChange={(e) => handleFilterChange('age', e.target.value)}
                     />

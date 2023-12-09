@@ -34,11 +34,13 @@ class PetListing(models.Model):
     pet_name = models.CharField(max_length=30)
     species = models.CharField(max_length=30, choices=SPECIES)
     age = models.PositiveIntegerField()
-    location = models.CharField(max_length=200)
     breed = models.CharField(max_length=30)
     gender = models.CharField(max_length=30, choices=GENDER)
     status = models.CharField(default="available", max_length=30, choices=STATUS)
     shelter = models.ForeignKey('accounts.Shelter', on_delete=models.CASCADE)
+    description = models.CharField(max_length=1000)
+    behaviour = models.CharField(max_length=200)
+    health = models.CharField(max_length=200)
     pet_picture = models.ImageField(upload_to='pet_pictures/', null=True, blank=True)
     
     def __str__(self) -> str:

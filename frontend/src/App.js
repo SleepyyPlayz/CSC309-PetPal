@@ -10,6 +10,7 @@ import PetDetail from './pages/pet_detail';
 import MyPosts from './pages/my_posts';
 import MyListings from './pages/my_listings';
 import BlogComment from './pages/blog_comments';
+import CreatePetForm from './pages/create_pet_listing';
 import { BrowserRouter, Route, Routes, Redirect} from 'react-router-dom';
 import { verifyToken } from './auth'
 import React, {useState, useEffect} from 'react';
@@ -69,6 +70,7 @@ function App() {
         <Route path="/pet_listings/:id/" element={<PetDetail />} />
         <Route path="/comments/:id/" element={<BlogComment />} />
         <Route path="/user_profile" element = {<UserDetail isLoggedIn={isLoggedIn}/>} />
+        <Route path="/create_pet_listing/" element = {<CreatePetForm/>}/>
         <Route path="*" element={<NoPage />} />
       </Route>
     </Routes>
