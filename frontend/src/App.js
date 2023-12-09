@@ -69,9 +69,9 @@ function App() {
         <Route path="/my_listings" element = {<MyListings IsLoggedIn={isLoggedIn}/>} />
         <Route path="login" element={<Login setIsLoggedIn={setIsLoggedIn}/>} />
         <Route path="signup" element={<Signup />} />
-        <Route path="applications" element={<Applications />} />
         {/* <Route path="applications/applications_list/" element={<Applications />} /> */}
         <Route path="/pet_listings/:id/" element={<PetDetail />} />
+        <Route path="/applications/:id/" element={<Applications />} />
         <Route path="/comments/:id/" element={<BlogComment />} />
         <Route path="/user_profile" element = {<UserDetail isLoggedIn={isLoggedIn}/>} />
         <Route path="*" element={<NoPage />} />
