@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../signup/signup-style.css';
-const UserDetail = ({isLoggedIn}) => {
+const UserDetail = ({isLoggedIn}, {handleSignOut}) => {
   const userId = localStorage.getItem('userId');
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -69,6 +69,35 @@ const UserDetail = ({isLoggedIn}) => {
       const value = event.target.value
       // Update the profileData state as the user types
       setnew_pass(value);
+    };
+
+    const handleDeleteProfile = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/accounts/user/${userId}/profile/`, {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+        });
+  
+        if (response.ok) {
+          // Handle successful deletion
+          localStorage.removeItem('access');
+          localStorage.removeItem('id');
+          localStorage.removeItem('is_shelter');
+          window.location.href = '/login';
+          console.log('Profile deleted successfully.');
+          // Perform any other necessary actions upon successful deletion
+        } else {
+          // Handle unsuccessful deletion
+          console.error('Failed to delete profile.');
+          // Display an error message or perform other actions if deletion fails
+        }
+      } catch (error) {
+        console.error('Error deleting profile:', error);
+        // Handle errors that occur during the deletion process
+      }
     };
     
   
@@ -227,16 +256,29 @@ const UserDetail = ({isLoggedIn}) => {
           />
         
         </div>
-        <div className="form-group">
+
+
+        <div className='row form-group'>
+        <div className="col-md-6">
         <button id="submit-button" className="btn btn-success btn-block" type="submit">Save</button>
+        </div>
+       
+        <div className="col-md-6">
+               <button className="btn btn-danger btn-block" onClick={handleDeleteProfile}>Delete Profile</button>
+        </div>
+        
+ 
         </div>
         <div className="form-group">
           <p className="error">{error}</p>
           <p className="success">{success}</p>
         </div>
-        
+
+     
       
       </form>
+        
+    
       </div>
      </>
   );
