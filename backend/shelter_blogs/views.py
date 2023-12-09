@@ -20,6 +20,15 @@ class ShelterBlogList(generics.ListCreateAPIView):
         return super().perform_create(serializer)
     
 
+class ShelterBlogListView(generics.ListAPIView):
+    serializer_class = ShelterBlogSerializer
+    permission_classes = [permissions.IsAuthenticated, IsShelterOwnerOrReadOnly]
+
+    def get_queryset(self):
+        shelter_id = self.kwargs['shelter_id']
+        return ShelterBlog.objects.filter(shelter__underlying_user=shelter_id)
+    
+
 class ShelterBlogDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = ShelterBlog.objects.all()
     serializer_class = ShelterBlogSerializer
