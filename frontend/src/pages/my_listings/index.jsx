@@ -33,13 +33,73 @@ const MyListings = ({isLoggedIn}) => {
 
     return (
     <>
+    <div className="container mt-4">
+    <div className="d-flex justify-content-between mt-3 pb-3">
+    <Link to={`/create_pet_listing/`} className="btn btn-primary">
+      Create a New Pet Listing
+    </Link>
+  
+    </div>
+    <ul className="list-group">
+      {listings.map(listing => (
+        <li key={listing.id} className="list-group-item">
+            <div className="row align-items-center">
+                <div className="col-md-4">
+            <img className="img-fluid img-thumbnail" style={{ width: '200px', height: '200px' }} src={listing.pet_picture}></img>
+            </div>
+            <div className="col-md-3">
+            {listing.pet_name}
+            </div>
+            <div className="col-md-2">
+            <Link className="btn btn-primary" to={`/update_pet_listing/${listing.id}`}>Update</Link>
+            </div>
+           
+         
+       
+            </div>
+        </li>
+      ))}
+    </ul>
+    <div className="d-flex justify-content-between mt-3">
+      {previousPage && (
+        <button
+          className="btn btn-secondary"
+          onClick={() => setCurrentPage(previousPage)}
+        >
+          Previous Page
+        </button>
+      )}
+      {nextPage && (
+        <button
+          className="btn btn-secondary"
+          onClick={() => setCurrentPage(nextPage)}
+        >
+          Next Page
+        </button>
+      )}
+    </div>
+  </div>
         
-        <div>
+        {/* <div className="container mt-4">
+          <div >
             <Link to={`/create_pet_listing/`} className="btn" >Create Pet Listing </Link>
             {listings.map(listing => (
               <div>
                 <li key={listing.id}>{listing.pet_name}</li>
                 <Link to={`/update_pet_listing/${listing.id}`} className="btn btn-sm btn-outline-info me-3">Update</Link>
+              <li key={listing.id} className="list-group-item">
+            <div className="row align-items-center">
+                <div className="col-md-4">
+            <img className="img-fluid img-thumbnail" style={{ width: '200px', height: '200px' }} src={listing.pet_picture}></img>
+            </div>
+            <div className="col-md-3">
+            {listing.pet_name}
+            </div>
+            <div className="col-md-2">
+            <Link className="btn btn-primary" to={`/update_pet_listing/${listing.id}`}>Update</Link>
+            </div>
+            </div>
+        </li>
               </div>
                   
                   
@@ -60,8 +120,8 @@ const MyListings = ({isLoggedIn}) => {
                 Previous Page
               </button>
             )}
-
-        </div>
+          </div>
+        </div> */}
     
     </>
     );
