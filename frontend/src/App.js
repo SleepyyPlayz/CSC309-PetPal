@@ -12,6 +12,7 @@ import ApplicationsFilled from './pages/applications_filled/index.jsx';
 import MyPosts from './pages/my_posts';
 import MyListings from './pages/my_listings';
 import BlogComment from './pages/blog_comments';
+import ShelterComment from './pages/shelter_comments/index.jsx';
 import CreatePetForm from './pages/create_pet_listing';
 import UpdatePetForm from './pages/update_pet_listing/index.jsx';
 import { BrowserRouter, Route, Routes, Redirect} from 'react-router-dom';
@@ -81,6 +82,7 @@ function App() {
         <Route path="/applications_filled/:id/" element={<ApplicationsFilled />} />
         <Route path="/shelter_view/:id/" element={<ShelterView isLoggedIn={isLoggedIn}/>} />
         <Route path="/comments/:id/" element={<BlogComment />} />
+        <Route path="/shelter_comments/:id/" element={<ShelterComment/>}/>
         <Route path="/user_profile" element = {<UserDetail handleSignOut={handleSignOut} isLoggedIn={isLoggedIn}/>} />
         <Route path="/create_pet_listing/" element = {<CreatePetForm/>}/>
         <Route path="/update_pet_listing/:id/" element = {<UpdatePetForm/>}/>
