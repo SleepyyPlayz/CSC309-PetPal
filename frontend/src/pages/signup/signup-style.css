@@ -56,3 +56,24 @@ body {
     justify-content:space-between;
 
 }
+
+
+.pfp-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+
+  .profile-picture {
+    width: 150px; /* Adjust the size as needed */
+    height: 150px; /* Adjust the size as needed */
+    border-radius: 50%;
+    cursor: pointer;
+    /* Add any additional styles for the image */
+  }
+
+  .profile-picture-input {
+    
+  }

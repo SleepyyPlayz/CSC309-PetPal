@@ -6,13 +6,15 @@ const UserDetail = ({isLoggedIn}) => {
   const [success, setSuccess] = useState("");
   const accessToken = localStorage.getItem('access');
   const [new_pass, setnew_pass] = useState('');
+  const [pfpChanged, setpfpChanged] = useState(false);
+  const [profilePictureURL, setProfilePictureURL] = useState(null);
   const [profileData, setProfileData] = useState({
     email: '',
     first_name: '',
     last_name: '',
     location: '',
     phone_number: '',
-    profile_picture: '',
+    profile_picture: null,
   });
   
   useEffect(() => {
@@ -46,6 +48,18 @@ const UserDetail = ({isLoggedIn}) => {
   
   }, []);
 
+  const handleProfilePictureChange = (e) => {
+      const file = e.target.files[0];
+
+      setProfileData({
+        ...profileData,
+        profile_picture: file
+      });
+      setpfpChanged(true);
+      const imageURL = URL.createObjectURL(file);
+      setProfilePictureURL(imageURL);
+    };
+
     const handleChange = (event) => {
       const { name, value } = event.target;
       // Update the profileData state as the user types
@@ -58,42 +72,53 @@ const UserDetail = ({isLoggedIn}) => {
     };
     
   
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    var skipFlag = false;
-    if (new_pass !== '') {
-      profileData.password = new_pass;
-    }
-    else {
-      delete profileData.password
-    }
-    fetch(`http://127.0.0.1:8000/accounts/user/${userId}/profile/`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify(profileData),
-    })
-    .then((response) => {
-      if (response.ok) {
-        setError("")
-        setSuccess("Profile updated!")
-        skipFlag = true;
-        return ""
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      const formData = new FormData();
+      Object.entries(profileData).forEach(([key, value]) => {
+        if (value !== null) {
+          formData.append(key, value);
+          console.log(key);
+          console.log(value);
+          console.log('here')
+        }
+     
+      });
+      if (pfpChanged === false) {
+        formData.delete('profile_picture');
       }
-      return response.json()
-    })
-    .then((json) => {
-      if (!skipFlag) {
-        setError("Error updating profile")
-        setSuccess("")
-        console.log(json)
-        return json
+      if (new_pass !== '') {
+        formData.set('password', new_pass);
+      } else {
+        formData.delete('password');
       }
-      })
-    }
 
+      for (let pair of formData.entries()) {
+        console.log('newpairs');
+        console.log(pair[0], pair[1]);
+      }
+     
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/accounts/user/${userId}/profile/`, {
+          method: 'PATCH',
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+          },
+          body: formData,
+        });
+    
+        if (response.ok) {
+          setError('');
+          setSuccess('Profile updated!');
+        } else {
+          const json = await response.json();
+          setError('Error updating profile');
+          setSuccess('');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
 
 
     const bootstrapCSS = (
@@ -112,6 +137,25 @@ const UserDetail = ({isLoggedIn}) => {
       <div className="container-sm">
       <form className="signup-form" onSubmit={handleSubmit}>
         <h2 id="create-your-account">User Profile</h2>
+        <div className = "pfp-container">
+        <label htmlFor="profile-picture-input">
+          <img
+            src={profilePictureURL || (profileData.profile_picture !== null ? `${profileData.profile_picture}` : "/no_image.jpg")}
+            alt="Profile"
+            className="profile-picture"
+          />
+        </label>
+
+       
+        </div>
+        <div className="form-group">
+        <input
+          type="file"
+          id="profile-picture-input"
+          accept="image/*"
+          onChange={handleProfilePictureChange}
+        />
+        </div>
 
         <div className = "row form-group">
             <div className="col-md-6">
