@@ -5,6 +5,7 @@ if (!isLoggedIn) {
         window.location.href = '/login'
     }
       
+    
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [image, setImage] = useState(null);

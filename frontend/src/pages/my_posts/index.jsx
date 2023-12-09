@@ -24,8 +24,6 @@ const MyPosts = ({isLoggedIn}) => {
       };
 
       useEffect(() => {
-
-        // Using the Fetch API
         fetch(currentPage, {
             headers: {
              "Authorization": `Bearer ${accessToken}`, },
@@ -44,7 +42,7 @@ const MyPosts = ({isLoggedIn}) => {
             console.error('Error fetching shelters:', error);
           });
 
-      }, [currentPage]); // Run this effect when currentPage changes
+      }, [currentPage]); 
 
     return (
 <>
