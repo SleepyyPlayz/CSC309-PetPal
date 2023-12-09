@@ -1,0 +1,39 @@
+.container-sm {
+    border: 1px solid black;
+    border-radius: 20px;
+    /* max-width: 80%; */
+    padding: 45px 10px 45px 10px;
+    margin-top: 10px;
+}
+
+.pet-form-bg {
+    background-color: #97DDDF;
+}
+
+.portrait{
+    border-radius: 50%;
+    object-fit: cover;
+    width: 200px;
+    height: 200px;
+    margin-left: 10px;
+}
+
+.center {
+    margin: auto;
+    justify-content: center;
+    padding: 10px;
+  }
+
+.pet-creation {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+body {
+    padding-top: 0.5rem;
+    padding-bottom: 1rem;
+}
+
+.form-group {
+    padding: 10px 10px 10px;
+}

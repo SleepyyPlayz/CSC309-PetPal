@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
-const CreatePetForm = () => {
+
+const UpdatePetForm = () => {
 const token = localStorage.getItem('access');
 const navigate = useNavigate()
+const { id } = useParams();
 
 
   const [formData, setFormData] = useState({
@@ -18,6 +20,25 @@ const navigate = useNavigate()
     description: '',
     pet_picture: null,
   });
+
+  useEffect(() => {
+    // Fetch existing pet data based on petId
+    const fetchPetData = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/pet_listings/${id}/`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        setFormData(data);
+      } catch (error) {
+        console.error('Error fetching pet data:', error.message);
+        // Handle error appropriately
+      }
+    };
+
+    fetchPetData();
+  }, [id]);
 
   const handleChange = (e) => {
     setFormData({
@@ -35,13 +56,14 @@ const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    delete formData.shelter
+    delete formData.id
 
-    
     console.log('Data being sent:', formData); // Log the data before sending
 
     try {
-      const response = await fetch(`http://127.0.0.1:8000/pet_listings/`, {
-        method: 'POST',
+      const response = await fetch(`http://127.0.0.1:8000/pet_listings/${id}/`, {
+        method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`, // Add your authentication token if required
@@ -54,7 +76,7 @@ const navigate = useNavigate()
       }
 
       const responseData = await response.json();
-      console.log('Pet listing created:', responseData);
+      console.log('Pet listing updated:', responseData);
       navigate(`/my_listings`);
       
       // Redirect or perform any other necessary actions upon successful submission
@@ -191,6 +213,25 @@ const navigate = useNavigate()
                             <div className="invalid-feedback">Please provide a description for the pet.</div>
                           </div>
 
+                          <div className="form-group">
+                            <div className="col-md-8">
+                                <label htmlFor="pet-status">Status:</label>
+                                {/* <input type="text" value={formData.gender} onChange={handleChange} id="validationCustom01" className="form-control" name="gender" placeholder=" " required/> */}
+                                <select
+                                    className="form-select"
+                                    value={formData.status}
+                                    onChange={handleChange} 
+                                    name='status'
+                                    >
+                                    <option value="available">Available</option>
+                                    <option value="adopted">Adopted</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="withdrawn">Withdrawn</option>
+                                    </select>
+                                <div className="invalid-feedback">Please provide status of the pet.</div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -213,4 +254,4 @@ const navigate = useNavigate()
   );
 };
 
-export default CreatePetForm;
+export default UpdatePetForm;
