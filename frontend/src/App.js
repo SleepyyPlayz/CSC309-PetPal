@@ -19,6 +19,7 @@ import React, {useState, useEffect} from 'react';
 import ShelterList from './pages/shelters';
 import ShelterDetail from './pages/shelter_profile';
 import ShelterView from './pages/shelter_view';
+import CreateBlog from './pages/create_blog';
 
 function App() {
   const [isShelter, setIsShelter] = useState(false);
@@ -67,6 +68,7 @@ function App() {
         <Route index element={<PetList />} />
         <Route path="blogs" element={<Blogs />} />
         <Route path="shelters" element={<ShelterList />} />
+        <Route path="create_blog" element = {<CreateBlog isLoggedIn={isLoggedIn}/>}/>
         <Route path="/shelter_profile" element = {<ShelterDetail isLoggedIn={isLoggedIn}/>} />
         <Route path="/my_posts" element = {<MyPosts IsLoggedIn={isLoggedIn}/>} />
         <Route path="/my_listings" element = {<MyListings IsLoggedIn={isLoggedIn}/>} />

@@ -8,9 +8,22 @@ const MyPosts = ({isLoggedIn}) => {
       const [nextPage, setNextPage] = useState(null);
       const [currentPage, setCurrentPage] = useState(`http://127.0.0.1:8000/shelter_blogs/${shelterId}/blog-posts/`);
       const [previousPage, setPreviousPage] = useState(null);
-      useEffect(() => {
+      const handleDelete = (blogId) => {
+        const response = fetch(`http://127.0.0.1:8000/shelter_blogs/${blogId}`, {
+            method: 'DELETE',
+            headers: {
+              'Authorization': `Bearer ${accessToken}`,
+              'Content-Type': 'application/json'
+            },
+          });
+      
+          if (response.ok) {
+            window.location.href = '/my_posts';
+          } else {
+          }
+      };
 
-        // Using the Fetch API
+      useEffect(() => {
         fetch(currentPage, {
             headers: {
              "Authorization": `Bearer ${accessToken}`, },
@@ -29,14 +42,14 @@ const MyPosts = ({isLoggedIn}) => {
             console.error('Error fetching shelters:', error);
           });
 
-      }, [currentPage]); // Run this effect when currentPage changes
+      }, [currentPage]); 
 
     return (
 <>
 
     <div className="container mt-4">
     <div className="d-flex justify-content-between mt-3 pb-3">
-    <Link to="/create_pet_listing" className="btn btn-primary">
+    <Link to="/create_blog" className="btn btn-primary">
       Create a New Blog
     </Link>
   
@@ -46,14 +59,19 @@ const MyPosts = ({isLoggedIn}) => {
         <li key={blog.id} className="list-group-item">
             <div className="row align-items-center">
                 <div className="col-md-4">
-            <img className="img-fluid" style={{ width: '200px', height: '200px' }} src={blog.image}></img>
+            <img className="img-fluid img-thumbnail" style={{ width: '200px', height: '200px' }} src={blog.image}></img>
             </div>
-            <div className="col-md-4">
+            <div className="col-md-3">
             {blog.title}
             </div>
-            <div className="col-md-4">
+            <div className="col-md-2">
             <Link className="btn btn-primary" to={`/comments/${blog.id}`}>Comments</Link>
             </div>
+           
+            <div className="col-md-2">
+                <button onClick={() => handleDelete(blog.id)} className="btn btn-danger">Delete</button>
+            </div>
+       
             </div>
             <p>Likes: {blog.likes}</p>
         </li>
