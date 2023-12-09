@@ -11,6 +11,7 @@ const Signup = () => {
     phone_number: '',
     is_shelter: false,
     location: '',
+    profile_picture: null,
   });
 
   const [error, setError] = useState("");
@@ -28,6 +29,7 @@ const Signup = () => {
     console.log(JSON.stringify(formData));
     e.preventDefault();
     var skipFlag = false;
+    
     fetch(registerUrl, {
         method: 'POST',
         headers: {
