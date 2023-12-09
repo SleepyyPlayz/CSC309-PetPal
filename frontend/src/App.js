@@ -5,6 +5,7 @@ import Blogs from './pages/blogs';
 import PetList from './pages/petpal_index';
 import NoPage from './pages/no_page';
 import Signup from './pages/signup';
+import Applications from './pages/applications';
 import UserDetail from './pages/user_profile';
 import PetDetail from './pages/pet_detail';
 import BlogComment from './pages/blog_comments';
@@ -38,6 +39,7 @@ function App() {
         <Route path="blogs" element={<Blogs />} />
         <Route path="login" element={<Login setIsLoggedIn={setIsLoggedIn}/>} />
         <Route path="signup" element={<Signup />} />
+        <Route path="applications" element={<Applications />} />
         <Route path="/pet_listings/:id/" element={<PetDetail />} />
         <Route path="/comments/:id/" element={<BlogComment />} />
         <Route path="/user_profile" element = {<UserDetail isLoggedIn={isLoggedIn}/>} />

@@ -25,6 +25,9 @@ const Layout = ({ handleSignOut, isLoggedIn }) => {
           ) : (
             <>
               <li>
+                <Link to="/applications">Applications</Link>
+              </li>
+              <li>
                 <Link to="/signup">Sign Up</Link>
               </li>
               <li>
