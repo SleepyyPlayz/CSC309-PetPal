@@ -3,42 +3,37 @@ import { useNavigate, useParams, Link } from 'react-router-dom';
 import './application-style.css';
 import ApplicationsFilled from '../applications_filled/index.jsx'
 
-const Applications = () => {
-
+const Applications = ({IsLoggedIn}) => {
     const [formData, setFormData] = useState({
-        petName: '',
-        firstName: '',
-        lastName: '',
-        address: '',
-        email: '',
+        pet: '',
         age: '',
         accommodation: '',
-        rentOwnOr: '',
-        hasPermissionToKeepPets: false,
-        previousPets: '',
-        hoursAvailableForPet: '',
+        rent_own_or: '',
+        has_permission_to_keep_pets: false,
+        previous_pets: '',
+        hours_available_for_pet: '',
     });
 
     const navigate = useNavigate();
     const { id } = useParams();
     console.log('ID from useParams:', id);
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [accessToken, setAccessToken] = useState('');
+    const accessToken = localStorage.getItem('access');
+    const userId = localStorage.getItem('userId');
       
     useEffect(() => {
         const fetchPetDetails = async () => {
-            console.log(id);
             if (id) {
                 try {
                     const response = await fetch(`http://127.0.0.1:8000/pet_listings/${id}/`);
                     if (response.ok) {
                         const petData = await response.json();
                         console.log(petData);
-                        setFormData(prevData => ({
-                            ...prevData,
-                            petName: petData.petName,
+                        setFormData(formData => ({
+                            ...formData,
+                            pet: petData.id,
                         }));
+                        console.log(formData);
                     } else {
                         // Handle error response
                     }
@@ -52,40 +47,6 @@ const Applications = () => {
         fetchPetDetails();
     }, [id, navigate]);
 
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const response = await fetch('http://127.0.0.1:8000/accounts/user/', {
-                    headers: {
-                        "Authorization": `Bearer ${accessToken}`,
-                    },
-                });
-    
-                if (response.ok) {
-                    const userData = await response.json();
-    
-                    // Update form state with user information
-                    setFormData(prevData => ({
-                        ...prevData,
-                        firstName: userData.firstName,
-                        lastName: userData.lastName,
-                        address: userData.address,
-                        email: userData.email,
-                    }));
-                } else {
-                    console.error('Failed to fetch user data');
-                }
-            } catch (error) {
-                console.error('Error fetching user data:', error);
-            }
-        };
-    
-        if (isLoggedIn) {
-            fetchUserData();
-        } else {
-            console.log("Invalid token or user not logged in");
-        }
-    }, [isLoggedIn, accessToken]);
 
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
@@ -107,8 +68,9 @@ const Applications = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`,
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(formData)
             });
         
             if (response.ok) {
@@ -153,11 +115,11 @@ const Applications = () => {
             {success ? (
                 <ApplicationsFilled formData={formData} id={id}/>
             ) : (
-                <form className="application-form needs-validation" onSubmit={handleSubmit} noValidate>
+                <form className="application-form" onSubmit={handleSubmit} noValidate>
                 <div className="col">
                     
                     <div className="form-group">
-                        <label>The pet you are applying for is: {formData.petName}</label>
+                        <label>The pet you are applying for is:</label>
                     </div>
 
                     <div className="form-group">
@@ -194,12 +156,12 @@ const Applications = () => {
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="rentOwnOr">Do you rent or own your home?</label>
+                        <label htmlFor="rent_own_or">Do you rent or own your home?</label>
                         <select
                             className="form-control"
-                            id="rentOwnOr"
-                            name="rentOwnOr"
-                            value={formData.rentOwnOr}
+                            id="rent_own_or"
+                            name="rent_own_or"
+                            value={formData.rent_own_or}
                             onChange={handleChange}
                             required
                         >
@@ -211,25 +173,25 @@ const Applications = () => {
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="hasPermissionToKeepPets">Do you have permission to keep pets?</label>
+                        <label htmlFor="has_permission_to_keep_pets">Do you have permission to keep pets?</label>
                         <input
                             type="checkbox"
                             className="form-check-input"
-                            id="hasPermissionToKeepPets"
-                            name="hasPermissionToKeepPets"
-                            checked={formData.hasPermissionToKeepPets}
+                            id="has_permission_to_keep_pets"
+                            name="has_permission_to_keep_pets"
+                            checked={formData.has_permission_to_keep_pets}
                             onChange={handleChange}
                         />
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="previousPets">Have you owned any pets? If yes, what are your past experiences with taking care of pets.</label>
+                        <label htmlFor="previous_petse">Have you owned any pets? If yes, what are your past experiences with taking care of pets.</label>
                         <textarea
                             className="form-control"
-                            id="previousPets"
-                            name="previousPets"
+                            id="previous_pets"
+                            name="previous_pets"
                             placeholder=" "
-                            value={formData.previousPets}
+                            value={formData.previous_pets}
                             onChange={handleChange}
                             required
                         ></textarea>
@@ -237,14 +199,14 @@ const Applications = () => {
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="hoursAvailableForPet">How many hours are you available to spend with a pet per day?</label>
+                        <label htmlFor="hours_available_for_pet">How many hours are you available to spend with a pet per day?</label>
                         <input
                             type="number"
                             className="form-control"
-                            id="hoursAvailableForPet"
-                            name="hoursAvailableForPet"
+                            id="hours_available_for_pet"
+                            name="hours_available_for_pet"
                             placeholder=" "
-                            value={formData.hoursAvailableForPet}
+                            value={formData.hours_available_for_pet}
                             onChange={handleChange}
                             required
                         />
