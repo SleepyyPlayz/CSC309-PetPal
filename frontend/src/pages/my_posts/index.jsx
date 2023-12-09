@@ -36,7 +36,7 @@ const MyPosts = ({isLoggedIn}) => {
 
     <div className="container mt-4">
     <div className="d-flex justify-content-between mt-3 pb-3">
-    <Link to="/create_pet_listing" className="btn btn-primary">
+    <Link to="/create_blog" className="btn btn-primary">
       Create a New Blog
     </Link>
   
