@@ -6,6 +6,7 @@ const UpdatePetForm = () => {
 const token = localStorage.getItem('access');
 const navigate = useNavigate()
 const { id } = useParams();
+var imgHasChanged = false;
 
 
   const [formData, setFormData] = useState({
@@ -20,6 +21,7 @@ const { id } = useParams();
     description: '',
     pet_picture: null,
   });
+
 
   useEffect(() => {
     // Fetch existing pet data based on petId
@@ -48,16 +50,35 @@ const { id } = useParams();
   };
 
   const handleFileChange = (e) => {
-    setFormData({
-      ...formData,
-      pet_picture: e.target.files[0],
-    });
+    // setFormData({
+    //   ...formData,
+    //   pet_picture: e.target.files[0],
+    // });
+    const file = e.target.files[0];
+
+      setFormData({
+        ...formData,
+        pet_picture: file
+      });
+      imgHasChanged = true;
+      
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     delete formData.shelter
     delete formData.id
+    if (!imgHasChanged) {
+      delete formData.pet_picture;
+    }
+    const data = new FormData();
+
+    Object.entries(formData).forEach(([key, value]) => {
+      if (value !== null) {
+        data.append(key, value);
+      }
+   
+    });
 
     console.log('Data being sent:', formData); // Log the data before sending
 
@@ -65,10 +86,9 @@ const { id } = useParams();
       const response = await fetch(`http://127.0.0.1:8000/pet_listings/${id}/`, {
         method: 'PATCH',
         headers: {
-            'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`, // Add your authentication token if required
           },
-        body: JSON.stringify(formData),
+        body: data,
       });
 
       if (!response.ok) {

@@ -35,6 +35,14 @@ const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const data = new FormData();
+
+    Object.entries(formData).forEach(([key, value]) => {
+      if (value !== null) {
+        data.append(key, value);
+      }
+   
+    });
 
     
     console.log('Data being sent:', formData); // Log the data before sending
@@ -43,10 +51,9 @@ const navigate = useNavigate()
       const response = await fetch(`http://127.0.0.1:8000/pet_listings/`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`, // Add your authentication token if required
           },
-        body: JSON.stringify(formData),
+        body: data,
       });
 
       if (!response.ok) {
