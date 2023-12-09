@@ -33,15 +33,29 @@ const MyPosts = ({isLoggedIn}) => {
 
     return (
 <>
-  <div className="container mt-4">
+
+    <div className="container mt-4">
+    <div className="d-flex justify-content-between mt-3 pb-3">
     <Link to="/create_pet_listing" className="btn btn-primary">
       Create a New Blog
     </Link>
+  
+    </div>
     <ul className="list-group">
       {blogs.map(blog => (
         <li key={blog.id} className="list-group-item">
+            <div className="row align-items-center">
+                <div className="col-md-4">
             <img className="img-fluid" style={{ width: '200px', height: '200px' }} src={blog.image}></img>
-          {blog.title}
+            </div>
+            <div className="col-md-4">
+            {blog.title}
+            </div>
+            <div className="col-md-4">
+            <Link className="btn btn-primary" to={`/comments/${blog.id}`}>Comments</Link>
+            </div>
+            </div>
+            <p>Likes: {blog.likes}</p>
         </li>
       ))}
     </ul>
