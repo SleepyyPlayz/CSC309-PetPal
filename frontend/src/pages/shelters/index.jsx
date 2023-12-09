@@ -79,7 +79,7 @@ const ShelterList= () => {
                         <p className="card-text">{pet.address_line_1} - {pet.address_line_2} - {pet.postal_code}</p>
                         <div className="d-flex justify-content-between align-items-center">
                           {/* <a className="btn btn-sm btn-outline-info me-3" href="pet-detail-page.html">Details</a> */}
-                          <Link to={`/pet_listings/${pet.id}`} className="btn btn-sm btn-outline-info me-3">Details</Link>
+                          <Link to={`/shelter_view/${pet.underlying_user}`} className="btn btn-sm btn-outline-info me-3">Details</Link>
                         </div>
                       </div>
                     </div>
