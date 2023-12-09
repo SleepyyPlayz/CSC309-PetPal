@@ -22,6 +22,7 @@ class ShelterCreate(CreateAPIView):
     def perform_create(self, serializer):
         if self.request.user.is_shelter:
             serializer.save(underlying_user=self.request.user)
+            serializer.save(profile_picture=self.request.user.profile_picture)
             return super().perform_create(serializer)
         else:
             raise exceptions.ValidationError("Cannot create shelter for account not marked is_shelter")
