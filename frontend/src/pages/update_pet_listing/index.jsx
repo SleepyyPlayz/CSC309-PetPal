@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const UpdatePetForm = () => {
@@ -262,7 +263,7 @@ var imgHasChanged = false;
                         </div>
     
                         <div className="col-md-8 mt-4">
-                            <a href="shelter-management-page.html">Back to Shelter Management Page</a>
+                          <Link to={`/my_listings`}> Back to my listings </Link>
                         </div>
                     </div>
                 </div>
