@@ -31,4 +31,11 @@ class NotificationsGetDelete(generics.RetrieveDestroyAPIView):
     serializer_class = NotificationSerializer
     permission_classes = [ReceiverIsUser]
 
+    # override the default GET behavior to update status
+    def get_object(self):
+        obj = Notification.objects.get(id=self.kwargs['pk'])
+        obj.unread = False
+        obj.save()
+        return super().get_object()
+
     

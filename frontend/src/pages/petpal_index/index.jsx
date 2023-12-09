@@ -106,7 +106,7 @@ const PetList = () => {
             <div className="row">
               <div className="col-lg-6 col-md-8 mx-auto">
                 <h1 className="fw-light">Welcome to PetPal!</h1>
-                <p className="lead text-muted">Our Featured Pets:</p>
+                <p className="lead text-muted">Find Your Pet Today:</p>
               </div>
             </div>
           </section>

@@ -7,6 +7,8 @@ import NoPage from './pages/no_page';
 import Signup from './pages/signup';
 import UserDetail from './pages/user_profile';
 import PetDetail from './pages/pet_detail';
+import Applications from './pages/applications';
+import ApplicationsFilled from './pages/applications_filled/index.jsx';
 import MyPosts from './pages/my_posts';
 import MyListings from './pages/my_listings';
 import BlogComment from './pages/blog_comments';
@@ -14,7 +16,9 @@ import CreatePetForm from './pages/create_pet_listing';
 import { BrowserRouter, Route, Routes, Redirect} from 'react-router-dom';
 import { verifyToken } from './auth'
 import React, {useState, useEffect} from 'react';
+import ShelterList from './pages/shelters';
 import ShelterDetail from './pages/shelter_profile';
+import ShelterView from './pages/shelter_view';
 
 function App() {
   const [isShelter, setIsShelter] = useState(false);
@@ -54,7 +58,7 @@ function App() {
     localStorage.removeItem('is_shelter');
     setIsShelter(false);
     setIsLoggedIn(false);
-    window.location.href= '/login';
+    window.location.href = '/';
   };
 
   return <BrowserRouter>
@@ -62,14 +66,19 @@ function App() {
       <Route path="/" element={<Layout handleSignOut={handleSignOut} isLoggedIn={isLoggedIn} IsShelter={isShelter}/>}>
         <Route index element={<PetList />} />
         <Route path="blogs" element={<Blogs />} />
+        <Route path="shelters" element={<ShelterList />} />
         <Route path="/shelter_profile" element = {<ShelterDetail isLoggedIn={isLoggedIn}/>} />
         <Route path="/my_posts" element = {<MyPosts IsLoggedIn={isLoggedIn}/>} />
         <Route path="/my_listings" element = {<MyListings IsLoggedIn={isLoggedIn}/>} />
         <Route path="login" element={<Login setIsLoggedIn={setIsLoggedIn}/>} />
         <Route path="signup" element={<Signup />} />
+        {/* <Route path="applications/applications_list/" element={<Applications />} /> */}
         <Route path="/pet_listings/:id/" element={<PetDetail />} />
+        <Route path="/applications/:id/" element={<Applications />} />
+        <Route path="/applications_filled/:id/" element={<ApplicationsFilled />} />
+        <Route path="/shelter_view/:id/" element={<ShelterView isLoggedIn={isLoggedIn}/>} />
         <Route path="/comments/:id/" element={<BlogComment />} />
-        <Route path="/user_profile" element = {<UserDetail isLoggedIn={isLoggedIn}/>} />
+        <Route path="/user_profile" element = {<UserDetail handleSignOut={handleSignOut} isLoggedIn={isLoggedIn}/>} />
         <Route path="/create_pet_listing/" element = {<CreatePetForm/>}/>
         <Route path="*" element={<NoPage />} />
       </Route>
