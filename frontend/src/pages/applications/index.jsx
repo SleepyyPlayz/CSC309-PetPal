@@ -75,7 +75,6 @@ const Applications = () => {
         
                 // Additional logic for handling the shelter response, if needed
                 }
-        
                 setError('');
                 setSuccess('Application submitted successfully!');
             } else {
@@ -209,12 +208,16 @@ const Applications = () => {
                             <div className="col-md-6">
                                 <button type="submit" className="btn btn-success btn-block">Submit</button>
                             </div>
+
                             <div className="col-md-8 mt-4">
                                 <a href="pet-detail-page.html">Back to Pet Details</a>
                             </div>
                         </div>
                     </div>
                 </form>
+                <div className="col-md-8 mt-4">
+                    <a href="pet-detail-page.html">Back to Pet Details</a>
+                </div>
             </div>
         </main>
     </>
