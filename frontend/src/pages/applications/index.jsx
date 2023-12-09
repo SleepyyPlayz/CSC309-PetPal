@@ -4,27 +4,48 @@ import './application-style.css';
 import ApplicationsFilled from '../applications_filled/index.jsx'
 
 const Applications = () => {
+
+    const [formData, setFormData] = useState({
+        petName: '',
+        firstName: '',
+        lastName: '',
+        address: '',
+        email: '',
+        age: '',
+        accommodation: '',
+        rentOwnOr: '',
+        hasPermissionToKeepPets: false,
+        previousPets: '',
+        hoursAvailableForPet: '',
+    });
+
     const navigate = useNavigate();
     const { id } = useParams();
+    console.log('ID from useParams:', id);
 
-    const [petDetails, setPetDetails] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [accessToken, setAccessToken] = useState('');
       
     useEffect(() => {
         const fetchPetDetails = async () => {
+            console.log(id);
             if (id) {
                 try {
-                const response = await fetch(`http://127.0.0.1:8000/pet_listings/${id}/`);
-                if (response.ok) {
-                    const petData = await response.json();
-                    setPetDetails(petData);
-                } else {
-                    // Handle error response
-                }
+                    const response = await fetch(`http://127.0.0.1:8000/pet_listings/${id}/`);
+                    if (response.ok) {
+                        const petData = await response.json();
+                        console.log(petData);
+                        setFormData(prevData => ({
+                            ...prevData,
+                            petName: petData.petName,
+                        }));
+                    } else {
+                        // Handle error response
+                    }
                 } catch (error) {
-                console.error('Error fetching pet details:', error);
+                    console.error('Error fetching pet details:', error);
                 }
+                
             }
         };
 
@@ -65,21 +86,6 @@ const Applications = () => {
             console.log("Invalid token or user not logged in");
         }
     }, [isLoggedIn, accessToken]);
-
-
-    const [formData, setFormData] = useState({
-        petName: '',
-        firstName: '',
-        lastName: '',
-        address: '',
-        email: '',
-        age: '',
-        accommodation: '',
-        rentOwnOr: '',
-        hasPermissionToKeepPets: false,
-        previousPets: '',
-        hoursAvailableForPet: '',
-    });
 
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
@@ -137,7 +143,7 @@ const Applications = () => {
             crossOrigin="anonymous"
         />
     );
-
+    console.log(formData);
     return (
     <>  
         {bootstrapCSS}
@@ -145,13 +151,13 @@ const Applications = () => {
         <main>
             <div className="container-sm">
             {success ? (
-                <ApplicationsFilled formData={formData} petDetails={petDetails} id={id}/>
+                <ApplicationsFilled formData={formData} id={id}/>
             ) : (
                 <form className="application-form needs-validation" onSubmit={handleSubmit} noValidate>
                 <div className="col">
                     
                     <div className="form-group">
-                        <label>The pet you are applying for is: {petDetails?.petName}</label>
+                        <label>The pet you are applying for is: {formData.petName}</label>
                     </div>
 
                     <div className="form-group">
