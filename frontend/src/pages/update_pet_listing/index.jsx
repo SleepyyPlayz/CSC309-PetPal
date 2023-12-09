@@ -59,19 +59,6 @@ const { id } = useParams();
     delete formData.shelter
     delete formData.id
 
-    
-
-
-    const data = new FormData();
-    data.append('pet_name', formData.name);
-    data.append('age', formData.age);
-    data.append('species', formData.species);
-    data.append('gender', formData.gender);
-    data.append('behaviour', formData.behaviour);
-    data.append('health', formData.health);
-    data.append('description', formData.description);
-    data.append('pet_picture', formData.pet_picture);
-    data.append('status', formData.status);
     console.log('Data being sent:', formData); // Log the data before sending
 
     try {

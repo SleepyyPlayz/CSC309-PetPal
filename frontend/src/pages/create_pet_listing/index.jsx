@@ -36,15 +36,7 @@ const navigate = useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const data = new FormData();
-    data.append('pet_name', formData.name);
-    data.append('age', formData.age);
-    data.append('species', formData.species);
-    data.append('gender', formData.gender);
-    data.append('behaviour', formData.behaviour);
-    data.append('health', formData.health);
-    data.append('description', formData.description);
-    data.append('pet_picture', formData.pet_picture);
+    
     console.log('Data being sent:', formData); // Log the data before sending
 
     try {
