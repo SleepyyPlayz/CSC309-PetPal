@@ -105,6 +105,9 @@ const Applications = ({IsLoggedIn}) => {
             crossOrigin="anonymous"
         />
     );
+
+    // const petName = formData.pet && formData.pet.pet_name;
+    
     console.log(formData);
     return (
     <>  
@@ -116,10 +119,16 @@ const Applications = ({IsLoggedIn}) => {
                 <ApplicationsFilled formData={formData} id={id}/>
             ) : (
                 <form className="application-form" onSubmit={handleSubmit} noValidate>
+                <div class="text-left">
+                        <h3>Pet Adoption Application Form</h3>
+                        <h6>
+                        Thank you for your interest in adopting a pet!
+                        Please fill out the application form below and we update your status on the application page. 
+                        </h6>
+                </div>
                 <div className="col">
-                    
                     <div className="form-group">
-                        <label>The pet you are applying for is:</label>
+                        <label>The pet you are applying for is: </label>
                     </div>
 
                     <div className="form-group">
