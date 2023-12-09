@@ -37,7 +37,12 @@ const MyListings = ({isLoggedIn}) => {
         <div>
             <Link to={`/create_pet_listing/`} className="btn" >Create Pet Listing </Link>
             {listings.map(listing => (
-                  <li key={listing.id}>{listing.pet_name}</li>
+              <div>
+                <li key={listing.id}>{listing.pet_name}</li>
+                <Link to={`/update_pet_listing/${listing.id}`} className="btn btn-sm btn-outline-info me-3">Update</Link>
+              </div>
+                  
+                  
                 ))}
 
                 {nextPage && (
