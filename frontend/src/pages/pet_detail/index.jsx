@@ -1,11 +1,12 @@
 // src/components/PetDetail.js
 
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 function PetDetail() {
   const [pet, setPet] = useState(null);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const apiUrl = `http://127.0.0.1:8000/pet_listings/${id}/`
@@ -23,7 +24,7 @@ function PetDetail() {
 
   const handleApply = () => {
     // Redirect to the application page with the pet ID in the URL
-    window.location.href = `/applications/${id}`;
+    navigate(`/applications/${id}`);
   };
 
   if (!pet) {
@@ -71,7 +72,7 @@ function PetDetail() {
                                 Not in model yet
                             </p>
                             <p className="card-text">Adoption fee: not in model yet</p>
-                            <button onClick={handleApply} className="btn btn-lg adopt-button">Apply for Adoption</button>
+                            <button onClick={handleApply} className="btn btn-lg adopt-button">Adopt Me!</button>
 
                             {/* <a href="pet-adoption-form.html" className="btn btn-lg adopt-button">Adopt Me!</a> */}
                         </div>

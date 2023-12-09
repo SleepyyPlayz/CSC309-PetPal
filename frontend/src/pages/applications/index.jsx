@@ -1,7 +1,72 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import './application-style.css';
+import ApplicationsFilled from '../applications_filled/index.jsx'
 
 const Applications = () => {
+    const navigate = useNavigate();
+    const { id } = useParams();
+
+    const [petDetails, setPetDetails] = useState(null);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [accessToken, setAccessToken] = useState('');
+      
+    useEffect(() => {
+        const fetchPetDetails = async () => {
+            if (id) {
+                try {
+                const response = await fetch(`http://127.0.0.1:8000/pet_listings/${id}/`);
+                if (response.ok) {
+                    const petData = await response.json();
+                    setPetDetails(petData);
+                } else {
+                    // Handle error response
+                }
+                } catch (error) {
+                console.error('Error fetching pet details:', error);
+                }
+            }
+        };
+
+        fetchPetDetails();
+    }, [id, navigate]);
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/accounts/user/', {
+                    headers: {
+                        "Authorization": `Bearer ${accessToken}`,
+                    },
+                });
+    
+                if (response.ok) {
+                    const userData = await response.json();
+    
+                    // Update form state with user information
+                    setFormData(prevData => ({
+                        ...prevData,
+                        firstName: userData.firstName,
+                        lastName: userData.lastName,
+                        address: userData.address,
+                        email: userData.email,
+                    }));
+                } else {
+                    console.error('Failed to fetch user data');
+                }
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
+    
+        if (isLoggedIn) {
+            fetchUserData();
+        } else {
+            console.log("Invalid token or user not logged in");
+        }
+    }, [isLoggedIn, accessToken]);
+
+
     const [formData, setFormData] = useState({
         petName: '',
         firstName: '',
@@ -30,7 +95,7 @@ const Applications = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         var skipFlag = false;
-      
+
         try {
             const response = await fetch('http://127.0.0.1:8000/applications/', {
                 method: 'POST',
@@ -42,41 +107,15 @@ const Applications = () => {
         
             if (response.ok) {
                 skipFlag = true;
-        
-                // Additional logic for handling successful response, if needed
-                if (formData.is_shelter === true) {
-                const tokenResponse = await fetch('http://127.0.0.1:8000/api/token/', {
-                    method: 'POST',
-                    headers: {
-                    'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                    email: formData.email,
-                    password: formData.password,
-                    }),
-                });
-        
-                const tokenData = await tokenResponse.json();
-        
-                console.log(tokenData);
-        
-                const accessToken = tokenData.access;
-        
-                const shelterResponse = await fetch('http://127.0.0.1:8000/accounts/shelter/', {
-                    method: 'POST',
-                    headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                    'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                    name: formData.email,
-                    }),
-                });
-        
-                // Additional logic for handling the shelter response, if needed
-                }
+
                 setError('');
                 setSuccess('Application submitted successfully!');
+                
+                const responseData = await response.json();
+                const newApplicationId = responseData.id;
+
+                navigate(`/applications_filled/${newApplicationId}`);
+
             } else {
                 const errorData = await response.json();
                 setError(errorData.message || 'Something went wrong');
@@ -87,6 +126,7 @@ const Applications = () => {
             setError('Something went wrong');
             setSuccess('');
         }
+
     };
 
     const bootstrapCSS = (
@@ -104,11 +144,14 @@ const Applications = () => {
 
         <main>
             <div className="container-sm">
+            {success ? (
+                <ApplicationsFilled formData={formData} petDetails={petDetails} id={id}/>
+            ) : (
                 <form className="application-form needs-validation" onSubmit={handleSubmit} noValidate>
                 <div className="col">
                     
                     <div className="form-group">
-                        <label>The pet you are applying for is: </label>
+                        <label>The pet you are applying for is: {petDetails?.petName}</label>
                     </div>
 
                     <div className="form-group">
@@ -210,14 +253,12 @@ const Applications = () => {
                             </div>
 
                             <div className="col-md-8 mt-4">
-                                <a href="pet-detail-page.html">Back to Pet Details</a>
+                                <Link to={`/pet_listings/${id}`}>Back to Pet Details</Link>
                             </div>
                         </div>
                     </div>
                 </form>
-                <div className="col-md-8 mt-4">
-                    <a href="pet-detail-page.html">Back to Pet Details</a>
-                </div>
+            )}
             </div>
         </main>
     </>

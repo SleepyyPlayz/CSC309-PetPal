@@ -5,9 +5,10 @@ import Blogs from './pages/blogs';
 import PetList from './pages/petpal_index';
 import NoPage from './pages/no_page';
 import Signup from './pages/signup';
-import Applications from './pages/applications';
 import UserDetail from './pages/user_profile';
 import PetDetail from './pages/pet_detail';
+import Applications from './pages/applications';
+import ApplicationsFilled from './pages/applications_filled/index.jsx';
 import MyPosts from './pages/my_posts';
 import MyListings from './pages/my_listings';
 import BlogComment from './pages/blog_comments';
@@ -73,6 +74,7 @@ function App() {
         {/* <Route path="applications/applications_list/" element={<Applications />} /> */}
         <Route path="/pet_listings/:id/" element={<PetDetail />} />
         <Route path="/applications/:id/" element={<Applications />} />
+        <Route path="/applications_filled/:id/" element={<ApplicationsFilled />} />
         <Route path="/shelter_view/:id/" element={<ShelterView isLoggedIn={isLoggedIn}/>} />
         <Route path="/comments/:id/" element={<BlogComment />} />
         <Route path="/user_profile" element = {<UserDetail isLoggedIn={isLoggedIn}/>} />
