@@ -16,6 +16,7 @@ import { verifyToken } from './auth'
 import React, {useState, useEffect} from 'react';
 import ShelterList from './pages/shelters';
 import ShelterDetail from './pages/shelter_profile';
+import ShelterView from './pages/shelter_view';
 
 function App() {
   const [isShelter, setIsShelter] = useState(false);
@@ -69,9 +70,10 @@ function App() {
         <Route path="/my_listings" element = {<MyListings IsLoggedIn={isLoggedIn}/>} />
         <Route path="login" element={<Login setIsLoggedIn={setIsLoggedIn}/>} />
         <Route path="signup" element={<Signup />} />
-        <Route path="applications" element={<Applications />} />
         {/* <Route path="applications/applications_list/" element={<Applications />} /> */}
         <Route path="/pet_listings/:id/" element={<PetDetail />} />
+        <Route path="/applications/:id/" element={<Applications />} />
+        <Route path="/shelter_view/:id/" element={<ShelterView isLoggedIn={isLoggedIn}/>} />
         <Route path="/comments/:id/" element={<BlogComment />} />
         <Route path="/user_profile" element = {<UserDetail isLoggedIn={isLoggedIn}/>} />
         <Route path="*" element={<NoPage />} />

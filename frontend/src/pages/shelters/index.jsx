@@ -73,13 +73,28 @@ const ShelterList= () => {
                   // <li key={pet.id}>{pet.pet_name}</li>
                   <div className="col">
                     <div className="card shadow-sm">
-                      <img className="card-img-top" width="100%" src={pet.profile_picture !== null ? `${pet.profile_picture}` : "/no_image.jpg" } alt="Shelter Pic"/>
+                   
+                    {pet.profile_picture ? (
+                    <img
+                        className="card-img-top"
+                        width="100%"
+                        src={pet.profile_picture}
+                        alt="Shelter Pic"
+                    />
+                    ) : (
+                    <img
+                        className="card-img-top"
+                        width="100%"
+                        src="/no_image.jpg"
+                        alt="Default Pic"
+                    />
+)}
                       <div className="card-body">
                         <h5 className="card-title">{pet.name}</h5>
                         <p className="card-text">{pet.address_line_1} - {pet.address_line_2} - {pet.postal_code}</p>
                         <div className="d-flex justify-content-between align-items-center">
                           {/* <a className="btn btn-sm btn-outline-info me-3" href="pet-detail-page.html">Details</a> */}
-                          <Link to={`/pet_listings/${pet.id}`} className="btn btn-sm btn-outline-info me-3">Details</Link>
+                          <Link to={`/shelter_view/${pet.underlying_user}`} className="btn btn-sm btn-outline-info me-3">Details</Link>
                         </div>
                       </div>
                     </div>
