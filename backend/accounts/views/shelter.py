@@ -12,6 +12,8 @@ from rest_framework import exceptions
 from ..models import PetPalUser, Shelter
 from ..serializers import BaseUserSerializer, ShelterSerializer
 from ..permissions import IsShelterOrReadOnly
+from rest_framework import permissions
+
 
 
 class ShelterCreate(CreateAPIView):
@@ -37,6 +39,7 @@ class ShelterEdit(RetrieveUpdateDestroyAPIView):
     
 # Users can see a list of all shelters
 class ShelterList(ListAPIView):
+    permission_classes = [permissions.AllowAny]
     serializer_class = ShelterSerializer
     def get_queryset(self):
         return Shelter.objects.all()

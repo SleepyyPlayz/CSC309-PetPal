@@ -23,7 +23,7 @@ class ApplicationCommentList(generics.ListCreateAPIView):
 
     def get_queryset(self):
         application_id = self.kwargs['application_id']
-        return ApplicationComment.objects.filter(application_id=application_id)
+        return ApplicationComment.objects.filter(application_id=application_id, parent_comment=None)
     
     def perform_create(self, serializer):
         application_id = self.kwargs['application_id']
@@ -65,7 +65,7 @@ class ReviewCommentList(generics.ListCreateAPIView):
 
     def get_queryset(self):
         shelter_id = self.kwargs['shelter_id']
-        return ReviewComment.objects.filter(shelter_id=shelter_id)
+        return ReviewComment.objects.filter(shelter_id=shelter_id, parent_comment=None)
 
     def perform_create(self, serializer):
         shelter_id = self.kwargs['shelter_id']
@@ -96,7 +96,7 @@ class BlogCommentList(generics.ListCreateAPIView):
 
     def get_queryset(self):
         blog_id = self.kwargs['blog_id']
-        return BlogComment.objects.filter(blog_id=blog_id)
+        return BlogComment.objects.filter(blog_id=blog_id, parent_comment=None)
     
     def perform_create(self, serializer):
         blog_id = self.kwargs['blog_id']

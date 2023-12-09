@@ -1,7 +1,8 @@
 import { Outlet, Link } from "react-router-dom";
 import React from 'react';
 
-const Layout = ({ handleSignOut, isLoggedIn }) => {
+const Layout = ({ handleSignOut, isLoggedIn}) => {
+  const isShelter = localStorage.getItem('is_shelter') === 'true';
   return (
     <>
       <nav>
@@ -18,7 +19,22 @@ const Layout = ({ handleSignOut, isLoggedIn }) => {
               <li>
                 <Link to="/user_profile">User Profile</Link>
               </li>
-              <li>
+              {isShelter && (
+                <>
+                <li>
+                  <Link to="/shelter_profile">Shelter Profile</Link>
+                </li>
+
+                <li>
+                  <Link to="/my_listings">My Listings</Link>
+                </li>
+
+                <li>
+                  <Link to="/my_posts">My Blogposts</Link>
+                </li>
+                </>
+              )}
+                <li>
                 <button onClick={handleSignOut}>Sign Out</button>
               </li>
             </>

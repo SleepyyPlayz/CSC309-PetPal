@@ -22,7 +22,7 @@ class PetListingSearch(generics.ListCreateAPIView):
     queryset = PetListing.objects.all()
     serializer_class = PetListingSerializer
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
-    filterset_fields = ['shelter', 'status', 'breed', 'age']
+    filterset_fields = ['shelter', 'status', 'breed', 'species', 'age']
     ordering_fields = ['pet_name', 'age']
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsShelterOwnerOrReadOnly]
 

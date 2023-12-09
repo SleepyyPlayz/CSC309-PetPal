@@ -1,25 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import '../signup/signup-style.css';
-const UserDetail = ({isLoggedIn}) => {
+const ShelterDetail = ({isLoggedIn}) => {
   const userId = localStorage.getItem('userId');
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const accessToken = localStorage.getItem('access');
   const [new_pass, setnew_pass] = useState('');
   const [profileData, setProfileData] = useState({
-    email: '',
-    first_name: '',
-    last_name: '',
-    location: '',
-    phone_number: '',
-    profile_picture: '',
+    name: '',
+    address_line_1: '',
+    address_line_2: '',
+    postal_code: '',
   });
   
   useEffect(() => {
     const getProfile = async () => {
       try {
         
-        const response = await fetch(`http://127.0.0.1:8000/accounts/user/${userId}/`, {
+        const response = await fetch(`http://127.0.0.1:8000/accounts/shelter/${userId}/`, {
           headers: {
             "Authorization": `Bearer ${accessToken}`,
           },
@@ -67,7 +65,7 @@ const UserDetail = ({isLoggedIn}) => {
     else {
       delete profileData.password
     }
-    fetch(`http://127.0.0.1:8000/accounts/user/${userId}/profile/`, {
+    fetch(`http://127.0.0.1:8000/accounts/shelter/${userId}/profile/`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -78,7 +76,7 @@ const UserDetail = ({isLoggedIn}) => {
     .then((response) => {
       if (response.ok) {
         setError("")
-        setSuccess("Profile updated!")
+        setSuccess("Shelter profile updated!")
         skipFlag = true;
         return ""
       }
@@ -111,75 +109,51 @@ const UserDetail = ({isLoggedIn}) => {
   
       <div className="container-sm">
       <form className="signup-form" onSubmit={handleSubmit}>
-        <h2 id="create-your-account">User Profile</h2>
+        <h2 id="create-your-account">Shelter Profile</h2>
 
-        <div className = "row form-group">
-            <div className="col-md-6">
-                <input
-                  type="text"
-                  name="first_name"
-                  className="form-control"
-                  value={profileData.first_name}
-                  onChange={handleChange}
-                  
-                />
-
-</div>
-<div className="col-md-6">
-                <input
-                  type="text"
-                  name="last_name"
-                  className="form-control"
-                  value={profileData.last_name}
-                  onChange={handleChange}
-                  placeholder={profileData.last_name}
-                />
-          </div>
-        </div>
 
         <div className="form-group">
         <input
-          type="email"
-          name="email"
+          type="text"
+          name="name"
           className="form-control"
-          value={profileData.email}
+          value={profileData.name}
           onChange={handleChange}
-          placeholder="Email"
+          placeholder="Shelter Name"
         />
         </div>
 
         <div className="form-group">
         <input
-          type="password"
-          name="password"
+          type="text"
           className="form-control"
-          value={new_pass}
-          onChange={handlePWChange}
-          placeholder="New Password"
+          name="address_line_1"
+          value={profileData.address_line_1}
+          onChange={handleChange}
+          placeholder="Address Line 1"
         />
         </div>
+
         <div className="form-group">
         <input
-          type="tel"
+          type="text"
           className="form-control"
-          name="phone_number"
-          value={profileData.phone_number}
+          name="address_line_2"
+          value={profileData.address_line_2}
           onChange={handleChange}
-          placeholder="Phone Number"
+          placeholder="Address Line 2"
         />
         </div>
        
 
         <div className="form-group">
-        
-          
           <input
             className="form-control"
             type="text"
-            name="location"
-            value={profileData.location}
+            name="postal_code"
+            value={profileData.postal_code}
             onChange={handleChange}
-         
+            placeholder='Postal Code'
           />
         
         </div>
@@ -198,4 +172,4 @@ const UserDetail = ({isLoggedIn}) => {
   );
 }
 
-export default UserDetail;
+export default ShelterDetail;

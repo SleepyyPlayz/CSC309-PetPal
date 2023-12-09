@@ -3,28 +3,110 @@ import { useParams } from 'react-router-dom';
 
 function BlogComment() {
     const [comments, setComments] = useState(null);
+    const [newCommentText, setNewCommentText] = useState('');
+    const [replyText, setReplyText] = useState('');
+    const [parentCommentId, setParentCommentId] = useState(null);
     const { id } = useParams();
+    const [nextPage, setNextPage] = useState(null);
+    const [currentPage, setCurrentPage] = useState(`http://127.0.0.1:8000/comments/shelter_blog/${id}/`);
+    const [previousPage, setPreviousPage] = useState(null);
 
 
     useEffect(() => {
         console.log('Rendering comments'); // Add this line
 
-        const apiUrl = `http://127.0.0.1:8000/comments/shelter_blog/${id}/`
+        // const apiUrl = `http://127.0.0.1:8000/comments/shelter_blog/${id}/`
         const token = localStorage.getItem('access');
         const headers = { 'Authorization': `Bearer ${token}` };
         // axios.get(`http://localhost:8000/api/pets/${id}/`)
         //   .then(response => setPet(response.data))
         //   .catch(error => console.error('Error fetching data:', error));
     
-        fetch(apiUrl, {headers})
+        fetch(currentPage, {headers})
 
           .then(response => response.json())
-          .then(data => setComments(data.results))
+          .then(data => {
+            setComments(data.results);
+            setNextPage(data.next);
+            if (data.hasOwnProperty('previous')){
+              setPreviousPage(data.previous);
+            } else {
+              setPreviousPage(null);
+            }
+          })
 
           .catch(error => {
             console.error('Error fetching comments:', error);
           });
-      }, [id]);
+      }, [currentPage]);
+
+      const handleCommentSubmit = () => {
+        // Submit new comment
+        // axios.post('your_backend_url/api/comments/', {
+        //     text: newCommentText,
+        //     // Add other necessary fields
+        // })
+        // .then(response => {
+        //     setComments([response.data, ...comments]);
+        //     setNewCommentText('');
+        // })
+        // .catch(error => console.error('Error submitting comment:', error));
+        const apiUrl = `http://127.0.0.1:8000/comments/shelter_blog/${id}/`;
+        const token = localStorage.getItem('access');
+
+        fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, // Add your authentication token if required
+          },
+          body: JSON.stringify({
+            text: newCommentText,
+            // Add other necessary fields
+          }),
+        })
+        .then(request => request.json())
+        .then(data => {
+          setComments([data, ...comments]);
+          setNewCommentText('');
+        })
+        .catch(error => console.error('Error submitting comment:', error));
+      };
+
+      const handleReplySubmit = () => {
+        // Submit reply to a comment
+        const apiUrl = `http://127.0.0.1:8000/comments/shelter_blog/${id}/`;
+        const token = localStorage.getItem('access');
+
+        fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, // Add your authentication token if required
+          },
+          body: JSON.stringify({
+            text: replyText,
+            parent_comment: parentCommentId,
+            // Add other necessary fields
+          }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            const updatedComments = comments.map(comment =>
+                comment.id === parentCommentId
+                    ? { ...comment, replies: [data, ...comment.replies] }
+                    : comment
+            );
+            setComments(updatedComments);
+            setReplyText('');
+            setParentCommentId(null);
+        })
+        .catch(error => console.error('Error submitting reply:', error));
+      };
+
+      const handleReplyClick = (commentId) => {
+        setParentCommentId(commentId);
+      };
 
       if (!comments) {
         return <div>Loading...</div>;
@@ -50,6 +132,32 @@ function BlogComment() {
                     {comment.replies.map(reply => renderReplies(reply))}
                 </div>
             )}
+            <button onClick={() => handleReplyClick(comment.id)}>Reply</button>
+            {parentCommentId === comment.id && (
+                // <div>
+                //     <input
+                //         type="text"
+                //         value={replyText}
+                //         onChange={(e) => setReplyText(e.target.value)}
+                //         placeholder="Type your reply"
+                //     />
+                //     <button onClick={handleReplySubmit}>Submit Reply</button>
+                // </div>
+                <div>
+                  <div className="mb-3">
+                    <label class="form-label">New Reply</label>
+                    <textarea
+                        type="text"
+                        className="form-control"
+                        rows="3"
+                        value={replyText}
+                        onChange={(e) => setReplyText(e.target.value)}
+                        placeholder="Type your reply"
+                    />
+                  </div>
+                  <button onClick={handleReplySubmit}>Submit Reply</button>
+                </div>
+            )}
         </div>
       );
 
@@ -66,6 +174,23 @@ function BlogComment() {
 
         <main>
         <div className="container mx-auto row justify-content-center g-0 mx-4 mt-2 px-3">
+
+            <div>
+              <div className="mb-3">
+                <label class="form-label">New Comment</label>
+                <textarea
+                    type="text"
+                    className="form-control"
+                    rows="3"
+                    value={newCommentText}
+                    onChange={(e) => setNewCommentText(e.target.value)}
+                    placeholder="Type your comment"
+                />
+              </div>
+              <button onClick={handleCommentSubmit}>Submit Comment</button>
+            </div>
+          
+
             {comments.map(comment => (   
                            
               <div key={comment.id}>
@@ -85,6 +210,24 @@ function BlogComment() {
                       </div>
                     </div>
                     {comment.replies.map(comment => renderReplies(comment))}
+                    <button onClick={() => handleReplyClick(comment.id)}>Reply</button>
+                    {parentCommentId === comment.id && (
+                        <div>
+                          <div className="mb-3">
+                            <label class="form-label">New Reply</label>
+                            <textarea
+                                type="text"
+                                className="form-control"
+                                rows="3"
+                                value={replyText}
+                                onChange={(e) => setReplyText(e.target.value)}
+                                placeholder="Type your reply"
+                            />
+                          </div>
+                          <button onClick={handleReplySubmit}>Submit Reply</button>
+                        </div>
+                    )}
+
                   </div>
                   
                   
@@ -92,7 +235,20 @@ function BlogComment() {
 
               </div>
             ))}
+            
         </div>
+        {nextPage && (
+              <button onClick={() => setCurrentPage(nextPage)}>
+                Next Page
+              </button>
+            )}
+          
+          {previousPage && (
+              <button onClick={() => setCurrentPage(previousPage)}>
+                Previous Page
+              </button>
+            )}
+        
 
         </main>
         </>
