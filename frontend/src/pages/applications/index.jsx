@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import './application-style.css';
+// import './applications-style.css';
 import ApplicationsFilled from '../applications_filled/index.jsx'
 
 const Applications = ({IsLoggedIn}) => {
@@ -20,7 +20,7 @@ const Applications = ({IsLoggedIn}) => {
 
     const accessToken = localStorage.getItem('access');
     const userId = localStorage.getItem('userId');
-      
+    
     useEffect(() => {
         const fetchPetDetails = async () => {
             if (id) {
@@ -97,22 +97,11 @@ const Applications = ({IsLoggedIn}) => {
 
     };
 
-    const bootstrapCSS = (
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossOrigin="anonymous"
-        />
-    );
-
     // const petName = formData.pet && formData.pet.pet_name;
     
     console.log(formData);
     return (
     <>  
-        {bootstrapCSS}
-
         <main>
             <div className="container-sm">
             {success ? (

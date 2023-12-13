@@ -8,13 +8,13 @@ import Signup from './pages/signup';
 import UserDetail from './pages/user_profile';
 import PetDetail from './pages/pet_detail';
 import Applications from './pages/applications';
-import ApplicationsFilled from './pages/applications_filled/index.jsx';
+import ApplicationsFilled from './pages/applications_filled';
 import MyPosts from './pages/my_posts';
 import MyListings from './pages/my_listings';
 import BlogComment from './pages/blog_comments';
-import ShelterComment from './pages/shelter_comments/index.jsx';
+import ShelterComment from './pages/shelter_comments';
 import CreatePetForm from './pages/create_pet_listing';
-import UpdatePetForm from './pages/update_pet_listing/index.jsx';
+import UpdatePetForm from './pages/update_pet_listing';
 import { BrowserRouter, Route, Routes, Redirect} from 'react-router-dom';
 import { verifyToken } from './auth'
 import React, {useState, useEffect} from 'react';
@@ -84,7 +84,7 @@ function App() {
         <Route path="/shelter_view/:id/" element={<ShelterView isLoggedIn={isLoggedIn}/>} />
         <Route path="/comments/:id/" element={<BlogComment />} />
         <Route path="/shelter_comments/:id/" element={<ShelterComment/>}/>
-        <Route path="/user_profile" element = {<UserDetail handleSignOut={handleSignOut} isLoggedIn={isLoggedIn}/>} />
+        <Route path="user_profile" element = {<UserDetail handleSignOut={handleSignOut} isLoggedIn={isLoggedIn}/>} />
         <Route path="/create_pet_listing/" element = {<CreatePetForm/>}/>
         <Route path="/update_pet_listing/:id/" element = {<UpdatePetForm/>}/>
 
