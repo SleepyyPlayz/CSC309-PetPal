@@ -10,7 +10,34 @@ function BlogComment() {
     const [nextPage, setNextPage] = useState(null);
     const [currentPage, setCurrentPage] = useState(`http://127.0.0.1:8000/comments/shelter_blog/${id}/`);
     const [previousPage, setPreviousPage] = useState(null);
+    const [updateReplies, setUpdateReplies] = useState(false);
+    const [pet, setPet] = useState(null);
 
+
+
+    useEffect(() => {
+      const accessToken = localStorage.getItem('access');
+      // else {
+      //     window.location.href = '/login';
+      // }
+      
+      const apiUrl = `http://127.0.0.1:8000/shelter_blogs/${id}/`
+      // axios.get(`http://localhost:8000/api/pets/${id}/`)
+      //   .then(response => setPet(response.data))
+      //   .catch(error => console.error('Error fetching data:', error));
+      console.log(accessToken);
+          fetch(apiUrl, {
+              method: 'GET',
+              headers: {
+                  'Authorization': `Bearer ${accessToken}`,
+              },
+          })
+        .then(response => response.json())
+        .then(data => setPet(data))
+        .catch(error => {
+          console.error('Error fetching pets:', error);
+        });
+    }, [id]);
 
     useEffect(() => {
         console.log('Rendering comments'); // Add this line
@@ -38,19 +65,14 @@ function BlogComment() {
           .catch(error => {
             console.error('Error fetching comments:', error);
           });
-      }, [currentPage]);
+      }, [currentPage, updateReplies]);
 
       const handleCommentSubmit = () => {
-        // Submit new comment
-        // axios.post('your_backend_url/api/comments/', {
-        //     text: newCommentText,
-        //     // Add other necessary fields
-        // })
-        // .then(response => {
-        //     setComments([response.data, ...comments]);
-        //     setNewCommentText('');
-        // })
-        // .catch(error => console.error('Error submitting comment:', error));
+        if (newCommentText.trim() === '') {
+          alert('Please enter a non-empty comment');
+          return;
+        }
+        
         const apiUrl = `http://127.0.0.1:8000/comments/shelter_blog/${id}/`;
         const token = localStorage.getItem('access');
 
@@ -75,6 +97,10 @@ function BlogComment() {
 
       const handleReplySubmit = () => {
         // Submit reply to a comment
+        if (replyText.trim() === '') {
+          alert('Please enter a non-empty reply');
+          return;
+        }
         const apiUrl = `http://127.0.0.1:8000/comments/shelter_blog/${id}/`;
         const token = localStorage.getItem('access');
 
@@ -100,6 +126,7 @@ function BlogComment() {
             setComments(updatedComments);
             setReplyText('');
             setParentCommentId(null);
+            setUpdateReplies(!updateReplies);
         })
         .catch(error => console.error('Error submitting reply:', error));
       };
@@ -109,6 +136,10 @@ function BlogComment() {
       };
 
       if (!comments) {
+        return <div>Loading...</div>;
+      }
+
+      if (!pet) {
         return <div>Loading...</div>;
       }
 
@@ -132,7 +163,7 @@ function BlogComment() {
                     {comment.replies.map(reply => renderReplies(reply))}
                 </div>
             )}
-            <button onClick={() => handleReplyClick(comment.id)}>Reply</button>
+            <button className="btn btn-primary mb-3" onClick={() => handleReplyClick(comment.id)}>Reply</button>
             {parentCommentId === comment.id && (
                 // <div>
                 //     <input
@@ -155,11 +186,15 @@ function BlogComment() {
                         placeholder="Type your reply"
                     />
                   </div>
-                  <button onClick={handleReplySubmit}>Submit Reply</button>
+                  <button className="btn btn-primary mb-3" onClick={handleReplySubmit}>Submit Reply</button>
                 </div>
             )}
         </div>
       );
+
+      if (!pet) {
+        return <div>Loading...</div>;
+      }
 
       return(
         <>
@@ -173,6 +208,27 @@ function BlogComment() {
         </head>
 
         <main>
+        <div className="container mx-auto align-items-center row row-cols-1 row-cols-md-2 g-4 mt-2 mb-1 mx-5">
+                <div className="col">
+                    <img src={pet.image!== null ? `${pet.image}` : "/no_image.jpg" } alt="Pet Pic" className="img-fluid card" />
+                </div>
+
+                <div className="col">
+                    <div className="card" >
+                        <div className="card-body">
+                            <h1 className="card-title">{pet.title}</h1>
+                            <p className="card-text">{pet.shelter.name}</p>
+                            <p className="card-text">{pet.text}</p>
+                            
+                      
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
         <div className="container mx-auto row justify-content-center g-0 mx-4 mt-2 px-3">
 
             <div>
@@ -187,7 +243,7 @@ function BlogComment() {
                     placeholder="Type your comment"
                 />
               </div>
-              <button onClick={handleCommentSubmit}>Submit Comment</button>
+              <button className="btn btn-primary mb-3" onClick={handleCommentSubmit}>Submit Comment</button>
             </div>
           
 
@@ -210,7 +266,7 @@ function BlogComment() {
                       </div>
                     </div>
                     {comment.replies.map(comment => renderReplies(comment))}
-                    <button onClick={() => handleReplyClick(comment.id)}>Reply</button>
+                    <button className="btn btn-primary mb-3" onClick={() => handleReplyClick(comment.id)}>Reply</button>
                     {parentCommentId === comment.id && (
                         <div>
                           <div className="mb-3">
@@ -224,7 +280,7 @@ function BlogComment() {
                                 placeholder="Type your reply"
                             />
                           </div>
-                          <button onClick={handleReplySubmit}>Submit Reply</button>
+                          <button className="btn btn-primary mb-3" onClick={handleReplySubmit}>Submit Reply</button>
                         </div>
                     )}
 
@@ -238,13 +294,13 @@ function BlogComment() {
             
         </div>
         {nextPage && (
-              <button onClick={() => setCurrentPage(nextPage)}>
+              <button className="btn btn-secondary" onClick={() => setCurrentPage(nextPage)}>
                 Next Page
               </button>
             )}
           
           {previousPage && (
-              <button onClick={() => setCurrentPage(previousPage)}>
+              <button className="btn btn-secondary" onClick={() => setCurrentPage(previousPage)}>
                 Previous Page
               </button>
             )}

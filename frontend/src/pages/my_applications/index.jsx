@@ -1,33 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const MyPosts = ({isLoggedIn}) => {
+const MyApplications = ({isLoggedIn}) => {
       const shelterId = localStorage.getItem('userId');
       const accessToken = localStorage.getItem('access');
-      const [blogs, setBlogs] = useState([]);
+      const isShelter = localStorage.getItem('is_shelter')
+      const [applications, setApplications] = useState([]);
       const [nextPage, setNextPage] = useState(null);
-      const [currentPage, setCurrentPage] = useState(`http://127.0.0.1:8000/shelter_blogs/${shelterId}/blog-posts/`);
+      var apiUrl
+      if (isShelter === 'false') {
+        apiUrl = `http://127.0.0.1:8000/applications/filled-applications/user/list/`;
+      } 
+      else {
+        apiUrl = `http://127.0.0.1:8000/applications/filled-applications/shelter/list/`;
+      }
+      const [currentPage, setCurrentPage] = useState(apiUrl);
       const [previousPage, setPreviousPage] = useState(null);
       
-      const handleDelete = (blogId) => {
-        const response = fetch(`http://127.0.0.1:8000/shelter_blogs/${blogId}`, {
-            method: 'DELETE',
-            headers: {
-              'Authorization': `Bearer ${accessToken}`,
-              'Content-Type': 'application/json'
-            },
-          });
-      
-          if (!response.ok) {
-            // Handle errors, e.g., show an error message to the user
-            console.error(`Error deleting post: ${response.status}`);
-          }
-      
-          // Post successfully deleted, you can check the response body if needed
-          console.log('Post deleted successfully');
-          window.location.reload();            
-        
-      };
 
       useEffect(() => {
         fetch(currentPage, {
@@ -36,7 +25,7 @@ const MyPosts = ({isLoggedIn}) => {
          })
           .then(response => response.json())
           .then(data => {
-            setBlogs(data.results);
+            setApplications(data.results);
             setNextPage(data.next);
             if (data.hasOwnProperty('previous')){
               setPreviousPage(data.previous);
@@ -55,31 +44,28 @@ const MyPosts = ({isLoggedIn}) => {
 
     <div className="container mt-4">
     <div className="d-flex justify-content-between mt-3 pb-3">
-    <Link to="/create_blog" className="btn btn-primary">
-      Create a New Blog
-    </Link>
   
     </div>
     <ul className="list-group">
-      {blogs.map(blog => (
-        <li key={blog.id} className="list-group-item">
+      {applications.map(application => (
+        <li key={application.pet.pet_name} className="list-group-item">
             <div className="row align-items-center">
-                <div className="col-md-4">
-            <img className="img-fluid img-thumbnail" style={{ width: '200px', height: '200px' }} src={blog.image}></img>
+            <div className="col-md-3">
+                <p>For pet: </p>
             </div>
             <div className="col-md-3">
-            {blog.title}
+                <p>Date Applied: {new Date(application.created_at).toISOString().split('T')[0]}</p>
+            </div>
+            <div className="col-md-3">
+                <p>Status: {application.status}</p>
             </div>
             <div className="col-md-2">
-            <Link className="btn btn-primary" to={`/comments/${blog.id}`}>Comments</Link>
+            <Link className="btn btn-primary mb-2 me-2" to={`/applications_filled/${application.id}`}>Details</Link>
+            <Link className="btn btn-info" to={`/application_comments/${application.id}`}>Comments</Link>
             </div>
            
-            <div className="col-md-2">
-                <button onClick={() => handleDelete(blog.id)} className="btn btn-danger">Delete</button>
-            </div>
        
             </div>
-            <p>Likes: {blog.likes}</p>
         </li>
       ))}
     </ul>
@@ -105,4 +91,4 @@ const MyPosts = ({isLoggedIn}) => {
 </>)
 
 }
-export default MyPosts;
+export default MyApplications;

@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-function ShelterComment() {
+function ApplicationComment() {
     const [comments, setComments] = useState(null);
     const [newCommentText, setNewCommentText] = useState('');
-    const [newCommentRating, setNewCommentRating] = useState('1');
     const [replyText, setReplyText] = useState('');
     const [parentCommentId, setParentCommentId] = useState(null);
     const { id } = useParams();
     const [nextPage, setNextPage] = useState(null);
-    const [currentPage, setCurrentPage] = useState(`http://127.0.0.1:8000/comments/shelter/${id}/`);
+    const [currentPage, setCurrentPage] = useState(`http://127.0.0.1:8000/comments/application/${id}/`);
     const [previousPage, setPreviousPage] = useState(null);
     const [updateReplies, setUpdateReplies] = useState(false);
+
 
 
     useEffect(() => {
@@ -47,7 +47,8 @@ function ShelterComment() {
           alert('Please enter a non-empty comment');
           return;
         }
-        const apiUrl = `http://127.0.0.1:8000/comments/shelter/${id}/`;
+        
+        const apiUrl = `http://127.0.0.1:8000/comments/application/${id}/`;
         const token = localStorage.getItem('access');
 
         fetch(apiUrl, {
@@ -58,7 +59,6 @@ function ShelterComment() {
           },
           body: JSON.stringify({
             text: newCommentText,
-            rating: newCommentRating,
             // Add other necessary fields
           }),
         })
@@ -71,12 +71,12 @@ function ShelterComment() {
       };
 
       const handleReplySubmit = () => {
+        // Submit reply to a comment
         if (replyText.trim() === '') {
           alert('Please enter a non-empty reply');
           return;
         }
-        // Submit reply to a comment
-        const apiUrl = `http://127.0.0.1:8000/comments/shelter/${id}/`;
+        const apiUrl = `http://127.0.0.1:8000/comments/application/${id}/`;
         const token = localStorage.getItem('access');
 
         fetch(apiUrl, {
@@ -88,7 +88,6 @@ function ShelterComment() {
           body: JSON.stringify({
             text: replyText,
             parent_comment: parentCommentId,
-            rating: newCommentRating,
             // Add other necessary fields
           }),
         })
@@ -173,8 +172,6 @@ function ShelterComment() {
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
             {/* <link href="style.css" rel="stylesheet"/> */}
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-            <link href="style.css" rel="stylesheet"/>  
-
         </head>
 
         <main>
@@ -190,13 +187,6 @@ function ShelterComment() {
                     value={newCommentText}
                     onChange={(e) => setNewCommentText(e.target.value)}
                     placeholder="Type your comment"
-                />
-                <label class="form-label">Rating</label>
-                <input
-                    type="number"
-                    className="form-control"
-                    value={newCommentRating}
-                    onChange={(e) => setNewCommentRating(e.target.value)}
                 />
               </div>
               <button className="btn btn-primary mb-3" onClick={handleCommentSubmit}>Submit Comment</button>
@@ -216,7 +206,6 @@ function ShelterComment() {
                         <div className="col-8">
                           <div className="card-body">
                             <h5 className="card-title">{comment.user.first_name} {comment.user.last_name}</h5>
-                            <img src={`/${comment.rating}_stars.jpg` } className="img-fluid mb-2" style={{ maxHeight: 50 }} alt="..."/>
                             <p className="card-text"> {comment.text} </p>
                           </div>
                         </div>
@@ -237,7 +226,7 @@ function ShelterComment() {
                                 placeholder="Type your reply"
                             />
                           </div>
-                          <button onClick={handleReplySubmit}>Submit Reply</button>
+                          <button className="btn btn-primary mb-3" onClick={handleReplySubmit}>Submit Reply</button>
                         </div>
                     )}
 
@@ -271,4 +260,4 @@ function ShelterComment() {
     
 }
 
-export default ShelterComment;
+export default ApplicationComment;

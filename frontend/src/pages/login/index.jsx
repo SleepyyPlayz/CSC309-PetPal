@@ -1,11 +1,18 @@
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import '../signup/signup-style.css';
 
-function Login( {setIsLoggedIn}) {
+import Container from "react-bootstrap/Container";
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+
+// import '../signup/signup-style.css';
+
+
+export default function Login( { setIsLoggedIn } ) {
+
     const [error, setError] = useState("");
     const navigate = useNavigate();
-    const loginUrl = 'http://127.0.0.1:8000/api/token/';
+    const loginUrl = 'http://localhost:8000/api/token/';
 
     function handle_submit(event) {
         let data = new FormData(event.target);
@@ -24,10 +31,11 @@ function Login( {setIsLoggedIn}) {
                 navigate('/');
             }
             else if ('detail' in json) {
-                setError(json.detail);
+                // setError(json.detail);
+                setError("Incorrect email or password.");
             }
             else {
-                setError("Unknown error while signing in.")
+                setError("Unknown error while signing in. Please try again later.")
             }
         })
         .catch(error => {
@@ -37,39 +45,49 @@ function Login( {setIsLoggedIn}) {
         event.preventDefault();
     }
 
-    const bootstrapCSS = (
-        <link
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-          crossOrigin="anonymous"
-        />
-      );
-
     return (
-    <>
-        {bootstrapCSS}
-       
-        <div className="container-sm" id="form-auth">
-            <form id="login-form" onSubmit={handle_submit} className="signup-form">
-            <h2 id="create-your-account">Login</h2>
-            <div className="form-group">
-                <input type="text" id="email" placeholder="email" className="form-control" name="email" required/>
-            </div>
-            <div className="form-group">
-                <input className="form-control" placeholder="password" type="password" id="password" name="password" required  />
-            </div>
-            <div className="form-group">
-                <button className="btn btn-success btn-block" id="submit-button" type="submit">Login</button>
-            </div>
-            <p className="error">{error}</p>
-            </form>
+        <Container fluid="sm" style={ styling.formContainer }>
+            <Form onSubmit={ handle_submit } style={ styling.form }>
 
-        </div>
-     
+                <h2 style={ styling.banner }>Login</h2>
 
-    </>
-    )
+                <Form.Group style={ styling.formGroup }>
+                    <Form.Control type="email" id="email" name="email" placeholder="Email" required />
+                </Form.Group>
+
+                <Form.Group style={ styling.formGroup }>
+                    <Form.Control type="password" id="password" name="password" placeholder="Password" required />
+                </Form.Group>
+
+                <Form.Group style={ styling.formGroup }>
+                    { error ? <p style={ styling.error }>{error}</p> : <p></p> }
+                    <Button variant="success" type="submit" className="d-block">Login</Button>
+                </Form.Group>
+
+            </Form>
+        </Container>
+    );
 }
 
-export default Login;
+const styling = {
+    formContainer : {
+        border: "1px solid grey",
+        borderRadius: "20px",
+        maxWidth: "500px",
+        padding: "45px 10px calc(45px + 16px) 10px",
+    },
+    banner : {
+        textAlign: "center",
+        margin: "16px 0.5rem 16px 0.5rem",
+    },
+    form : {
+        maxWidth: "380px",
+        margin: "0 auto",
+    },
+    formGroup: {
+        padding: "10px 20px"
+    },
+    error : {
+        color: "red",
+    },
+};

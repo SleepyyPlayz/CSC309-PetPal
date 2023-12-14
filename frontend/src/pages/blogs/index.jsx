@@ -58,7 +58,7 @@ const Blogs = () => {
     })
     .then(request => request.json())
     .then(data => {
-      alert(data.message)
+      // alert(data.message)
       setLikeStatusChanged(!likeStatusChanged); // Trigger the useEffect when the like status changes
     })
     .catch(error => {
@@ -130,12 +130,10 @@ const Blogs = () => {
                         <p className="card-text">Author: {blog.shelter.name}</p>
                         <div className="d-flex justify-content-between align-items-center">
                           {/* <a className="btn btn-sm btn-outline-info me-3" href="pet-detail-page.html">Details</a> */}
-                          <button className="btn btn-sm btn-outline-danger me-3" onClick={() => like(blog.id)}>Like </button>
-                          <Link to={`/comments/${blog.id}`} className="btn btn-sm btn-outline-primary me-3" >Comments </Link>
+                          <button className="btn btn-sm btn-outline-danger me-3" onClick={() => like(blog.id)}>Likes: {blog.likes}</button>
+                          <Link to={`/comments/${blog.id}`} className="btn btn-sm btn-outline-primary me-3" >Details </Link>
                           {/* <small className="text-muted">{pet.shelter.name}</small> */}
                         </div>
-                        <p className="card-text">{blog.likes}</p>
-
                       </div>
                     </div>
                   </div>
