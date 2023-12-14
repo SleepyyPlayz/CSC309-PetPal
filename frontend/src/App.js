@@ -8,6 +8,7 @@ import Signup from './pages/signup';
 import UserDetail from './pages/user_profile';
 import PetDetail from './pages/pet_detail';
 import Applications from './pages/applications';
+import MyApplications from './pages/my_applications';
 import ApplicationsFilled from './pages/applications_filled';
 import MyPosts from './pages/my_posts';
 import MyListings from './pages/my_listings';
@@ -78,6 +79,7 @@ function App() {
         <Route path="/my_listings" element = {<MyListings IsLoggedIn={isLoggedIn}/>} />
         <Route path="login" element={<Login setIsLoggedIn={setIsLoggedIn}/>} />
         <Route path="signup" element={<Signup />} />
+        <Route path="/my_applications" element = {<MyApplications IsLoggedIn={isLoggedIn} />} />
         {/* <Route path="applications/applications_list/" element={<Applications />} /> */}
         <Route path="/pet_listings/:id/" element={<PetDetail />} />
         <Route path="/applications/:id/" element={<Applications isLoggedIn={isLoggedIn}/>} />

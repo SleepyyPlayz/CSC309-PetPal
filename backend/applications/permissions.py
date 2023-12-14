@@ -64,6 +64,16 @@ class CanViewOwnApplications(permissions.BasePermission):
         # Shelters can only view their own applications.
         return obj.shelter == request.user
     
+
+class CanViewOwnApplicationUser(permissions.BasePermission):
+    """
+    Allow shelters to view their own applications.
+    """
+
+    def has_object_permission(self, request, view, obj):
+        # Shelters can only view their own applications.
+        return obj.applicant == request.user
+    
     
 class CanChangeLastUpdateTime(permissions.BasePermission):
     """
