@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import './application-style.css';
+// import './applications-style.css';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const FormField = ({ label, value, disabled }) => {
@@ -35,6 +35,7 @@ const ApplicationsFilled = () => {
     const accessToken = localStorage.getItem('access');
     const userId = localStorage.getItem('userId');
     const { id } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchApplicationData = async () => {
@@ -100,9 +101,9 @@ const ApplicationsFilled = () => {
             const response = await fetch(`http://127.0.0.1:8000/applications/${id}/`, {
                 method: 'PATCH',
                 headers: {
-                    Authorization: `Bearer ${token}`, // Add your authentication token if required
+                    Authorization: `Bearer ${accessToken}`, // Add your authentication token if required
                 },
-                body: data,
+                body: formData,
             });
         
             if (!response.ok) {

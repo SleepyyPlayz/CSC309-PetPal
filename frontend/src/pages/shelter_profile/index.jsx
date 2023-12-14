@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../signup/signup-style.css';
+
+
 const ShelterDetail = ({isLoggedIn}) => {
   const userId = localStorage.getItem('userId');
   const [error, setError] = useState("");

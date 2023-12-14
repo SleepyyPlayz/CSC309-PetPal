@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from .models import PetApplication
 from .permissions import IsApplicationForUser, CanUpdateApplicationStatus, IsNotAShelter
-from .permissions import CanViewOwnApplications, IsApplicationForShelter
+from .permissions import CanViewOwnApplications, IsApplicationForShelter, CanViewOwnApplicationUser
 from .serializers import PetApplicationSerializer
 from .filters import ApplicationFilter
 from rest_framework.decorators import api_view
@@ -45,7 +45,6 @@ class FilledAppShelterView(generics.RetrieveUpdateAPIView):
     #     return super().perform_update(serializer)
 
 class PetApplicationListView(generics.ListAPIView):
-    queryset = PetApplication.objects.all()
     serializer_class = PetApplicationSerializer
     permission_classes = [CanViewOwnApplications]
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
@@ -53,9 +52,33 @@ class PetApplicationListView(generics.ListAPIView):
     filterset_fields = ['status']
     ordering_fields = ['created_at', 'updated_at']
 
+
     def get_queryset(self):
-        queryset = super().get_queryset()
+        queryset = PetApplication.objects.filter(pet__shelter = self.request.user.id)
         ordering = self.request.query_params.get('ordering', None)
         if ordering:
             queryset = queryset.order_by(ordering)
+        
         return queryset
+
+
+class PetApplicationListViewUser(generics.ListAPIView):
+    queryset = PetApplication.objects.all()
+    serializer_class = PetApplicationSerializer
+    permission_classes = [CanViewOwnApplicationUser]
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+    filterset_class = ApplicationFilter
+    filterset_fields = ['status']
+    ordering_fields = ['created_at', 'updated_at']
+
+   
+
+    def get_queryset(self):
+        queryset = PetApplication.objects.filter(applicant = self.request.user.id)
+        ordering = self.request.query_params.get('ordering', None)
+        if ordering:
+            queryset = queryset.order_by(ordering)
+        
+        return queryset
+    
+
