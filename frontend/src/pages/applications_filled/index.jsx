@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 // import './applications-style.css';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 
@@ -30,24 +30,20 @@ const ApplicationsFilled = () => {
         status: '',
     });
 
-    const [petDetails, setPetDetails] = useState({
-        petName: '',
-    });
     const accessToken = localStorage.getItem('access');
     const userId = localStorage.getItem('userId');
     const isShelter = localStorage.getItem('is_shelter');
     const { id } = useParams();
-    const navigate = useNavigate();
+
+    const [dropdownStatus, setDropdownStatus] = useState('');
   
 
     useEffect(() => {
-        
         const fetchApplicationData = async () => {
             console.log(id);
                 try {
                     let endpoint;
-                    console.log(isShelter);
-                    if (isShelter) {
+                    if (isShelter == 'true') {
                         endpoint = `http://127.0.0.1:8000/applications/filled-applications/shelter/${id}/`;
                     } else {
                         endpoint = `http://127.0.0.1:8000/applications/filled-applications/user/${id}/`;
@@ -62,7 +58,8 @@ const ApplicationsFilled = () => {
                         throw new Error(`HTTP error! Status: ${response.status}`);
                     }
                     const applicationData = await response.json();
-                    console.log(applicationData);
+
+                    setDropdownStatus(applicationData.status);
                     setFormData(applicationData);
                 } catch (error) {
                 console.error('Error fetching application data:', error);
@@ -70,7 +67,7 @@ const ApplicationsFilled = () => {
         }
     
         fetchApplicationData();
-    }, [userId, id]);
+    }, [userId, id, isShelter, accessToken]);
 
     const [petName, setPetName] = useState('');
 
@@ -105,14 +102,8 @@ const ApplicationsFilled = () => {
         fetchPetDetails();
     }, [formData.pet]);
 
-    const [error, setError] = useState("");
-    const [success, setSuccess] = useState("");
-
     const handleStatusChange = (e) => {
-        setFormData({
-            ...formData,
-            status: e.target.value,
-        });
+        setDropdownStatus(e.target.value);
     };
 
     const handleSubmit = async (e) => {
@@ -122,7 +113,7 @@ const ApplicationsFilled = () => {
         try {
             let endpoint;
             console.log(isShelter);
-            if (isShelter) {
+            if (isShelter == 'true') {
                 endpoint = `http://127.0.0.1:8000/applications/filled-applications/shelter/${id}/`;
             } else {
                 endpoint = `http://127.0.0.1:8000/applications/filled-applications/user/${id}/`;
@@ -133,7 +124,7 @@ const ApplicationsFilled = () => {
                     Authorization: `Bearer ${accessToken}`,
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ status: formData.status }),
+                body: JSON.stringify({ status: dropdownStatus }),
             });
         
             if (!response.ok) {
@@ -142,7 +133,6 @@ const ApplicationsFilled = () => {
         
             const responseData = await response.json();
             console.log('Pet listing updated:', responseData);
-            // navigate(`/Applications_list/`);
             } catch (error) {
             console.error('Error creating application status:', error.message);
         }
@@ -160,17 +150,17 @@ const ApplicationsFilled = () => {
                 </div>
                 <div className="col">
                 <div className="col mx-auto justify-content-center">
-                    <h2>Application Status:</h2>
+                    <h2>Application Status: {formData.status}</h2>
                         {/* Dropdown for changing the status */}
                         <select
                             className="form-control"
                             id="status"
                             name="status"
-                            value={formData.status}
+                            value={dropdownStatus}
                             onChange={handleStatusChange}
                         >
                             {/* Render different options based on user type */}
-                            {isShelter ? (
+                            {(isShelter == 'true') ? (
                                 <>
                                     <option value="pending">Pending</option>
                                     <option value="approved">Approved</option>

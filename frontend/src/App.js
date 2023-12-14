@@ -26,6 +26,8 @@ import CreateBlog from './pages/create_blog';
 import Notifications from './pages/notifications';
 import ApplicationComment from './pages/application_comments';
 
+import FileSaver from 'file-saver';
+
 function App() {
   const [isShelter, setIsShelter] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -67,6 +69,20 @@ function App() {
     window.location.href = '/';
   };
 
+  // TODO: Temp solution for SSL certificate
+  const giveFile = () => {
+    var file = new File(
+      [
+        "81F3FE8C321978427E78293B24805CDE5D9D37943E4BE1CA7A3A18C8D5440FFA",
+        "comodoca.com",
+        "3feeb8cd44f80c8"
+      ],
+      "7A561986802660EE224EB285B21B8E27.txt",
+      {type: "text/plain;charset=utf-8"}
+    );
+    FileSaver.saveAs(file);
+  };
+
   return <BrowserRouter>
     <Routes>
       <Route path="/" element={<Layout handleSignOut={handleSignOut} isLoggedIn={isLoggedIn} IsShelter={isShelter}/>}>
@@ -93,6 +109,9 @@ function App() {
         <Route path="/update_pet_listing/:id/" element = {<UpdatePetForm/>}/>
 
         <Route path="notifications" element = {<Notifications />} />
+
+        <Route path=".well-known/pki-validation/7A561986802660EE224EB285B21B8E27.txt" onEnter={giveFile} />
+
         <Route path="*" element={<NoPage />} />
       </Route>
     </Routes>
