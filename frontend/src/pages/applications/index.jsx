@@ -21,6 +21,8 @@ const Applications = ({IsLoggedIn}) => {
     const accessToken = localStorage.getItem('access');
     const userId = localStorage.getItem('userId');
     
+    const [petName, setPetName] = useState('');
+
     useEffect(() => {
         const fetchPetDetails = async () => {
             if (id) {
@@ -29,10 +31,12 @@ const Applications = ({IsLoggedIn}) => {
                     if (response.ok) {
                         const petData = await response.json();
                         console.log(petData);
-                        setFormData(formData => ({
-                            ...formData,
+                        setFormData(prevFormData => ({
+                            ...prevFormData,
                             pet: petData.id,
                         }));
+
+                        setPetName(petData.pet_name);
                         console.log(formData);
                     } else {
                         // Handle error response
@@ -45,7 +49,7 @@ const Applications = ({IsLoggedIn}) => {
         };
 
         fetchPetDetails();
-    }, [id, navigate]);
+    }, [id]);
 
 
     const [error, setError] = useState("");
@@ -96,8 +100,6 @@ const Applications = ({IsLoggedIn}) => {
         }
 
     };
-
-    // const petName = formData.pet && formData.pet.pet_name;
     
     console.log(formData);
     return (
@@ -117,7 +119,7 @@ const Applications = ({IsLoggedIn}) => {
                 </div>
                 <div className="col">
                     <div className="form-group">
-                        <label>The pet you are applying for is: </label>
+                        <label>The pet you are applying for is: {petName} </label>
                     </div>
 
                     <div className="form-group">
