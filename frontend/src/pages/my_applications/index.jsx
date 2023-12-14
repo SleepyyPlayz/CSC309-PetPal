@@ -60,7 +60,8 @@ const MyApplications = ({isLoggedIn}) => {
                 <p>Status: {application.status}</p>
             </div>
             <div className="col-md-2">
-            <Link className="btn btn-primary" to={`/applications_filled/${application.id}`}>Details</Link>
+            <Link className="btn btn-primary mb-2 me-2" to={`/applications_filled/${application.id}`}>Details</Link>
+            <Link className="btn btn-info" to={`/application_comments/${application.id}`}>Comments</Link>
             </div>
            
        
