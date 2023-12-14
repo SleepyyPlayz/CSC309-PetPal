@@ -23,6 +23,7 @@ import ShelterDetail from './pages/shelter_profile';
 import ShelterView from './pages/shelter_view';
 import CreateBlog from './pages/create_blog';
 import Notifications from './pages/notifications';
+import ApplicationComment from './pages/application_comments';
 
 function App() {
   const [isShelter, setIsShelter] = useState(false);
@@ -83,6 +84,7 @@ function App() {
         <Route path="/applications_filled/:id/" element={<ApplicationsFilled />} />
         <Route path="/shelter_view/:id/" element={<ShelterView isLoggedIn={isLoggedIn}/>} />
         <Route path="/comments/:id/" element={<BlogComment />} />
+        <Route path="/application_comments/:id/" element={<ApplicationComment/>} />
         <Route path="/shelter_comments/:id/" element={<ShelterComment/>}/>
         <Route path="user_profile" element = {<UserDetail handleSignOut={handleSignOut} isLoggedIn={isLoggedIn}/>} />
         <Route path="/create_pet_listing/" element = {<CreatePetForm/>}/>

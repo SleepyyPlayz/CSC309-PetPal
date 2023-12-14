@@ -10,6 +10,8 @@ function BlogComment() {
     const [nextPage, setNextPage] = useState(null);
     const [currentPage, setCurrentPage] = useState(`http://127.0.0.1:8000/comments/shelter_blog/${id}/`);
     const [previousPage, setPreviousPage] = useState(null);
+    const [updateReplies, setUpdateReplies] = useState(false);
+
 
 
     useEffect(() => {
@@ -38,19 +40,14 @@ function BlogComment() {
           .catch(error => {
             console.error('Error fetching comments:', error);
           });
-      }, [currentPage]);
+      }, [currentPage, updateReplies]);
 
       const handleCommentSubmit = () => {
-        // Submit new comment
-        // axios.post('your_backend_url/api/comments/', {
-        //     text: newCommentText,
-        //     // Add other necessary fields
-        // })
-        // .then(response => {
-        //     setComments([response.data, ...comments]);
-        //     setNewCommentText('');
-        // })
-        // .catch(error => console.error('Error submitting comment:', error));
+        if (newCommentText.trim() === '') {
+          alert('Please enter a non-empty comment');
+          return;
+        }
+        
         const apiUrl = `http://127.0.0.1:8000/comments/shelter_blog/${id}/`;
         const token = localStorage.getItem('access');
 
@@ -75,6 +72,10 @@ function BlogComment() {
 
       const handleReplySubmit = () => {
         // Submit reply to a comment
+        if (replyText.trim() === '') {
+          alert('Please enter a non-empty reply');
+          return;
+        }
         const apiUrl = `http://127.0.0.1:8000/comments/shelter_blog/${id}/`;
         const token = localStorage.getItem('access');
 
@@ -100,6 +101,7 @@ function BlogComment() {
             setComments(updatedComments);
             setReplyText('');
             setParentCommentId(null);
+            setUpdateReplies(!updateReplies);
         })
         .catch(error => console.error('Error submitting reply:', error));
       };
@@ -132,7 +134,7 @@ function BlogComment() {
                     {comment.replies.map(reply => renderReplies(reply))}
                 </div>
             )}
-            <button onClick={() => handleReplyClick(comment.id)}>Reply</button>
+            <button className="btn btn-primary mb-3" onClick={() => handleReplyClick(comment.id)}>Reply</button>
             {parentCommentId === comment.id && (
                 // <div>
                 //     <input
@@ -155,7 +157,7 @@ function BlogComment() {
                         placeholder="Type your reply"
                     />
                   </div>
-                  <button onClick={handleReplySubmit}>Submit Reply</button>
+                  <button className="btn btn-primary mb-3" onClick={handleReplySubmit}>Submit Reply</button>
                 </div>
             )}
         </div>
@@ -187,7 +189,7 @@ function BlogComment() {
                     placeholder="Type your comment"
                 />
               </div>
-              <button onClick={handleCommentSubmit}>Submit Comment</button>
+              <button className="btn btn-primary mb-3" onClick={handleCommentSubmit}>Submit Comment</button>
             </div>
           
 
@@ -210,7 +212,7 @@ function BlogComment() {
                       </div>
                     </div>
                     {comment.replies.map(comment => renderReplies(comment))}
-                    <button onClick={() => handleReplyClick(comment.id)}>Reply</button>
+                    <button className="btn btn-primary mb-3" onClick={() => handleReplyClick(comment.id)}>Reply</button>
                     {parentCommentId === comment.id && (
                         <div>
                           <div className="mb-3">
@@ -224,7 +226,7 @@ function BlogComment() {
                                 placeholder="Type your reply"
                             />
                           </div>
-                          <button onClick={handleReplySubmit}>Submit Reply</button>
+                          <button className="btn btn-primary mb-3" onClick={handleReplySubmit}>Submit Reply</button>
                         </div>
                     )}
 
@@ -238,13 +240,13 @@ function BlogComment() {
             
         </div>
         {nextPage && (
-              <button onClick={() => setCurrentPage(nextPage)}>
+              <button className="btn btn-secondary" onClick={() => setCurrentPage(nextPage)}>
                 Next Page
               </button>
             )}
           
           {previousPage && (
-              <button onClick={() => setCurrentPage(previousPage)}>
+              <button className="btn btn-secondary" onClick={() => setCurrentPage(previousPage)}>
                 Previous Page
               </button>
             )}

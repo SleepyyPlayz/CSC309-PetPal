@@ -14,7 +14,7 @@ class ApplicationCommentSerializer(serializers.ModelSerializer):
         fields = ['id', 'text', 'user', 'parent_comment', 'replies', 'application']
     
     def get_replies(self, obj): 
-        serializer = ApplicationCommentSerializer(obj.replies.all(), many=True)
+        serializer = ApplicationCommentSerializer(obj.replies.all(), many=True, context={'request': self.context.get('request')})
         return serializer.data
     
 class ReviewCommentSerializer(serializers.ModelSerializer):
@@ -27,7 +27,7 @@ class ReviewCommentSerializer(serializers.ModelSerializer):
         fields = ['id', 'text', 'user', 'parent_comment', 'replies', 'shelter', 'rating']
 
     def get_replies(self, obj): 
-        serializer = ReviewCommentSerializer(obj.replies.all(), many=True)
+        serializer = ReviewCommentSerializer(obj.replies.all(), many=True, context={'request': self.context.get('request')})
         return serializer.data
     
 class BlogCommentSerializer(serializers.ModelSerializer):
@@ -40,5 +40,5 @@ class BlogCommentSerializer(serializers.ModelSerializer):
         fields = ['id', 'text', 'user', 'parent_comment', 'replies', 'blog']
     
     def get_replies(self, obj): 
-        serializer = BlogCommentSerializer(obj.replies.all(), many=True)
+        serializer = BlogCommentSerializer(obj.replies.all(), many=True, context={'request': self.context.get('request')})
         return serializer.data
