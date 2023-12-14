@@ -3,7 +3,7 @@ from django.db import models
 class ShelterBlog(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100)
-    text = models.CharField(max_length=500)
+    text = models.TextField()
     likes = models.IntegerField(default=0)
     shelter = models.ForeignKey('accounts.Shelter', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='blog_pics/', null=True, blank=True)

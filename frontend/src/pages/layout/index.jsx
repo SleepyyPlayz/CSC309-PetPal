@@ -36,6 +36,7 @@ const Layout = ({ handleSignOut, isLoggedIn}) => {
                   {/* <Link to="/applications/filled-applications/shelter/list/" className="me-2"><Button variant="primary">Applications</Button></Link> */}
 
                   <Link to="/user_profile" className="me-2"><Button variant="secondary">Your Profile</Button></Link>
+                  <Link to="/my_applications" className="me-2"><Button variant="secondary">My Applications</Button></Link>
                   
                   { isShelter && 
                     <>

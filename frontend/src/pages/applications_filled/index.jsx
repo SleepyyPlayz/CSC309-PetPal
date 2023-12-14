@@ -2,6 +2,8 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 // import './applications-style.css';
 import { useParams, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 
 const FormField = ({ label, value, disabled }) => {
     return (
@@ -31,17 +33,26 @@ const ApplicationsFilled = () => {
     const [petDetails, setPetDetails] = useState({
         petName: '',
     });
-    const [petName, setPetName] = useState('');
     const accessToken = localStorage.getItem('access');
     const userId = localStorage.getItem('userId');
+    const isShelter = localStorage.getItem('is_shelter');
     const { id } = useParams();
     const navigate = useNavigate();
+  
 
     useEffect(() => {
+        
         const fetchApplicationData = async () => {
             console.log(id);
                 try {
-                    const response = await fetch(`http://127.0.0.1:8000/applications/filled-applications/user/${id}/`, {
+                    let endpoint;
+                    console.log(isShelter);
+                    if (isShelter) {
+                        endpoint = `http://127.0.0.1:8000/applications/filled-applications/shelter/${id}/`;
+                    } else {
+                        endpoint = `http://127.0.0.1:8000/applications/filled-applications/user/${id}/`;
+                    }
+                    const response = await fetch(endpoint, {
                         method: 'GET',
                         headers: {
                             'Authorization': `Bearer ${accessToken}`,
@@ -59,37 +70,48 @@ const ApplicationsFilled = () => {
         }
     
         fetchApplicationData();
-    }, [id]);
+    }, [userId, id]);
 
-    // useEffect(() => {
-    //     const fetchPetDetails = async () => {
-    //         try {
-    //             if (formData.pet) {
-    //                 console.log(formData.pet);
-    //                 const response = await fetch(`http://127.0.0.1:8000/pet_listings/${formData.pet}/`);
-    //                 if (response.ok) {
-    //                     const petData = await response.json();
-    //                     setPetDetails(petData);
-    //                     console.log(petData);
-    //                 } else {
-    //                     // Handle error response
-    //                 }
-    //             }
-    //         } catch (error) {
-    //             console.error('Error fetching pet details:', error);
-    //         }
-    //     };
-    
-    //     fetchPetDetails();
-    // }, [formData.pet]);
+    const [petName, setPetName] = useState('');
+
+    useEffect(() => {
+        const fetchPetDetails = async () => {
+            if (formData.pet) {
+                try {
+                    const response = await fetch(`http://127.0.0.1:8000/pet_listings/${formData.pet}/`);
+                    if (response.ok) {
+                        const petData = await response.json();
+                        console.log(petData);
+
+                        setFormData(prevFormData => ({
+                            ...prevFormData,
+                            pet: petData.id,
+                        }));
+
+                        setPetName(petData.pet_name);
+                        console.log(petName)
+
+                        console.log(formData);
+                    } else {
+                        // Handle error response
+                    }
+                } catch (error) {
+                    console.error('Error fetching pet details:', error);
+                }
+                
+            }
+        };
+
+        fetchPetDetails();
+    }, [formData.pet]);
 
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
 
-    const handleChange = (e) => {
+    const handleStatusChange = (e) => {
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value,
+            status: e.target.value,
         });
     };
 
@@ -98,12 +120,20 @@ const ApplicationsFilled = () => {
         
         console.log('Data being sent:', formData); // Log the data before sending
         try {
-            const response = await fetch(`http://127.0.0.1:8000/applications/${id}/`, {
+            let endpoint;
+            console.log(isShelter);
+            if (isShelter) {
+                endpoint = `http://127.0.0.1:8000/applications/filled-applications/shelter/${id}/`;
+            } else {
+                endpoint = `http://127.0.0.1:8000/applications/filled-applications/user/${id}/`;
+            }
+            const response = await fetch(endpoint, {
                 method: 'PATCH',
                 headers: {
-                    Authorization: `Bearer ${accessToken}`, // Add your authentication token if required
+                    Authorization: `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json',
                 },
-                body: formData,
+                body: JSON.stringify({ status: formData.status }),
             });
         
             if (!response.ok) {
@@ -112,12 +142,9 @@ const ApplicationsFilled = () => {
         
             const responseData = await response.json();
             console.log('Pet listing updated:', responseData);
-            navigate(`/Applications_list/`);
-            
-            // Redirect or perform any other necessary actions upon successful submission
+            // navigate(`/Applications_list/`);
             } catch (error) {
-            console.error('Error creating pet listing:', error.message);
-            // Handle error appropriately
+            console.error('Error creating application status:', error.message);
         }
       };
 
@@ -134,21 +161,49 @@ const ApplicationsFilled = () => {
                 <div className="col">
                 <div className="col mx-auto justify-content-center">
                     <h2>Application Status:</h2>
-                <div className="btn btn-primary disabled">Status: {formData.status}</div>
+                        {/* Dropdown for changing the status */}
+                        <select
+                            className="form-control"
+                            id="status"
+                            name="status"
+                            value={formData.status}
+                            onChange={handleStatusChange}
+                        >
+                            {/* Render different options based on user type */}
+                            {isShelter ? (
+                                <>
+                                    <option value="pending">Pending</option>
+                                    <option value="approved">Approved</option>
+                                    <option value="denied">Denied</option>
+                                </>
+                            ) : (
+                                <>
+                                <option value="pending">Pending</option>
+                                <option value="withdrawn">Withdrawn</option>
+                                </>
+                            )}
+                        </select>
                 </div>
-    
                 {/* <FormField label="Name of the pet you want to adopt:" value={petName} disabled /> */}
+                <FormField label="Pet Name:" value={petName} disabled />
                 <FormField label="Your age:" value={formData.age} disabled />
                 <FormField label="Do you live in a house, apartment, or condo?" value={formData.accommodation} disabled />
                 <FormField label="Do you rent or own your home?" value={formData.rent_own_or} disabled />
                 <FormField label="Do you have permission to keep pets?" value={formData.has_permission_to_keep_pets} disabled />
                 <FormField label="Have you owned any pets? If yes, what are your past experiences with taking care of pets." value={formData.previous_pets} disabled />
                 <FormField label="How many hours are you available to spend with a pet per day?" value={formData.hours_available_for_pet} disabled />
-
-                
+                </div>
+            </div>
+            <div className="form-group">
+                <div className="row">
+                    <div className="col-md-6">
+                    {/* Button to submit the form and update the status */}
+                    <button type="submit" className="btn btn-success btn-block" onClick={handleSubmit}>Submit</button>
+                    </div>
                 </div>
             </div>
             </form>
+            <Link to={`/application_comments/${formData.id}`} className="btn btn-sm btn-outline-primary me-3" >Comments </Link>
         </div>
     );
 };
