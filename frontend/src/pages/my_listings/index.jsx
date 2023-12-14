@@ -54,8 +54,6 @@ const MyListings = ({ isLoggedIn }) => {
                                     <Link className="btn btn-primary" to={`/update_pet_listing/${listing.id}`}>Update</Link>
                                 </div>
 
-
-
                             </div>
                         </li>
                     ))}
