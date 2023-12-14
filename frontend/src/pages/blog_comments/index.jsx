@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
 function BlogComment() {
@@ -197,17 +198,7 @@ function BlogComment() {
       }
 
       return(
-        <>
-          <head>
-            <meta charset="UTF-8"/>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-            <title>Pet Pal Project</title>
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
-            {/* <link href="style.css" rel="stylesheet"/> */}
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-        </head>
-
-        <main>
+        <Container>
         <div className="container mx-auto align-items-center row row-cols-1 row-cols-md-2 g-4 mt-2 mb-1 mx-5">
                 <div className="col">
                     <img src={pet.image!== null ? `${pet.image}` : "/no_image.jpg" } alt="Pet Pic" className="img-fluid card" />
@@ -306,8 +297,7 @@ function BlogComment() {
             )}
         
 
-        </main>
-        </>
+        </Container>
       );
 
 

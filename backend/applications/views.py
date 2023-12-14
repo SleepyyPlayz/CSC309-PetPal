@@ -10,6 +10,9 @@ from rest_framework.response import Response
 from rest_framework import generics, permissions, exceptions
 import django_filters
 
+from notifications.callbacks import create_notification
+
+
 class NewPetApplication(generics.CreateAPIView):
     queryset = PetApplication.objects.all()
     permission_classes = [IsNotAShelter]

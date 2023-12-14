@@ -56,7 +56,7 @@ class ApplicationCommentList(generics.ListCreateAPIView):
             message = f"{owner.first_name} has commented on the {application.pet.pet_name} application."
             link = reverse('app_comment_list', kwargs={'application_id': application_id})
 
-        create_notification(receiver_id=receiver_id, n_type=n_type, message=message, link=link)
+        create_notification(receiver_id=receiver_id, n_type=n_type, message=message, link=f"/application_comments/{application_id}/")
         application.save()
 
         return super().perform_create(serializer)
@@ -98,7 +98,7 @@ class ReviewCommentList(generics.ListCreateAPIView):
         message = f"User {reviewer.first_name} has written a comment on the your {shelter.name} shelter."
         link = reverse('review_comment_list', kwargs={'shelter_id': shelter_id})
 
-        create_notification(receiver_id=receiver_id, n_type=n_type, message=message, link=f"/shelter_view/{shelter_id}/")
+        create_notification(receiver_id=receiver_id, n_type=n_type, message=message, link=f"/shelter_comments/{shelter_id}/")
         
         return super().perform_create(serializer)
     
@@ -135,7 +135,7 @@ class BlogCommentList(generics.ListCreateAPIView):
         message = f"User {reviewer.first_name} {reviewer.last_name} has commented on the your blog post: {blog.title}."
         # link = reverse('blog_comment_list', kwargs={'blog_id': blog_id})
 
-        create_notification(receiver_id=receiver_id, n_type=n_type, message=message, link="/my_posts")
+        create_notification(receiver_id=receiver_id, n_type=n_type, message=message, link=f"/comments/{blog_id}/")
 
         return super().perform_create(serializer)
 
