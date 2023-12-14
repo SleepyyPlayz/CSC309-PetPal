@@ -54,9 +54,8 @@ const MyApplications = ({isLoggedIn}) => {
                 <p>For pet: </p>
             </div>
             <div className="col-md-3">
-                <p>Date Applied: {application.created_at}</p>
+                <p>Date Applied: {new Date(application.created_at).toISOString().split('T')[0]}</p>
             </div>
-
             <div className="col-md-3">
                 <p>Status: {application.status}</p>
             </div>
