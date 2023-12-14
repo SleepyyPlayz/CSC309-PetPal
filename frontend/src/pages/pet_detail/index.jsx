@@ -12,8 +12,13 @@ export default function PetDetail() {
     const [pet, setPet] = useState(null);
     const { id } = useParams();
     const navigate = useNavigate();
+    const is_shelter = localStorage.getItem('is_shelter');
+    const is_logged_in = localStorage.getItem('access');
 
     useEffect(() => {
+      if(is_logged_in){
+        console.log('Im logged in test');
+      }
         const apiUrl = `http://127.0.0.1:8000/pet_listings/${id}/`
         // axios.get(`http://localhost:8000/api/pets/${id}/`)
         //   .then(response => setPet(response.data))
@@ -22,6 +27,7 @@ export default function PetDetail() {
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => setPet(data))
+            
             .catch(error => {
                 console.error('Error fetching pets:', error);
             });
@@ -29,7 +35,13 @@ export default function PetDetail() {
 
     const handleApply = () => {
         // Redirect to the application page with the pet ID in the URL
-        navigate(`/applications/${id}`);
+        if (!is_logged_in){
+          navigate('../login');
+        }
+        else {
+          navigate(`/applications/${id}`);
+        }
+        
     };
 
     if (!pet) {
@@ -52,16 +64,16 @@ export default function PetDetail() {
                             <Card.Text>From: {pet.shelter.name}</Card.Text>
                             <Card.Text>Gender: {pet.gender}</Card.Text>
                             <Card.Text>Age: {pet.age}</Card.Text>
-                            <Card.Text>Behavior: Not in model yet</Card.Text>
-                            <Card.Text>Health: Not in model yet</Card.Text>
+                            <Card.Text>Behaviour: {pet.behaviour}</Card.Text>
+                            <Card.Text>Health: {pet.health}</Card.Text>
 
                             <Card.Text>Description:
-                                Not in model yet
+                                {pet.description}
                             </Card.Text>
 
-                            <Card.Text>Adoption fee: not in model yet</Card.Text>
+                            <Card.Text>Status: {pet.status}</Card.Text>
                             
-                            <Button variant="outline-success" size="lg" onClick={handleApply} className="adopt-button">Adopt Me!</Button>
+                            <Button variant="outline-success" size="lg" onClick={handleApply} className={`adopt-button`} disabled={pet.status !== 'available' || is_shelter === 'true'} >Adopt Me!</Button>
                         </Card.Body>
                     </Card>
                 </Col>
