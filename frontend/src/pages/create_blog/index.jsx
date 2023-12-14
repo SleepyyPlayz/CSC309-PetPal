@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
 
 const CreateBlog = ({isLoggedIn}) => {
 if (!isLoggedIn) {
@@ -10,6 +12,8 @@ if (!isLoggedIn) {
   const [text, setText] = useState('');
   const [image, setImage] = useState(null);
   const accessToken = localStorage.getItem('access');
+  const navigate = useNavigate()
+
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -46,12 +50,15 @@ if (!isLoggedIn) {
 
       if (response.ok) {
         console.log('Blog created successfully!');
+        navigate(`/my_posts`);
       } else {
         console.error('Failed to create blog');
       }
     } catch (error) {
       console.error('Error creating blog:', error);
     }
+
+
   };
 
   return (

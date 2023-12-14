@@ -18,10 +18,15 @@ const MyPosts = ({isLoggedIn}) => {
             },
           });
       
-          if (response.ok) {
-            window.location.href = '/my_posts';
-          } else {
+          if (!response.ok) {
+            // Handle errors, e.g., show an error message to the user
+            console.error(`Error deleting post: ${response.status}`);
           }
+      
+          // Post successfully deleted, you can check the response body if needed
+          console.log('Post deleted successfully');
+          window.location.reload();            
+        
       };
 
       useEffect(() => {
