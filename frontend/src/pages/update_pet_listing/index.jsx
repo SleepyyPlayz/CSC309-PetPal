@@ -7,7 +7,8 @@ const UpdatePetForm = () => {
 const token = localStorage.getItem('access');
 const navigate = useNavigate()
 const { id } = useParams();
-var imgHasChanged = false;
+const [imgHasChanged, setImgHasChanged] = useState(false);
+
 
 
   const [formData, setFormData] = useState({
@@ -61,7 +62,8 @@ var imgHasChanged = false;
         ...formData,
         pet_picture: file
       });
-      imgHasChanged = true;
+      setImgHasChanged(true);
+      console.log(imgHasChanged);
       
   };
 
@@ -69,7 +71,9 @@ var imgHasChanged = false;
     e.preventDefault();
     delete formData.shelter
     delete formData.id
+    console.log("imgHasChanged value:", imgHasChanged); // Log the value for debugging
     if (!imgHasChanged) {
+      console.log("made it here")
       delete formData.pet_picture;
     }
     const data = new FormData();
@@ -77,11 +81,17 @@ var imgHasChanged = false;
     Object.entries(formData).forEach(([key, value]) => {
       if (value !== null) {
         data.append(key, value);
+        console.log(key);
+        console.log(value);
+        console.log('here')
       }
    
     });
 
-    console.log('Data being sent:', formData); // Log the data before sending
+    console.log('Data being sent:'); // Log the data before sending
+    for (let pair of data.entries()) {
+      console.log(pair[0], pair[1]);
+    }
 
     try {
       const response = await fetch(`http://127.0.0.1:8000/pet_listings/${id}/`, {
